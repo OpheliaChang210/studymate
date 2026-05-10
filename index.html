@@ -659,6 +659,30 @@ body.daytime {
   overflow: hidden;
 }
 
+
+.focus-music-btn {
+  margin-top: 20px;
+  background: rgba(255,255,255,0.12);
+  border: 1.5px solid rgba(255,255,255,0.25);
+  border-radius: 20px;
+  padding: 8px 20px;
+  color: rgba(255,255,255,0.8);
+  font-family: 'ChenYuluoyan', sans-serif;
+  font-size: 13px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.2s;
+  backdrop-filter: blur(8px);
+}
+.focus-music-btn:active { transform: scale(0.93); }
+.focus-music-btn.muted {
+  background: rgba(255,255,255,0.05);
+  border-color: rgba(255,255,255,0.12);
+  color: rgba(255,255,255,0.4);
+}
+
 </style>
 <style>
 :root {
@@ -1883,6 +1907,30 @@ body.daytime {
   overflow: hidden;
 }
 
+
+.focus-music-btn {
+  margin-top: 20px;
+  background: rgba(255,255,255,0.12);
+  border: 1.5px solid rgba(255,255,255,0.25);
+  border-radius: 20px;
+  padding: 8px 20px;
+  color: rgba(255,255,255,0.8);
+  font-family: 'ChenYuluoyan', sans-serif;
+  font-size: 13px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.2s;
+  backdrop-filter: blur(8px);
+}
+.focus-music-btn:active { transform: scale(0.93); }
+.focus-music-btn.muted {
+  background: rgba(255,255,255,0.05);
+  border-color: rgba(255,255,255,0.12);
+  color: rgba(255,255,255,0.4);
+}
+
 </style>
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
@@ -2659,6 +2707,12 @@ body.daytime {
         </div>
 
         <div class="focus-tomato-dots" id="focus-tomato-dots"></div>
+
+        <!-- Music toggle -->
+        <button class="focus-music-btn" id="focus-music-btn" onclick="toggleFocusMusic()">
+          <span id="music-icon">🔊</span>
+          <span id="music-label">海浪聲</span>
+        </button>
       </div>
     </div>
 
@@ -3775,6 +3829,169 @@ function addBingoTask() {
 
 
 
+
+// ── AMBIENT AUDIO ────────────────────────────────────────
+let audioCtx = null;
+let audioNodes = [];
+let isMusicOn = true;
+
+function initAudio() {
+  if (audioCtx) return;
+  audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+}
+
+function startAmbientSound() {
+  if (!audioCtx) initAudio();
+  stopAmbientSound();
+
+  const hour = new Date().getHours();
+  const isDay = hour >= 6 && hour < 18;
+
+  if (isDay) {
+    // Ocean waves - low freq rumble
+    startOceanWaves();
+    // Wind - filtered noise
+    startWind();
+  } else {
+    // Night - softer waves + crickets
+    startOceanWaves(0.4);
+    startCrickets();
+  }
+}
+
+function startOceanWaves(vol = 0.55) {
+  if (!audioCtx) return;
+  const bufferSize = audioCtx.sampleRate * 4;
+  const buffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
+  const data = buffer.getChannelData(0);
+  for (let i = 0; i < bufferSize; i++) data[i] = Math.random() * 2 - 1;
+
+  const source = audioCtx.createBufferSource();
+  source.buffer = buffer;
+  source.loop = true;
+
+  // Low pass filter for rumble
+  const filter = audioCtx.createBiquadFilter();
+  filter.type = 'lowpass';
+  filter.frequency.value = 320;
+  filter.Q.value = 0.8;
+
+  // LFO for wave rhythm
+  const lfo = audioCtx.createOscillator();
+  const lfoGain = audioCtx.createGain();
+  lfo.frequency.value = 0.18;
+  lfoGain.gain.value = 0.4;
+
+  const masterGain = audioCtx.createGain();
+  masterGain.gain.value = vol;
+
+  const gainNode = audioCtx.createGain();
+  gainNode.gain.value = 0.6;
+
+  lfo.connect(lfoGain);
+  lfoGain.connect(gainNode.gain);
+  source.connect(filter);
+  filter.connect(gainNode);
+  gainNode.connect(masterGain);
+  masterGain.connect(audioCtx.destination);
+
+  lfo.start();
+  source.start();
+  audioNodes.push(source, lfo, masterGain);
+}
+
+function startWind() {
+  if (!audioCtx) return;
+  const bufferSize = audioCtx.sampleRate * 3;
+  const buffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
+  const data = buffer.getChannelData(0);
+  for (let i = 0; i < bufferSize; i++) data[i] = Math.random() * 2 - 1;
+
+  const source = audioCtx.createBufferSource();
+  source.buffer = buffer;
+  source.loop = true;
+
+  const filter = audioCtx.createBiquadFilter();
+  filter.type = 'bandpass';
+  filter.frequency.value = 600;
+  filter.Q.value = 0.5;
+
+  const lfo = audioCtx.createOscillator();
+  const lfoGain = audioCtx.createGain();
+  lfo.frequency.value = 0.08;
+  lfoGain.gain.value = 0.25;
+
+  const gain = audioCtx.createGain();
+  gain.gain.value = 0.12;
+
+  lfo.connect(lfoGain);
+  lfoGain.connect(gain.gain);
+  source.connect(filter);
+  filter.connect(gain);
+  gain.connect(audioCtx.destination);
+
+  lfo.start();
+  source.start();
+  audioNodes.push(source, lfo);
+}
+
+function startCrickets() {
+  if (!audioCtx) return;
+  // Cricket chirp using oscillator bursts
+  function chirp() {
+    if (!isMusicOn || !audioCtx) return;
+    const osc = audioCtx.createOscillator();
+    const gain = audioCtx.createGain();
+    osc.frequency.value = 3800 + Math.random() * 400;
+    osc.type = 'sine';
+    gain.gain.setValueAtTime(0, audioCtx.currentTime);
+    gain.gain.linearRampToValueAtTime(0.04, audioCtx.currentTime + 0.01);
+    gain.gain.linearRampToValueAtTime(0.04, audioCtx.currentTime + 0.04);
+    gain.gain.linearRampToValueAtTime(0, audioCtx.currentTime + 0.06);
+    osc.connect(gain);
+    gain.connect(audioCtx.destination);
+    osc.start();
+    osc.stop(audioCtx.currentTime + 0.07);
+    // Schedule next chirp
+    const next = 60 + Math.random() * 120;
+    const t = setTimeout(chirp, next);
+    audioNodes.push({ stop: () => clearTimeout(t) });
+  }
+  // Multiple cricket groups
+  chirp();
+  setTimeout(chirp, 200);
+  setTimeout(chirp, 500);
+}
+
+function stopAmbientSound() {
+  audioNodes.forEach(n => {
+    try {
+      if (n.stop) n.stop();
+      if (n.disconnect) n.disconnect();
+    } catch(e) {}
+  });
+  audioNodes = [];
+}
+
+function toggleFocusMusic() {
+  isMusicOn = !isMusicOn;
+  const btn = document.getElementById('focus-music-btn');
+  const icon = document.getElementById('music-icon');
+  const label = document.getElementById('music-label');
+
+  if (isMusicOn) {
+    btn.classList.remove('muted');
+    icon.textContent = '🔊';
+    label.textContent = '海浪聲';
+    startAmbientSound();
+  } else {
+    btn.classList.add('muted');
+    icon.textContent = '🔇';
+    label.textContent = '已靜音';
+    stopAmbientSound();
+  }
+}
+
 // ── FOCUS / 陪讀模式 ────────────────────────────────────
 let focusState = {
   totalMin: 25,
@@ -3837,6 +4054,7 @@ function startFocus() {
   updateFocusTomatoes();
   drawFocusScene();
   tickFocus();
+  if (isMusicOn) startAmbientSound();
 }
 
 function tickFocus() {
@@ -3894,6 +4112,7 @@ function toggleFocus() {
 function stopFocus() {
   clearTimeout(focusState.timer);
   focusState.isRunning = false;
+  stopAmbientSound();
   const totalMin = focusState.totalFocused + Math.floor((focusState.totalMin * 60 - focusState.remaining) / 60);
   showFocusFinish(totalMin);
 }
@@ -3931,6 +4150,7 @@ function showFocusFinish(totalMin) {
 function resetFocus() {
   document.getElementById('focus-finish').style.display = 'none';
   document.getElementById('focus-setup').style.display = 'flex';
+  stopAmbientSound();
   focusState.tomatoCount = 0;
   focusState.totalFocused = 0;
   updateFocusTomatoes();
