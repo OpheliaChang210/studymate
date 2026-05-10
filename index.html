@@ -3848,14 +3848,13 @@ function startAmbientSound() {
   const isDay = hour >= 6 && hour < 18;
 
   if (isDay) {
-    // Ocean waves - low freq rumble
+    // Ocean waves + wind
     startOceanWaves();
-    // Wind - filtered noise
     startWind();
   } else {
-    // Night - softer waves + crickets
-    startOceanWaves(0.4);
-    startCrickets();
+    // Night - soft piano melody + gentle waves
+    startOceanWaves(0.25);
+    startSoftPiano();
   }
 }
 
@@ -3935,48 +3934,114 @@ function startWind() {
   audioNodes.push(source, lfo);
 }
 
-function startCrickets() {
+function startSoftPiano() {
   if (!audioCtx) return;
-  // Soft distant crickets - lower freq, gentle envelope, long gaps
-  function chirp() {
+
+  // Pentatonic scale frequencies (C major pentatonic) - always sounds peaceful
+  const notes = [261.63, 293.66, 329.63, 392.00, 440.00, 523.25, 587.33, 659.25, 783.99];
+
+  // Reverb convolver for warmth
+  const convolver = audioCtx.createConvolver();
+  const reverbLen = audioCtx.sampleRate * 2.5;
+  const reverbBuf = audioCtx.createBuffer(2, reverbLen, audioCtx.sampleRate);
+  for (let ch = 0; ch < 2; ch++) {
+    const d = reverbBuf.getChannelData(ch);
+    for (let i = 0; i < reverbLen; i++) {
+      d[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / reverbLen, 2.5);
+    }
+  }
+  convolver.buffer = reverbBuf;
+
+  const reverbGain = audioCtx.createGain();
+  reverbGain.gain.value = 0.35;
+  convolver.connect(reverbGain);
+  reverbGain.connect(audioCtx.destination);
+  audioNodes.push(convolver, reverbGain);
+
+  // Master gain
+  const master = audioCtx.createGain();
+  master.gain.value = 0.22;
+  master.connect(audioCtx.destination);
+  master.connect(convolver);
+  audioNodes.push(master);
+
+  function playNote(freq, delay, duration) {
     if (!isMusicOn || !audioCtx) return;
 
-    // 3 quick soft pulses per chirp
-    for (let p = 0; p < 3; p++) {
-      const osc = audioCtx.createOscillator();
-      const gain = audioCtx.createGain();
-      const filter = audioCtx.createBiquadFilter();
+    const osc = audioCtx.createOscillator();
+    const gain = audioCtx.createGain();
 
-      osc.frequency.value = 1800 + Math.random() * 200; // much lower freq
-      osc.type = 'sine';
+    // Slightly detuned second oscillator for warmth
+    const osc2 = audioCtx.createOscillator();
+    const gain2 = audioCtx.createGain();
 
-      filter.type = 'lowpass';
-      filter.frequency.value = 2200;
+    osc.type = 'sine';
+    osc2.type = 'sine';
+    osc.frequency.value = freq;
+    osc2.frequency.value = freq * 1.003; // slight detune
 
-      const t = audioCtx.currentTime + p * 0.09;
-      gain.gain.setValueAtTime(0, t);
-      gain.gain.linearRampToValueAtTime(0.018, t + 0.02); // very soft
-      gain.gain.linearRampToValueAtTime(0.015, t + 0.06);
-      gain.gain.linearRampToValueAtTime(0, t + 0.09);
+    const t = audioCtx.currentTime + delay;
 
-      osc.connect(filter);
-      filter.connect(gain);
-      gain.connect(audioCtx.destination);
-      osc.start(t);
-      osc.stop(t + 0.1);
-    }
+    // Piano-like envelope: quick attack, long decay
+    gain.gain.setValueAtTime(0, t);
+    gain.gain.linearRampToValueAtTime(1, t + 0.015);
+    gain.gain.exponentialRampToValueAtTime(0.3, t + 0.3);
+    gain.gain.exponentialRampToValueAtTime(0.001, t + duration);
 
-    // Long random gap between chirps = distant, relaxed feel
-    const nextMs = 2000 + Math.random() * 3000;
-    const timer = setTimeout(chirp, nextMs);
-    audioNodes.push({ stop: () => clearTimeout(timer) });
+    gain2.gain.setValueAtTime(0, t);
+    gain2.gain.linearRampToValueAtTime(0.4, t + 0.015);
+    gain2.gain.exponentialRampToValueAtTime(0.001, t + duration * 0.8);
+
+    osc.connect(gain);
+    osc2.connect(gain2);
+    gain.connect(master);
+    gain2.connect(master);
+
+    osc.start(t);
+    osc2.start(t);
+    osc.stop(t + duration + 0.1);
+    osc2.stop(t + duration + 0.1);
   }
 
-  // Stagger 2 cricket groups
-  const t1 = setTimeout(chirp, 800);
-  const t2 = setTimeout(chirp, 2200);
-  audioNodes.push({ stop: () => clearTimeout(t1) });
-  audioNodes.push({ stop: () => clearTimeout(t2) });
+  // Gentle arpeggio patterns
+  const patterns = [
+    [0, 2, 4, 7],     // C E G C
+    [0, 3, 5, 7],     // C F A C
+    [2, 4, 7, 9],     // E G C E
+    [0, 2, 5, 7],     // C E A C
+  ];
+
+  let playing = true;
+
+  function playPhrase() {
+    if (!isMusicOn || !playing) return;
+
+    const pattern = patterns[Math.floor(Math.random() * patterns.length)];
+    const baseOctave = Math.random() > 0.5 ? 1 : 0.5;
+    const noteDur = 1.8 + Math.random() * 1.2;
+    const gap = 0.45 + Math.random() * 0.3;
+
+    // Play arpeggio
+    pattern.forEach((idx, i) => {
+      const freq = notes[idx % notes.length] * baseOctave;
+      playNote(freq, i * gap, noteDur);
+    });
+
+    // Occasionally add a high soft note
+    if (Math.random() > 0.6) {
+      const hiNote = notes[6 + Math.floor(Math.random() * 2)] * 1;
+      playNote(hiNote, pattern.length * gap + 0.5, 2.5);
+    }
+
+    // Gap between phrases: 3-7 seconds
+    const nextMs = (pattern.length * gap + noteDur + 2 + Math.random() * 4) * 1000;
+    const timer = setTimeout(playPhrase, nextMs);
+    audioNodes.push({ stop: () => { playing = false; clearTimeout(timer); } });
+  }
+
+  // Start after a short silence
+  const startTimer = setTimeout(playPhrase, 1200);
+  audioNodes.push({ stop: () => { playing = false; clearTimeout(startTimer); } });
 }
 
 function stopAmbientSound() {
@@ -3997,8 +4062,10 @@ function toggleFocusMusic() {
 
   if (isMusicOn) {
     btn.classList.remove('muted');
+    btn.classList.remove('muted');
     icon.textContent = '🔊';
-    label.textContent = '海浪聲';
+    const h = new Date().getHours();
+    label.textContent = (h >= 6 && h < 18) ? '海浪聲' : '鋼琴聲';
     startAmbientSound();
   } else {
     btn.classList.add('muted');
