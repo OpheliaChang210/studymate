@@ -3937,30 +3937,46 @@ function startWind() {
 
 function startCrickets() {
   if (!audioCtx) return;
-  // Cricket chirp using oscillator bursts
+  // Soft distant crickets - lower freq, gentle envelope, long gaps
   function chirp() {
     if (!isMusicOn || !audioCtx) return;
-    const osc = audioCtx.createOscillator();
-    const gain = audioCtx.createGain();
-    osc.frequency.value = 3800 + Math.random() * 400;
-    osc.type = 'sine';
-    gain.gain.setValueAtTime(0, audioCtx.currentTime);
-    gain.gain.linearRampToValueAtTime(0.04, audioCtx.currentTime + 0.01);
-    gain.gain.linearRampToValueAtTime(0.04, audioCtx.currentTime + 0.04);
-    gain.gain.linearRampToValueAtTime(0, audioCtx.currentTime + 0.06);
-    osc.connect(gain);
-    gain.connect(audioCtx.destination);
-    osc.start();
-    osc.stop(audioCtx.currentTime + 0.07);
-    // Schedule next chirp
-    const next = 60 + Math.random() * 120;
-    const t = setTimeout(chirp, next);
-    audioNodes.push({ stop: () => clearTimeout(t) });
+
+    // 3 quick soft pulses per chirp
+    for (let p = 0; p < 3; p++) {
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      const filter = audioCtx.createBiquadFilter();
+
+      osc.frequency.value = 1800 + Math.random() * 200; // much lower freq
+      osc.type = 'sine';
+
+      filter.type = 'lowpass';
+      filter.frequency.value = 2200;
+
+      const t = audioCtx.currentTime + p * 0.09;
+      gain.gain.setValueAtTime(0, t);
+      gain.gain.linearRampToValueAtTime(0.018, t + 0.02); // very soft
+      gain.gain.linearRampToValueAtTime(0.015, t + 0.06);
+      gain.gain.linearRampToValueAtTime(0, t + 0.09);
+
+      osc.connect(filter);
+      filter.connect(gain);
+      gain.connect(audioCtx.destination);
+      osc.start(t);
+      osc.stop(t + 0.1);
+    }
+
+    // Long random gap between chirps = distant, relaxed feel
+    const nextMs = 2000 + Math.random() * 3000;
+    const timer = setTimeout(chirp, nextMs);
+    audioNodes.push({ stop: () => clearTimeout(timer) });
   }
-  // Multiple cricket groups
-  chirp();
-  setTimeout(chirp, 200);
-  setTimeout(chirp, 500);
+
+  // Stagger 2 cricket groups
+  const t1 = setTimeout(chirp, 800);
+  const t2 = setTimeout(chirp, 2200);
+  audioNodes.push({ stop: () => clearTimeout(t1) });
+  audioNodes.push({ stop: () => clearTimeout(t2) });
 }
 
 function stopAmbientSound() {
