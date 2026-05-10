@@ -141,6 +141,28 @@ body.daytime {
   to   { opacity: 1; }
 }
 
+
+.todo-empty {
+  background: var(--surface);
+  border: 1.5px dashed var(--border);
+  border-radius: 2px;
+  min-height: 86px;
+  box-shadow: none;
+}
+.todo-add {
+  background: var(--surface);
+  border: 1.5px dashed var(--border2);
+  border-radius: 2px;
+  min-height: 86px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.15s;
+  box-shadow: none;
+}
+.todo-add:active { transform: scale(0.93); }
+
 </style>
 <style>
 :root {
@@ -842,6 +864,28 @@ body.daytime {
   to   { opacity: 1; }
 }
 
+
+.todo-empty {
+  background: var(--surface);
+  border: 1.5px dashed var(--border);
+  border-radius: 2px;
+  min-height: 86px;
+  box-shadow: none;
+}
+.todo-add {
+  background: var(--surface);
+  border: 1.5px dashed var(--border2);
+  border-radius: 2px;
+  min-height: 86px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.15s;
+  box-shadow: none;
+}
+.todo-add:active { transform: scale(0.93); }
+
 </style>
 </head>
 <body>
@@ -902,7 +946,29 @@ body.daytime {
           .m3{stroke:#e8603c;stroke-width:3.5;stroke-dasharray:150;stroke-dashoffset:150;animation:draw 0.5s ease forwards 4.0s;}
           .m4{stroke:#e8603c;stroke-width:3.5;stroke-dasharray:160;stroke-dashoffset:160;animation:draw 0.55s ease forwards 4.4s;}
           @keyframes draw { to { stroke-dashoffset:0; } }
-        </style>
+        
+.todo-empty {
+  background: var(--surface);
+  border: 1.5px dashed var(--border);
+  border-radius: 2px;
+  min-height: 86px;
+  box-shadow: none;
+}
+.todo-add {
+  background: var(--surface);
+  border: 1.5px dashed var(--border2);
+  border-radius: 2px;
+  min-height: 86px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.15s;
+  box-shadow: none;
+}
+.todo-add:active { transform: scale(0.93); }
+
+</style>
         <!-- S --><path class="sig-stroke s1" d="M28 22 Q20 18 16 24 Q12 32 20 38 Q30 44 28 52 Q26 60 16 62 Q10 63 8 58"/>
         <!-- t --><path class="sig-stroke s2" d="M38 14 Q36 30 35 48 Q34 58 36 65 Q38 70 44 68 M30 36 L48 34"/>
         <!-- u --><path class="sig-stroke s3" d="M54 34 Q52 52 54 60 Q58 70 66 64 Q72 58 72 48 L72 34"/>
@@ -981,6 +1047,7 @@ body.daytime {
         <div class="ob-dot" id="dot1"></div>
         <div class="ob-dot" id="dot2"></div>
         <div class="ob-dot" id="dot3"></div>
+        <div class="ob-dot" id="dot4"></div>
       </div>
 
       <!-- Step 0: Name -->
@@ -1019,8 +1086,34 @@ body.daytime {
         <button class="ob-next" onclick="obNext(3)"><span class="ob-next-inner">繼續 →</span></button>
       </div>
 
-      <!-- Step 3: Done -->
+      <!-- Step 3: Timetable -->
       <div class="ob-step" id="ob-step3">
+        <div class="ob-q">上傳你的課表</div>
+        <div class="ob-hint">AI 會自動讀取，幫你安排複習提醒（可跳過）</div>
+        <div id="timetable-upload-area" onclick="document.getElementById('timetable-file').click()"
+          style="border:2px dashed var(--border2);border-radius:8px;padding:28px 16px;text-align:center;cursor:pointer;margin-bottom:14px;transition:all 0.15s;background:var(--surface);">
+          <div style="font-size:32px;margin-bottom:8px;">📅</div>
+          <div style="font-size:13px;color:var(--text2);">點此上傳課表圖片或 PDF</div>
+          <div style="font-size:11px;color:var(--text3);margin-top:4px;">支援 JPG、PNG、PDF</div>
+        </div>
+        <input type="file" id="timetable-file" accept="image/*,.pdf" style="display:none" onchange="handleTimetableUpload(this)"/>
+        <div id="timetable-preview" style="display:none;margin-bottom:14px;">
+          <div style="display:flex;align-items:center;gap:10px;background:var(--surface);border:1.5px solid var(--border2);border-radius:6px;padding:10px 14px;">
+            <span style="font-size:20px;">✅</span>
+            <div>
+              <div style="font-size:13px;font-weight:600;" id="timetable-filename"></div>
+              <div style="font-size:11px;color:var(--text3);" id="timetable-status">分析中...</div>
+            </div>
+          </div>
+        </div>
+        <div style="display:flex;gap:10px;">
+          <button class="ob-next" style="flex:1;" onclick="obNext(4)"><span class="ob-next-inner">跳過</span></button>
+          <button class="ob-next" style="flex:1;" id="timetable-next-btn" onclick="obNext(4)"><span class="ob-next-inner">繼續 →</span></button>
+        </div>
+      </div>
+
+      <!-- Step 4: Done -->
+      <div class="ob-step" id="ob-step4">
         <div style="text-align:center; padding-top:20px;">
           <div style="font-size:60px; margin-bottom:20px;">🎯</div>
           <div class="ob-q" style="text-align:center;" id="ob-welcome"></div>
@@ -1230,6 +1323,7 @@ let state = {
   weaknesses: [],       // [string]
   goals: [],            // [{ name, date, target, progress }]
   slots: [],            // [{ time, title, detail, type }]
+  timetable: [],         // [{ day, time, subject }]
   streak: 0,
   lastStudyDate: null,
 };
@@ -1266,14 +1360,18 @@ function obNext(step) {
     if (name && date) {
       state.goals.push({ name, date, target: '', progress: 0 });
     }
+  }
+  if (step === 4) {
     const welcomeName = document.getElementById('ob-name').value.trim();
     document.getElementById('ob-welcome').textContent = `歡迎，${welcomeName}！`;
   }
   document.getElementById(`ob-step${obStep}`).classList.remove('active');
-  document.getElementById(`dot${obStep}`).classList.remove('on');
+  const prevDot = document.getElementById(`dot${obStep}`);
+  if (prevDot) prevDot.classList.remove('on');
   obStep = step;
   document.getElementById(`ob-step${step}`).classList.add('active');
-  document.getElementById(`dot${step}`).classList.add('on');
+  const nextDot = document.getElementById(`dot${step}`);
+  if (nextDot) nextDot.classList.add('on');
 }
 
 function toggleChip(el) { el.classList.toggle('on'); }
@@ -1336,22 +1434,32 @@ function renderHome() {
 
 function renderTasks() {
   const grid = document.getElementById('todo-grid');
-  if (state.tasks.length === 0) {
-    grid.innerHTML = `<div style="grid-column:1/-1;padding:16px;font-size:13px;color:var(--text3);">還沒有任務，新增一個吧！</div>`;
-    document.getElementById('task-count').textContent = '0 / 0 完成';
-    return;
-  }
   const emojis = ['📖','🧮','📊','✏️','🎧','⚖️','🌟','💡','📝','🔬'];
-  grid.innerHTML = state.tasks.map((t,i) => `
-    <div class="todo-card ${t.done ? 'done' : ''}" onclick="toggleTask(${i})">
-      <div class="chk">${t.done ? '✓' : ''}</div>
-      <div class="todo-emoji">${emojis[i % emojis.length]}</div>
-      <div class="todo-title">${t.title}</div>
-      ${t.sub ? `<div class="todo-sub">${t.sub}</div>` : ''}
-    </div>
-  `).join('');
+  const totalCells = Math.max(9, Math.ceil((state.tasks.length + 1) / 3) * 3);
+  let html = '';
+  for (let i = 0; i < totalCells; i++) {
+    const t = state.tasks[i];
+    if (t) {
+      html += `<div class="todo-card ${t.done ? 'done' : ''}" onclick="toggleTask(${i})">
+        <div class="chk">${t.done ? '✓' : ''}</div>
+        <div class="todo-emoji">${emojis[i % emojis.length]}</div>
+        <div class="todo-title">${t.title}</div>
+        ${t.sub ? `<div class="todo-sub">${t.sub}</div>` : ''}
+      </div>`;
+    } else if (i === state.tasks.length) {
+      // Add button cell
+      html += `<div class="todo-card todo-add" onclick="document.getElementById('new-task-input').focus()">
+        <div style="font-size:24px;color:var(--text3);margin:auto;">＋</div>
+      </div>`;
+    } else {
+      // Empty cell
+      html += `<div class="todo-card todo-empty"></div>`;
+    }
+  }
+  grid.innerHTML = html;
   const done = state.tasks.filter(t => t.done).length;
-  document.getElementById('task-count').textContent = `${done} / ${state.tasks.length} 完成`;
+  const total = state.tasks.length;
+  document.getElementById('task-count').textContent = total > 0 ? `${done} / ${total} 完成` : '新增你的任務';
 }
 
 function renderProgress() {
@@ -1771,6 +1879,75 @@ function applyTimeTheme() {
   }
 }
 applyTimeTheme();
+
+
+// ── TIMETABLE UPLOAD ────────────────────────────────────
+async function handleTimetableUpload(input) {
+  const file = input.files[0];
+  if (!file) return;
+
+  document.getElementById('timetable-preview').style.display = 'block';
+  document.getElementById('timetable-filename').textContent = file.name;
+  document.getElementById('timetable-status').textContent = 'AI 分析中...';
+  document.getElementById('timetable-upload-area').style.opacity = '0.5';
+
+  try {
+    // Convert to base64
+    const base64 = await new Promise((res, rej) => {
+      const reader = new FileReader();
+      reader.onload = () => res(reader.result.split(',')[1]);
+      reader.onerror = rej;
+      reader.readAsDataURL(file);
+    });
+
+    const isImage = file.type.startsWith('image/');
+    const isPdf = file.type === 'application/pdf';
+
+    const messageContent = [
+      {
+        type: isImage ? 'image' : 'document',
+        source: {
+          type: 'base64',
+          media_type: file.type,
+          data: base64
+        }
+      },
+      {
+        type: 'text',
+        text: '這是一張課表。請分析並用JSON格式回傳所有課程資訊，格式如下（只回傳JSON，不要其他文字）：[{"day":"週一","time":"08:00","subject":"課程名稱"},...]。day請用週一到週日，time用HH:MM格式。'
+      }
+    ];
+
+    const res = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 1000,
+        messages: [{ role: 'user', content: messageContent }]
+      })
+    });
+
+    const data = await res.json();
+    const raw = data.content[0].text.replace(/```json|```/g,'').trim();
+    const timetable = JSON.parse(raw);
+    state.timetable = timetable;
+    save();
+
+    document.getElementById('timetable-status').textContent = `✓ 找到 ${timetable.length} 堂課，已設定提醒`;
+
+    // Auto-generate slots from timetable
+    timetable.forEach(c => {
+      const existing = state.slots.find(s => s.title === c.subject);
+      if (!existing) {
+        state.slots.push({ time: c.time, title: `${c.subject} 筆記上傳`, detail: c.day, type: 'timetable' });
+      }
+    });
+
+  } catch(e) {
+    document.getElementById('timetable-status').textContent = '分析失敗，可以稍後手動設定';
+  }
+}
 
 // ── SPLASH ──────────────────────────────────────────────
 function dismissSplash() {
