@@ -892,15 +892,15 @@ body.daytime {
       <svg width="300" height="90" viewBox="0 0 300 90" xmlns="http://www.w3.org/2000/svg">
         <style>
           .sig-stroke { fill:none; stroke-linecap:round; stroke-linejoin:round; }
-          .s1{stroke:#1a1612;stroke-width:2.2;stroke-dasharray:120;stroke-dashoffset:120;animation:draw 0.5s ease forwards 0.8s;}
-          .s2{stroke:#1a1612;stroke-width:2.2;stroke-dasharray:180;stroke-dashoffset:180;animation:draw 0.6s ease forwards 1.2s;}
-          .s3{stroke:#1a1612;stroke-width:2.2;stroke-dasharray:150;stroke-dashoffset:150;animation:draw 0.5s ease forwards 1.7s;}
-          .s4{stroke:#1a1612;stroke-width:2.2;stroke-dasharray:130;stroke-dashoffset:130;animation:draw 0.45s ease forwards 2.1s;}
-          .s5{stroke:#1a1612;stroke-width:2.2;stroke-dasharray:160;stroke-dashoffset:160;animation:draw 0.55s ease forwards 2.5s;}
-          .m1{stroke:#e8603c;stroke-width:2.2;stroke-dasharray:200;stroke-dashoffset:200;animation:draw 0.65s ease forwards 3.0s;}
-          .m2{stroke:#e8603c;stroke-width:2.2;stroke-dasharray:130;stroke-dashoffset:130;animation:draw 0.45s ease forwards 3.6s;}
-          .m3{stroke:#e8603c;stroke-width:2.2;stroke-dasharray:150;stroke-dashoffset:150;animation:draw 0.5s ease forwards 4.0s;}
-          .m4{stroke:#e8603c;stroke-width:2.2;stroke-dasharray:160;stroke-dashoffset:160;animation:draw 0.55s ease forwards 4.4s;}
+          .s1{stroke:#1a1612;stroke-width:3.5;stroke-dasharray:120;stroke-dashoffset:120;animation:draw 0.5s ease forwards 0.8s;}
+          .s2{stroke:#1a1612;stroke-width:3.5;stroke-dasharray:180;stroke-dashoffset:180;animation:draw 0.6s ease forwards 1.2s;}
+          .s3{stroke:#1a1612;stroke-width:3.5;stroke-dasharray:150;stroke-dashoffset:150;animation:draw 0.5s ease forwards 1.7s;}
+          .s4{stroke:#1a1612;stroke-width:3.5;stroke-dasharray:130;stroke-dashoffset:130;animation:draw 0.45s ease forwards 2.1s;}
+          .s5{stroke:#1a1612;stroke-width:3.5;stroke-dasharray:160;stroke-dashoffset:160;animation:draw 0.55s ease forwards 2.5s;}
+          .m1{stroke:#e8603c;stroke-width:3.5;stroke-dasharray:200;stroke-dashoffset:200;animation:draw 0.65s ease forwards 3.0s;}
+          .m2{stroke:#e8603c;stroke-width:3.5;stroke-dasharray:130;stroke-dashoffset:130;animation:draw 0.45s ease forwards 3.6s;}
+          .m3{stroke:#e8603c;stroke-width:3.5;stroke-dasharray:150;stroke-dashoffset:150;animation:draw 0.5s ease forwards 4.0s;}
+          .m4{stroke:#e8603c;stroke-width:3.5;stroke-dasharray:160;stroke-dashoffset:160;animation:draw 0.55s ease forwards 4.4s;}
           @keyframes draw { to { stroke-dashoffset:0; } }
         </style>
         <!-- S --><path class="sig-stroke s1" d="M28 22 Q20 18 16 24 Q12 32 20 38 Q30 44 28 52 Q26 60 16 62 Q10 63 8 58"/>
@@ -1780,7 +1780,7 @@ function dismissSplash() {
   setTimeout(() => splash.remove(), 700);
 }
 // If already has user data, dismiss faster
-setTimeout(dismissSplash, state.user ? 1800 : 5600);
+setTimeout(dismissSplash, 6000);
 
 if (state.user) {
   document.getElementById('ob').classList.remove('active');
