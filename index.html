@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>StudyMate · 學習助理</title>
-<link href="https://fonts.googleapis.com/css2?family=Boogaloo&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&display=swap" rel="stylesheet">
 <style>@font-face { font-family: "ChenYuluoyan"; src: url("https://cdn.jsdelivr.net/gh/max32002/ChenYuluoyan-Thin-Webfont@main/ChenYuluoyan-Thin.woff2") format("woff2"); font-weight: normal; } @font-face { font-family: "ChenYuluoyan"; src: url("https://cdn.jsdelivr.net/gh/max32002/ChenYuluoyan-Thin-Webfont@main/ChenYuluoyan-Thin.woff2") format("woff2"); font-weight: bold; }
 /* ── SPLASH SCREEN ── */
 #splash {
@@ -163,6 +163,502 @@ body.daytime {
 }
 .todo-add:active { transform: scale(0.93); }
 
+
+/* ── BINGO SCREEN ── */
+.bingo-header {
+  padding: 50px 20px 14px;
+  background: var(--surface);
+  border-bottom: 2px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+.bingo-header h1 {
+  font-family: 'ChenYuluoyan', sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--ink);
+}
+#bingo-count {
+  font-size: 11px;
+  color: var(--coral);
+  font-family: 'ChenYuluoyan', sans-serif;
+}
+
+.bingo-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  padding: 16px 16px 8px;
+}
+
+.bingo-card {
+  position: relative;
+  border: 2px solid var(--border2);
+  border-radius: 3px;
+  min-height: 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  overflow: hidden;
+  background: var(--surface);
+  transition: transform 0.15s;
+  box-shadow: 2px 2px 0 var(--border);
+}
+.bingo-card:active { transform: scale(0.93); }
+
+.bingo-card-title {
+  font-family: 'ChenYuluoyan', sans-serif;
+  font-size: 12px;
+  color: var(--ink);
+  text-align: center;
+  padding: 0 8px;
+  position: relative;
+  z-index: 2;
+  line-height: 1.5;
+}
+.bingo-card-emoji {
+  font-size: 22px;
+  margin-bottom: 6px;
+  position: relative;
+  z-index: 2;
+}
+
+/* Empty card */
+.bingo-card.empty {
+  border: 2px dashed var(--border);
+  background: transparent;
+  box-shadow: none;
+  cursor: default;
+}
+.bingo-card.add-card {
+  border: 2px dashed var(--border2);
+  background: transparent;
+  box-shadow: none;
+}
+.bingo-card.add-card:active { transform: scale(0.93); }
+
+/* Done card - crayon fill animation */
+.bingo-card.done {
+  border-color: var(--coral);
+}
+.bingo-card.done .bingo-card-title { color: white; }
+.bingo-card.done .bingo-card-emoji { filter: grayscale(0.3); }
+
+/* Crayon fill layer */
+.crayon-fill {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+.crayon-fill canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* Checkmark stamp */
+.bingo-stamp {
+  position: absolute;
+  top: 6px; right: 6px;
+  width: 22px; height: 22px;
+  border-radius: 50%;
+  background: white;
+  border: 2px solid var(--coral);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px;
+  color: var(--coral);
+  font-weight: 700;
+  z-index: 3;
+  opacity: 0;
+  transform: scale(0);
+  transition: all 0.3s cubic-bezier(0.34,1.56,0.64,1);
+}
+.bingo-card.done .bingo-stamp {
+  opacity: 1;
+  transform: scale(1);
+}
+
+
+/* ── CHAT UI ── */
+.rec-header {
+  padding: 50px 20px 12px;
+  background: var(--surface);
+  border-bottom: 2px solid var(--border);
+}
+.rec-header h1 {
+  font-family: 'ChenYuluoyan', sans-serif;
+  font-size: 22px; font-weight: 700; color: var(--ink);
+  margin-bottom: 2px;
+}
+.rec-header p { font-size: 11px; color: var(--text3); }
+
+.chat-messages {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px 16px 8px;
+}
+
+.msg-ai {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+}
+.msg-ai-avatar {
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  background: var(--coral);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14px; flex-shrink: 0;
+  border: 2px solid var(--border2);
+}
+.msg-ai-bubble {
+  background: var(--surface);
+  border: 1.5px solid var(--border2);
+  border-radius: 0 12px 12px 12px;
+  padding: 10px 14px;
+  font-family: 'ChenYuluoyan', sans-serif;
+  font-size: 13px;
+  color: var(--ink);
+  line-height: 1.7;
+  max-width: 85%;
+  box-shadow: 2px 2px 0 var(--border);
+}
+.msg-ai-bubble.typing::after {
+  content: '●●●';
+  animation: typing 1s infinite;
+  color: var(--coral);
+  font-size: 10px;
+}
+@keyframes typing {
+  0%,100% { opacity: 0.3; }
+  50% { opacity: 1; }
+}
+
+.msg-user {
+  display: flex;
+  justify-content: flex-end;
+}
+.msg-user-bubble {
+  background: var(--coral);
+  border-radius: 12px 0 12px 12px;
+  padding: 10px 14px;
+  font-family: 'ChenYuluoyan', sans-serif;
+  font-size: 13px;
+  color: white;
+  line-height: 1.7;
+  max-width: 85%;
+}
+
+/* Upload area */
+.upload-area {
+  margin: 8px 16px;
+  border: 2px dashed var(--border2);
+  border-radius: 6px;
+  padding: 14px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.15s;
+  background: var(--surface);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.upload-area:active { transform: scale(0.97); }
+.upload-area-icon { font-size: 24px; }
+.upload-area-text { text-align: left; }
+.upload-area-main { font-size: 13px; color: var(--ink); font-family: 'ChenYuluoyan', sans-serif; }
+.upload-area-sub { font-size: 11px; color: var(--text3); margin-top: 2px; }
+
+.uploaded-file {
+  margin: 4px 16px;
+  background: var(--washi-green, #e0f5e8);
+  border: 1.5px solid var(--accent3);
+  border-radius: 6px;
+  padding: 10px 14px;
+  display: flex; align-items: center; gap: 10px;
+  font-family: 'ChenYuluoyan', sans-serif;
+  font-size: 12px;
+}
+
+/* Chat input */
+.chat-input-row {
+  display: flex;
+  gap: 8px;
+  padding: 10px 16px 16px;
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+  position: sticky;
+  bottom: 70px;
+}
+.chat-text-input {
+  flex: 1;
+  background: var(--bg);
+  border: 1.5px solid var(--border2);
+  border-radius: 20px;
+  padding: 10px 16px;
+  font-family: 'ChenYuluoyan', sans-serif;
+  font-size: 13px;
+  color: var(--ink);
+  outline: none;
+  resize: none;
+  max-height: 80px;
+  overflow-y: auto;
+}
+.chat-text-input:focus { border-color: var(--coral); }
+.chat-text-input::placeholder { color: var(--text3); }
+.chat-send-btn {
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  background: var(--coral);
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  color: white;
+  display: flex; align-items: center; justify-content: center;
+  transition: all 0.15s;
+  flex-shrink: 0;
+  box-shadow: 2px 2px 0 #c04020;
+  align-self: flex-end;
+}
+.chat-send-btn:active { transform: scale(0.9); }
+.chat-send-btn.loading { opacity: 0.5; pointer-events: none; }
+
+
+/* ── BINGO LINE REWARD ── */
+.bingo-line-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 900;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: rgba(245,240,232,0.92);
+  backdrop-filter: blur(4px);
+  animation: lineRewardIn 0.4s cubic-bezier(0.34,1.56,0.64,1);
+}
+.bingo-line-overlay.show { display: flex; }
+@keyframes lineRewardIn {
+  from { opacity:0; transform:scale(0.85); }
+  to   { opacity:1; transform:scale(1); }
+}
+.bingo-line-star {
+  font-size: 64px;
+  animation: starPop 0.6s cubic-bezier(0.34,1.56,0.64,1);
+}
+@keyframes starPop {
+  0%   { transform: rotate(-15deg) scale(0.3); }
+  60%  { transform: rotate(8deg) scale(1.2); }
+  100% { transform: rotate(-3deg) scale(1); }
+}
+.bingo-line-title {
+  font-family: 'ChenYuluoyan', sans-serif;
+  font-size: 28px;
+  color: var(--coral);
+  margin: 8px 0 4px;
+  text-decoration: underline wavy var(--coral);
+}
+.bingo-line-sub {
+  font-family: 'ChenYuluoyan', sans-serif;
+  font-size: 14px;
+  color: var(--text2);
+  margin-bottom: 24px;
+  text-align: center;
+  padding: 0 32px;
+  line-height: 1.7;
+}
+.bingo-line-btn {
+  background: var(--coral);
+  color: white;
+  border: none;
+  padding: 12px 32px;
+  border-radius: 2px;
+  font-family: 'ChenYuluoyan', sans-serif;
+  font-size: 16px;
+  cursor: pointer;
+  box-shadow: 3px 3px 0 #c04020;
+  transition: all 0.15s;
+}
+.bingo-line-btn:active { transform: translate(2px,2px); box-shadow: 1px 1px 0 #c04020; }
+
+/* Highlight winning cards */
+.bingo-card.winning {
+  border-color: var(--coral) !important;
+  box-shadow: 0 0 0 3px var(--coral), 3px 3px 0 var(--coral) !important;
+  animation: winPulse 0.6s ease;
+}
+@keyframes winPulse {
+  0%,100% { transform: scale(1); }
+  50%      { transform: scale(1.06); }
+}
+
+/* Line confetti */
+.line-conf {
+  position: absolute;
+  font-size: 22px;
+  animation: confFall2 linear forwards;
+  pointer-events: none;
+}
+@keyframes confFall2 {
+  0%   { transform: translateY(-20px) rotate(0deg); opacity: 1; }
+  100% { transform: translateY(700px) rotate(540deg); opacity: 0; }
+}
+
+
+
+
+
+
+
+
+/* ── FOCUS SCREEN ── */
+#screen-focus { background: #0a1a3a; }
+
+.focus-scene {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.focus-ui {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  padding: 20px;
+}
+
+.focus-mode-label {
+  font-family: 'ChenYuluoyan', sans-serif;
+  font-size: 13px;
+  color: rgba(255,255,255,0.6);
+  letter-spacing: 3px;
+  margin-bottom: 8px;
+}
+
+.focus-timer {
+  font-family: 'Caveat', cursive;
+  font-size: 72px;
+  font-weight: 700;
+  color: white;
+  line-height: 1;
+  text-shadow: 0 4px 20px rgba(0,0,0,0.3);
+  margin-bottom: 8px;
+}
+
+.focus-task-name {
+  font-family: 'ChenYuluoyan', sans-serif;
+  font-size: 14px;
+  color: rgba(255,255,255,0.7);
+  margin-bottom: 32px;
+  text-align: center;
+}
+
+.focus-controls {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.focus-btn {
+  width: 56px; height: 56px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.2);
+  border: 2px solid rgba(255,255,255,0.4);
+  color: white;
+  font-size: 22px;
+  cursor: pointer;
+  transition: all 0.2s;
+  backdrop-filter: blur(8px);
+}
+.focus-btn:active { transform: scale(0.9); }
+.focus-btn-stop {
+  background: rgba(232,96,60,0.3);
+  border-color: rgba(232,96,60,0.6);
+  font-size: 18px;
+}
+
+.focus-tomato-dots {
+  display: flex;
+  gap: 8px;
+}
+.tomato-dot {
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.25);
+  transition: background 0.3s;
+}
+.tomato-dot.done { background: var(--coral); }
+.tomato-dot.current { background: white; }
+
+/* Setup panel */
+.focus-setup {
+  position: absolute;
+  inset: 0;
+  background: var(--bg);
+  z-index: 20;
+  overflow-y: auto;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+}
+.focus-setup-inner {
+  padding: 56px 24px 40px;
+  width: 100%;
+  max-width: 480px;
+}
+
+.focus-preview {
+  width: 100%;
+  height: 160px;
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 20px;
+  border: 2px solid var(--border2);
+  background: #c8e8f8;
+  position: relative;
+}
+
+.focus-time-chip {
+  padding: 7px 16px;
+  background: var(--surface);
+  border: 1.5px solid var(--border2);
+  border-radius: 2px;
+  font-family: 'ChenYuluoyan', sans-serif;
+  font-size: 14px;
+  color: var(--text2);
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.focus-time-chip.on {
+  background: var(--coral);
+  border-color: var(--coral);
+  color: white;
+}
+
+/* Finish panel */
+.focus-finish {
+  position: absolute;
+  inset: 0;
+  background: var(--bg);
+  background-image: repeating-linear-gradient(transparent, transparent 27px, rgba(160,145,120,0.18) 27px, rgba(160,145,120,0.18) 28px);
+  z-index: 20;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
 </style>
 <style>
 :root {
@@ -233,8 +729,7 @@ body {
 .scroll-area {
   flex:1; overflow-y:auto; padding-bottom:90px;
   scrollbar-width:none;
-  background-image: repeating-linear-gradient(transparent, transparent 27px, rgba(180,170,155,0.2) 27px, rgba(180,170,155,0.2) 28px);
-  background-attachment:local;
+
 }
 .scroll-area::-webkit-scrollbar { display:none; }
 
@@ -252,11 +747,17 @@ body {
   transition: transform 0.15s;
 }
 .nav-btn:active { transform:scale(0.88); }
-.nav-btn .icon { font-size:22px; transition: transform 0.2s; }
-.nav-btn .lbl { font-size:9px; color:var(--text3); font-weight:500; letter-spacing:0.3px; }
+.nav-icon {
+  width: 24px;
+  height: 24px;
+  color: var(--text3);
+  transition: all 0.2s;
+  stroke: currentColor;
+}
+.nav-btn .lbl { font-size:9px; color:var(--text3); font-weight:500; letter-spacing:0.3px; font-family:'ChenYuluoyan',sans-serif; }
 .nav-btn.on .lbl { color:var(--coral); font-weight:700; }
-.nav-btn.on .icon { transform:scale(1.15); }
-.nav-btn.on::after { content:''; position:absolute; bottom:0; left:50%; transform:translateX(-50%); width:18px; height:2px; background:var(--coral); }
+.nav-btn.on .nav-icon { color:var(--coral); transform:scale(1.12); }
+.nav-btn.on::after { content:''; position:absolute; bottom:2px; left:50%; transform:translateX(-50%); width:20px; height:2.5px; background:var(--coral); border-radius:2px; }
 
 /* ── ONBOARDING ── */
 #ob {
@@ -886,7 +1387,509 @@ body.daytime {
 }
 .todo-add:active { transform: scale(0.93); }
 
+
+/* ── BINGO SCREEN ── */
+.bingo-header {
+  padding: 50px 20px 14px;
+  background: var(--surface);
+  border-bottom: 2px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+.bingo-header h1 {
+  font-family: 'ChenYuluoyan', sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--ink);
+}
+#bingo-count {
+  font-size: 11px;
+  color: var(--coral);
+  font-family: 'ChenYuluoyan', sans-serif;
+}
+
+.bingo-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  padding: 16px 16px 8px;
+}
+
+.bingo-card {
+  position: relative;
+  border: 2px solid var(--border2);
+  border-radius: 3px;
+  min-height: 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  overflow: hidden;
+  background: var(--surface);
+  transition: transform 0.15s;
+  box-shadow: 2px 2px 0 var(--border);
+}
+.bingo-card:active { transform: scale(0.93); }
+
+.bingo-card-title {
+  font-family: 'ChenYuluoyan', sans-serif;
+  font-size: 12px;
+  color: var(--ink);
+  text-align: center;
+  padding: 0 8px;
+  position: relative;
+  z-index: 2;
+  line-height: 1.5;
+}
+.bingo-card-emoji {
+  font-size: 22px;
+  margin-bottom: 6px;
+  position: relative;
+  z-index: 2;
+}
+
+/* Empty card */
+.bingo-card.empty {
+  border: 2px dashed var(--border);
+  background: transparent;
+  box-shadow: none;
+  cursor: default;
+}
+.bingo-card.add-card {
+  border: 2px dashed var(--border2);
+  background: transparent;
+  box-shadow: none;
+}
+.bingo-card.add-card:active { transform: scale(0.93); }
+
+/* Done card - crayon fill animation */
+.bingo-card.done {
+  border-color: var(--coral);
+}
+.bingo-card.done .bingo-card-title { color: white; }
+.bingo-card.done .bingo-card-emoji { filter: grayscale(0.3); }
+
+/* Crayon fill layer */
+.crayon-fill {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+.crayon-fill canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* Checkmark stamp */
+.bingo-stamp {
+  position: absolute;
+  top: 6px; right: 6px;
+  width: 22px; height: 22px;
+  border-radius: 50%;
+  background: white;
+  border: 2px solid var(--coral);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px;
+  color: var(--coral);
+  font-weight: 700;
+  z-index: 3;
+  opacity: 0;
+  transform: scale(0);
+  transition: all 0.3s cubic-bezier(0.34,1.56,0.64,1);
+}
+.bingo-card.done .bingo-stamp {
+  opacity: 1;
+  transform: scale(1);
+}
+
+
+/* ── CHAT UI ── */
+.rec-header {
+  padding: 50px 20px 12px;
+  background: var(--surface);
+  border-bottom: 2px solid var(--border);
+}
+.rec-header h1 {
+  font-family: 'ChenYuluoyan', sans-serif;
+  font-size: 22px; font-weight: 700; color: var(--ink);
+  margin-bottom: 2px;
+}
+.rec-header p { font-size: 11px; color: var(--text3); }
+
+.chat-messages {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px 16px 8px;
+}
+
+.msg-ai {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+}
+.msg-ai-avatar {
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  background: var(--coral);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14px; flex-shrink: 0;
+  border: 2px solid var(--border2);
+}
+.msg-ai-bubble {
+  background: var(--surface);
+  border: 1.5px solid var(--border2);
+  border-radius: 0 12px 12px 12px;
+  padding: 10px 14px;
+  font-family: 'ChenYuluoyan', sans-serif;
+  font-size: 13px;
+  color: var(--ink);
+  line-height: 1.7;
+  max-width: 85%;
+  box-shadow: 2px 2px 0 var(--border);
+}
+.msg-ai-bubble.typing::after {
+  content: '●●●';
+  animation: typing 1s infinite;
+  color: var(--coral);
+  font-size: 10px;
+}
+@keyframes typing {
+  0%,100% { opacity: 0.3; }
+  50% { opacity: 1; }
+}
+
+.msg-user {
+  display: flex;
+  justify-content: flex-end;
+}
+.msg-user-bubble {
+  background: var(--coral);
+  border-radius: 12px 0 12px 12px;
+  padding: 10px 14px;
+  font-family: 'ChenYuluoyan', sans-serif;
+  font-size: 13px;
+  color: white;
+  line-height: 1.7;
+  max-width: 85%;
+}
+
+/* Upload area */
+.upload-area {
+  margin: 8px 16px;
+  border: 2px dashed var(--border2);
+  border-radius: 6px;
+  padding: 14px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.15s;
+  background: var(--surface);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.upload-area:active { transform: scale(0.97); }
+.upload-area-icon { font-size: 24px; }
+.upload-area-text { text-align: left; }
+.upload-area-main { font-size: 13px; color: var(--ink); font-family: 'ChenYuluoyan', sans-serif; }
+.upload-area-sub { font-size: 11px; color: var(--text3); margin-top: 2px; }
+
+.uploaded-file {
+  margin: 4px 16px;
+  background: var(--washi-green, #e0f5e8);
+  border: 1.5px solid var(--accent3);
+  border-radius: 6px;
+  padding: 10px 14px;
+  display: flex; align-items: center; gap: 10px;
+  font-family: 'ChenYuluoyan', sans-serif;
+  font-size: 12px;
+}
+
+/* Chat input */
+.chat-input-row {
+  display: flex;
+  gap: 8px;
+  padding: 10px 16px 16px;
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+  position: sticky;
+  bottom: 70px;
+}
+.chat-text-input {
+  flex: 1;
+  background: var(--bg);
+  border: 1.5px solid var(--border2);
+  border-radius: 20px;
+  padding: 10px 16px;
+  font-family: 'ChenYuluoyan', sans-serif;
+  font-size: 13px;
+  color: var(--ink);
+  outline: none;
+  resize: none;
+  max-height: 80px;
+  overflow-y: auto;
+}
+.chat-text-input:focus { border-color: var(--coral); }
+.chat-text-input::placeholder { color: var(--text3); }
+.chat-send-btn {
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  background: var(--coral);
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  color: white;
+  display: flex; align-items: center; justify-content: center;
+  transition: all 0.15s;
+  flex-shrink: 0;
+  box-shadow: 2px 2px 0 #c04020;
+  align-self: flex-end;
+}
+.chat-send-btn:active { transform: scale(0.9); }
+.chat-send-btn.loading { opacity: 0.5; pointer-events: none; }
+
+
+/* ── BINGO LINE REWARD ── */
+.bingo-line-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 900;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: rgba(245,240,232,0.92);
+  backdrop-filter: blur(4px);
+  animation: lineRewardIn 0.4s cubic-bezier(0.34,1.56,0.64,1);
+}
+.bingo-line-overlay.show { display: flex; }
+@keyframes lineRewardIn {
+  from { opacity:0; transform:scale(0.85); }
+  to   { opacity:1; transform:scale(1); }
+}
+.bingo-line-star {
+  font-size: 64px;
+  animation: starPop 0.6s cubic-bezier(0.34,1.56,0.64,1);
+}
+@keyframes starPop {
+  0%   { transform: rotate(-15deg) scale(0.3); }
+  60%  { transform: rotate(8deg) scale(1.2); }
+  100% { transform: rotate(-3deg) scale(1); }
+}
+.bingo-line-title {
+  font-family: 'ChenYuluoyan', sans-serif;
+  font-size: 28px;
+  color: var(--coral);
+  margin: 8px 0 4px;
+  text-decoration: underline wavy var(--coral);
+}
+.bingo-line-sub {
+  font-family: 'ChenYuluoyan', sans-serif;
+  font-size: 14px;
+  color: var(--text2);
+  margin-bottom: 24px;
+  text-align: center;
+  padding: 0 32px;
+  line-height: 1.7;
+}
+.bingo-line-btn {
+  background: var(--coral);
+  color: white;
+  border: none;
+  padding: 12px 32px;
+  border-radius: 2px;
+  font-family: 'ChenYuluoyan', sans-serif;
+  font-size: 16px;
+  cursor: pointer;
+  box-shadow: 3px 3px 0 #c04020;
+  transition: all 0.15s;
+}
+.bingo-line-btn:active { transform: translate(2px,2px); box-shadow: 1px 1px 0 #c04020; }
+
+/* Highlight winning cards */
+.bingo-card.winning {
+  border-color: var(--coral) !important;
+  box-shadow: 0 0 0 3px var(--coral), 3px 3px 0 var(--coral) !important;
+  animation: winPulse 0.6s ease;
+}
+@keyframes winPulse {
+  0%,100% { transform: scale(1); }
+  50%      { transform: scale(1.06); }
+}
+
+/* Line confetti */
+.line-conf {
+  position: absolute;
+  font-size: 22px;
+  animation: confFall2 linear forwards;
+  pointer-events: none;
+}
+@keyframes confFall2 {
+  0%   { transform: translateY(-20px) rotate(0deg); opacity: 1; }
+  100% { transform: translateY(700px) rotate(540deg); opacity: 0; }
+}
+
+
+
+
+
+
+
+
+/* ── FOCUS SCREEN ── */
+#screen-focus { background: #0a1a3a; }
+
+.focus-scene {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.focus-ui {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  padding: 20px;
+}
+
+.focus-mode-label {
+  font-family: 'ChenYuluoyan', sans-serif;
+  font-size: 13px;
+  color: rgba(255,255,255,0.6);
+  letter-spacing: 3px;
+  margin-bottom: 8px;
+}
+
+.focus-timer {
+  font-family: 'Caveat', cursive;
+  font-size: 72px;
+  font-weight: 700;
+  color: white;
+  line-height: 1;
+  text-shadow: 0 4px 20px rgba(0,0,0,0.3);
+  margin-bottom: 8px;
+}
+
+.focus-task-name {
+  font-family: 'ChenYuluoyan', sans-serif;
+  font-size: 14px;
+  color: rgba(255,255,255,0.7);
+  margin-bottom: 32px;
+  text-align: center;
+}
+
+.focus-controls {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.focus-btn {
+  width: 56px; height: 56px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.2);
+  border: 2px solid rgba(255,255,255,0.4);
+  color: white;
+  font-size: 22px;
+  cursor: pointer;
+  transition: all 0.2s;
+  backdrop-filter: blur(8px);
+}
+.focus-btn:active { transform: scale(0.9); }
+.focus-btn-stop {
+  background: rgba(232,96,60,0.3);
+  border-color: rgba(232,96,60,0.6);
+  font-size: 18px;
+}
+
+.focus-tomato-dots {
+  display: flex;
+  gap: 8px;
+}
+.tomato-dot {
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.25);
+  transition: background 0.3s;
+}
+.tomato-dot.done { background: var(--coral); }
+.tomato-dot.current { background: white; }
+
+/* Setup panel */
+.focus-setup {
+  position: absolute;
+  inset: 0;
+  background: var(--bg);
+  z-index: 20;
+  overflow-y: auto;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+}
+.focus-setup-inner {
+  padding: 56px 24px 40px;
+  width: 100%;
+  max-width: 480px;
+}
+
+.focus-preview {
+  width: 100%;
+  height: 160px;
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 20px;
+  border: 2px solid var(--border2);
+  background: #c8e8f8;
+  position: relative;
+}
+
+.focus-time-chip {
+  padding: 7px 16px;
+  background: var(--surface);
+  border: 1.5px solid var(--border2);
+  border-radius: 2px;
+  font-family: 'ChenYuluoyan', sans-serif;
+  font-size: 14px;
+  color: var(--text2);
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.focus-time-chip.on {
+  background: var(--coral);
+  border-color: var(--coral);
+  color: white;
+}
+
+/* Finish panel */
+.focus-finish {
+  position: absolute;
+  inset: 0;
+  background: var(--bg);
+  background-image: repeating-linear-gradient(transparent, transparent 27px, rgba(160,145,120,0.18) 27px, rgba(160,145,120,0.18) 28px);
+  z-index: 20;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
 </style>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="StudyMate">
+<meta name="theme-color" content="#f5f0e8">
+<link rel="manifest" href="data:application/manifest+json,%7B%22name%22%3A%22StudyMate%22%2C%22short_name%22%3A%22StudyMate%22%2C%22start_url%22%3A%22.%22%2C%22display%22%3A%22standalone%22%2C%22background_color%22%3A%22%23f5f0e8%22%2C%22theme_color%22%3A%22%23e8603c%22%7D">
+<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' rx='100' fill='%23f5f0e8'/%3E%3C!-- Book --%3E%3Cpath d='M100 190 Q185 155 256 172 Q327 155 412 190 L412 355 Q327 332 256 348 Q185 332 100 355 Z' fill='%23faf7f2' stroke='%23e8603c' stroke-width='12'/%3E%3Cline x1='256' y1='172' x2='256' y2='348' stroke='%23e8603c' stroke-width='12'/%3E%3Cpath d='M100 355 Q178 378 256 370 Q334 378 412 355' fill='none' stroke='%23e8603c' stroke-width='10'/%3E%3C!-- Left lines --%3E%3Cline x1='130' y1='224' x2='236' y2='213' stroke='%23ddd8ce' stroke-width='8'/%3E%3Cline x1='130' y1='254' x2='236' y2='243' stroke='%23ddd8ce' stroke-width='8'/%3E%3Cline x1='130' y1='284' x2='200' y2='275' stroke='%23e8603c' stroke-width='8'/%3E%3C!-- Right lines --%3E%3Cline x1='276' y1='213' x2='382' y2='224' stroke='%23ddd8ce' stroke-width='8'/%3E%3Cline x1='276' y1='243' x2='382' y2='254' stroke='%23ddd8ce' stroke-width='8'/%3E%3Cline x1='276' y1='273' x2='340' y2='282' stroke='%23e8603c' stroke-width='8'/%3E%3C!-- Left arrow --%3E%3Cpath d='M40 268 Q65 262 88 270' fill='none' stroke='%23e8603c' stroke-width='10' stroke-linecap='round'/%3E%3Cpath d='M82 252 L94 268 L82 284' fill='none' stroke='%23e8603c' stroke-width='10' stroke-linecap='round' stroke-linejoin='round'/%3E%3C!-- Right arrow --%3E%3Cpath d='M424 262 Q448 258 472 264' fill='none' stroke='%23e8603c' stroke-width='10' stroke-linecap='round'/%3E%3Cpath d='M424 278 Q448 284 468 272' fill='none' stroke='%23e8603c' stroke-width='10' stroke-linecap='round'/%3E%3C!-- Wavy underline --%3E%3Cpath d='M110 374 Q150 386 190 374 Q230 362 256 370 Q282 378 320 370 Q358 362 400 374' fill='none' stroke='%23e8603c' stroke-width='8' stroke-linecap='round'/%3E%3C/svg%3E">
 </head>
 <body>
 <div class="phone">
@@ -968,9 +1971,364 @@ body.daytime {
 }
 .todo-add:active { transform: scale(0.93); }
 
-</style>
-        <!-- S --><path class="sig-stroke s1" d="M28 22 Q20 18 16 24 Q12 32 20 38 Q30 44 28 52 Q26 60 16 62 Q10 63 8 58"/>
-        <!-- t --><path class="sig-stroke s2" d="M38 14 Q36 30 35 48 Q34 58 36 65 Q38 70 44 68 M30 36 L48 34"/>
+
+/* ── BINGO SCREEN ── */
+.bingo-header {
+  padding: 50px 20px 14px;
+  background: var(--surface);
+  border-bottom: 2px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+.bingo-header h1 {
+  font-family: 'ChenYuluoyan', sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--ink);
+}
+#bingo-count {
+  font-size: 11px;
+  color: var(--coral);
+  font-family: 'ChenYuluoyan', sans-serif;
+}
+
+.bingo-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  padding: 16px 16px 8px;
+}
+
+.bingo-card {
+  position: relative;
+  border: 2px solid var(--border2);
+  border-radius: 3px;
+  min-height: 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  overflow: hidden;
+  background: var(--surface);
+  transition: transform 0.15s;
+  box-shadow: 2px 2px 0 var(--border);
+}
+.bingo-card:active { transform: scale(0.93); }
+
+.bingo-card-title {
+  font-family: 'ChenYuluoyan', sans-serif;
+  font-size: 12px;
+  color: var(--ink);
+  text-align: center;
+  padding: 0 8px;
+  position: relative;
+  z-index: 2;
+  line-height: 1.5;
+}
+.bingo-card-emoji {
+  font-size: 22px;
+  margin-bottom: 6px;
+  position: relative;
+  z-index: 2;
+}
+
+/* Empty card */
+.bingo-card.empty {
+  border: 2px dashed var(--border);
+  background: transparent;
+  box-shadow: none;
+  cursor: default;
+}
+.bingo-card.add-card {
+  border: 2px dashed var(--border2);
+  background: transparent;
+  box-shadow: none;
+}
+.bingo-card.add-card:active { transform: scale(0.93); }
+
+/* Done card - crayon fill animation */
+.bingo-card.done {
+  border-color: var(--coral);
+}
+.bingo-card.done .bingo-card-title { color: white; }
+.bingo-card.done .bingo-card-emoji { filter: grayscale(0.3); }
+
+/* Crayon fill layer */
+.crayon-fill {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+.crayon-fill canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* Checkmark stamp */
+.bingo-stamp {
+  position: absolute;
+  top: 6px; right: 6px;
+  width: 22px; height: 22px;
+  border-radius: 50%;
+  background: white;
+  border: 2px solid var(--coral);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px;
+  color: var(--coral);
+  font-weight: 700;
+  z-index: 3;
+  opacity: 0;
+  transform: scale(0);
+  transition: all 0.3s cubic-bezier(0.34,1.56,0.64,1);
+}
+.bingo-card.done .bingo-stamp {
+  opacity: 1;
+  transform: scale(1);
+}
+
+
+/* ── CHAT UI ── */
+.rec-header {
+  padding: 50px 20px 12px;
+  background: var(--surface);
+  border-bottom: 2px solid var(--border);
+}
+.rec-header h1 {
+  font-family: 'ChenYuluoyan', sans-serif;
+  font-size: 22px; font-weight: 700; color: var(--ink);
+  margin-bottom: 2px;
+}
+.rec-header p { font-size: 11px; color: var(--text3); }
+
+.chat-messages {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px 16px 8px;
+}
+
+.msg-ai {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+}
+.msg-ai-avatar {
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  background: var(--coral);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14px; flex-shrink: 0;
+  border: 2px solid var(--border2);
+}
+.msg-ai-bubble {
+  background: var(--surface);
+  border: 1.5px solid var(--border2);
+  border-radius: 0 12px 12px 12px;
+  padding: 10px 14px;
+  font-family: 'ChenYuluoyan', sans-serif;
+  font-size: 13px;
+  color: var(--ink);
+  line-height: 1.7;
+  max-width: 85%;
+  box-shadow: 2px 2px 0 var(--border);
+}
+.msg-ai-bubble.typing::after {
+  content: '●●●';
+  animation: typing 1s infinite;
+  color: var(--coral);
+  font-size: 10px;
+}
+@keyframes typing {
+  0%,100% { opacity: 0.3; }
+  50% { opacity: 1; }
+}
+
+.msg-user {
+  display: flex;
+  justify-content: flex-end;
+}
+.msg-user-bubble {
+  background: var(--coral);
+  border-radius: 12px 0 12px 12px;
+  padding: 10px 14px;
+  font-family: 'ChenYuluoyan', sans-serif;
+  font-size: 13px;
+  color: white;
+  line-height: 1.7;
+  max-width: 85%;
+}
+
+/* Upload area */
+.upload-area {
+  margin: 8px 16px;
+  border: 2px dashed var(--border2);
+  border-radius: 6px;
+  padding: 14px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.15s;
+  background: var(--surface);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.upload-area:active { transform: scale(0.97); }
+.upload-area-icon { font-size: 24px; }
+.upload-area-text { text-align: left; }
+.upload-area-main { font-size: 13px; color: var(--ink); font-family: 'ChenYuluoyan', sans-serif; }
+.upload-area-sub { font-size: 11px; color: var(--text3); margin-top: 2px; }
+
+.uploaded-file {
+  margin: 4px 16px;
+  background: var(--washi-green, #e0f5e8);
+  border: 1.5px solid var(--accent3);
+  border-radius: 6px;
+  padding: 10px 14px;
+  display: flex; align-items: center; gap: 10px;
+  font-family: 'ChenYuluoyan', sans-serif;
+  font-size: 12px;
+}
+
+/* Chat input */
+.chat-input-row {
+  display: flex;
+  gap: 8px;
+  padding: 10px 16px 16px;
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+  position: sticky;
+  bottom: 70px;
+}
+.chat-text-input {
+  flex: 1;
+  background: var(--bg);
+  border: 1.5px solid var(--border2);
+  border-radius: 20px;
+  padding: 10px 16px;
+  font-family: 'ChenYuluoyan', sans-serif;
+  font-size: 13px;
+  color: var(--ink);
+  outline: none;
+  resize: none;
+  max-height: 80px;
+  overflow-y: auto;
+}
+.chat-text-input:focus { border-color: var(--coral); }
+.chat-text-input::placeholder { color: var(--text3); }
+.chat-send-btn {
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  background: var(--coral);
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  color: white;
+  display: flex; align-items: center; justify-content: center;
+  transition: all 0.15s;
+  flex-shrink: 0;
+  box-shadow: 2px 2px 0 #c04020;
+  align-self: flex-end;
+}
+.chat-send-btn:active { transform: scale(0.9); }
+.chat-send-btn.loading { opacity: 0.5; pointer-events: none; }
+
+
+/* ── BINGO LINE REWARD ── */
+.bingo-line-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 900;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: rgba(245,240,232,0.92);
+  backdrop-filter: blur(4px);
+  animation: lineRewardIn 0.4s cubic-bezier(0.34,1.56,0.64,1);
+}
+.bingo-line-overlay.show { display: flex; }
+@keyframes lineRewardIn {
+  from { opacity:0; transform:scale(0.85); }
+  to   { opacity:1; transform:scale(1); }
+}
+.bingo-line-star {
+  font-size: 64px;
+  animation: starPop 0.6s cubic-bezier(0.34,1.56,0.64,1);
+}
+@keyframes starPop {
+  0%   { transform: rotate(-15deg) scale(0.3); }
+  60%  { transform: rotate(8deg) scale(1.2); }
+  100% { transform: rotate(-3deg) scale(1); }
+}
+.bingo-line-title {
+  font-family: 'ChenYuluoyan', sans-serif;
+  font-size: 28px;
+  color: var(--coral);
+  margin: 8px 0 4px;
+  text-decoration: underline wavy var(--coral);
+}
+.bingo-line-sub {
+  font-family: 'ChenYuluoyan', sans-serif;
+  font-size: 14px;
+  color: var(--text2);
+  margin-bottom: 24px;
+  text-align: center;
+  padding: 0 32px;
+  line-height: 1.7;
+}
+.bingo-line-btn {
+  background: var(--coral);
+  color: white;
+  border: none;
+  padding: 12px 32px;
+  border-radius: 2px;
+  font-family: 'ChenYuluoyan', sans-serif;
+  font-size: 16px;
+  cursor: pointer;
+  box-shadow: 3px 3px 0 #c04020;
+  transition: all 0.15s;
+}
+.bingo-line-btn:active { transform: translate(2px,2px); box-shadow: 1px 1px 0 #c04020; }
+
+/* Highlight winning cards */
+.bingo-card.winning {
+  border-color: var(--coral) !important;
+  box-shadow: 0 0 0 3px var(--coral), 3px 3px 0 var(--coral) !important;
+  animation: winPulse 0.6s ease;
+}
+@keyframes winPulse {
+  0%,100% { transform: scale(1); }
+  50%      { transform: scale(1.06); }
+}
+
+/* Line confetti */
+.line-conf {
+  position: absolute;
+  font-size: 22px;
+  animation: confFall2 linear forwards;
+  pointer-events: none;
+}
+@keyframes confFall2 {
+  0%   { transform: translateY(-20px) rotate(0deg); opacity: 1; }
+  100% { transform: translateY(700px) rotate(540deg); opacity: 0; }
+}
+
+
+/* ── LINED PAPER BACKGROUND ── */
+.scroll-area.lined {
+  background-image: repeating-linear-gradient(
+    transparent,
+    transparent 27px,
+    rgba(160,145,120,0.22) 27px,
+    rgba(160,145,120,0.22) 28px
+  );
+  background-attachment: local;
+}"/>
         <!-- u --><path class="sig-stroke s3" d="M54 34 Q52 52 54 60 Q58 70 66 64 Q72 58 72 48 L72 34"/>
         <!-- d --><path class="sig-stroke s4" d="M88 14 L86 65 M86 42 Q84 34 78 34 Q70 34 68 44 Q66 56 72 62 Q78 68 86 62"/>
         <!-- y --><path class="sig-stroke s5" d="M96 34 Q100 52 102 60 M116 34 Q110 56 104 68 Q98 80 90 82"/>
@@ -1147,18 +2505,7 @@ body.daytime {
         <span style="color:var(--text3);font-size:18px;">›</span>
       </div>
 
-      <!-- Tasks section -->
-      <div class="sec-hd">
-        <h2>今日任務</h2>
-        <span id="task-count">0 / 0 完成</span>
-      </div>
 
-      <div class="todo-grid" id="todo-grid"></div>
-
-      <div class="add-todo-row">
-        <input class="add-todo-input" id="new-task-input" placeholder="新增任務..." maxlength="20">
-        <button class="add-btn" onclick="addTask()">＋</button>
-      </div>
 
       <!-- Progress -->
       <div class="sec-hd"><h2>學科進度</h2></div>
@@ -1168,30 +2515,57 @@ body.daytime {
     </div>
   </div>
 
-  <!-- ══════════════ RECORD ══════════════ -->
+  <!-- ══════════════ RECORD + RADAR ══════════════ -->
   <div class="screen" id="screen-record">
     <div class="rec-header">
-      <h1>學習記錄</h1>
-      <p>說說你今天學了什麼</p>
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
+        <h1 id="rec-tab-title">學習記錄</h1>
+      </div>
+      <div style="display:flex;gap:0;border:1.5px solid var(--border2);border-radius:4px;overflow:hidden;">
+        <button id="tab-record" onclick="switchRecTab('record')" style="flex:1;padding:8px;background:var(--coral);color:white;border:none;font-family:'ChenYuluoyan',sans-serif;font-size:13px;cursor:pointer;">📝 記錄</button>
+        <button id="tab-radar" onclick="switchRecTab('radar')" style="flex:1;padding:8px;background:var(--surface);color:var(--text2);border:none;font-family:'ChenYuluoyan',sans-serif;font-size:13px;cursor:pointer;">📡 弱點</button>
+      </div>
     </div>
-    <div class="scroll-area">
-      <div class="chat-box">
-        <textarea id="rec-input" placeholder="例如：今天讀了利率平價理論，大致懂了，但匯率換算方向還是會混..."></textarea>
-        <div class="chat-footer">
-          <span class="chat-hint">AI 會自動分類並標記弱點</span>
-          <button class="send-btn" id="send-btn" onclick="submitRecord()">記錄 ✦</button>
+    <div id="panel-record" style="display:flex;flex-direction:column;flex:1;overflow:hidden;">
+    <div class="scroll-area lined" style="padding-bottom:130px;" id="chat-scroll">
+
+      <!-- Upload area -->
+      <div class="upload-area" onclick="document.getElementById('notes-file').click()">
+        <div class="upload-area-icon">📎</div>
+        <div class="upload-area-text">
+          <div class="upload-area-main">上傳今天的筆記</div>
+          <div class="upload-area-sub">支援 PDF、圖片（GoodNotes 匯出）</div>
         </div>
       </div>
+      <input type="file" id="notes-file" accept="image/*,.pdf" style="display:none" onchange="handleNotesUpload(this)"/>
+      <div id="uploaded-files-list"></div>
 
-      <div class="ai-bubble" id="ai-bubble" style="display:none;">
-        <div class="ai-hd"><div class="ai-dot"></div><span class="ai-lbl">助理分析</span></div>
-        <div class="ai-text" id="ai-text"></div>
+      <!-- Chat messages -->
+      <div class="chat-messages" id="chat-messages">
+        <div class="msg-ai">
+          <div class="msg-ai-avatar">📚</div>
+          <div class="msg-ai-bubble">嗨！今天上了什麼課？可以上傳筆記，或直接跟我說說今天學了什麼 ✦</div>
+        </div>
       </div>
+    </div>
 
-      <div class="sec-hd"><h2>最近記錄</h2></div>
-      <div id="rec-list">
-        <div style="padding:20px 24px;font-size:13px;color:var(--text3);">還沒有記錄，開始你的第一筆！</div>
+    </div><!-- end panel-record -->
+
+    <!-- Radar panel (hidden by default) -->
+    <div id="panel-radar" style="display:none;flex:1;overflow-y:auto;padding-bottom:90px;">
+      <div class="weak-box" style="margin-top:14px;">
+        <div class="weak-hd"><span style="font-size:18px;">⚠️</span><span class="weak-title" id="weak-title2">弱點清單</span></div>
+        <div class="weak-chips" id="weak-chips2"><span class="weak-empty">還沒有弱點記錄！</span></div>
       </div>
+      <div class="sec-hd" style="margin-top:8px;"><h2>各科掌握度</h2></div>
+      <div id="subj-cards2"></div>
+    </div>
+
+    <!-- Input row (sticky bottom) -->
+    <div class="chat-input-row" id="chat-input-row">
+      <textarea class="chat-text-input" id="chat-input" placeholder="說說今天學了什麼..." rows="1"
+        onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendChatMsg();}"></textarea>
+      <button class="chat-send-btn" id="chat-send-btn" onclick="sendChatMsg()">→</button>
     </div>
   </div>
 
@@ -1240,6 +2614,112 @@ body.daytime {
     </div>
   </div>
 
+
+  <!-- ══════════════ BINGO SCREEN ══════════════ -->
+  <div class="screen" id="screen-bingo">
+    <!-- Bingo line reward overlay -->
+    <div class="bingo-line-overlay" id="bingo-line-overlay">
+      <div id="bingo-line-conf"></div>
+      <div class="bingo-line-star" id="bingo-line-star">🎯</div>
+      <div class="bingo-line-title" id="bingo-line-title">連線！</div>
+      <div class="bingo-line-sub" id="bingo-line-sub">太厲害了！</div>
+      <button class="bingo-line-btn" onclick="closeBingoLine()">繼續加油 →</button>
+    </div>
+    <div class="bingo-header">
+      <h1>終結拖延症</h1>
+      <span id="bingo-count">0 / 9 完成</span>
+    </div>
+    <div class="scroll-area" style="padding-bottom:90px;">
+      <div class="bingo-grid" id="bingo-grid"></div>
+      <div class="add-todo-row">
+        <input class="add-todo-input" id="bingo-task-input" placeholder="新增任務..." maxlength="20">
+        <button class="add-btn" onclick="addBingoTask()">＋</button>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ══════════════ FOCUS SCREEN ══════════════ -->
+  <div class="screen" id="screen-focus">
+    <div class="focus-scene" id="focus-scene">
+      <!-- Sky + scene rendered by JS/CSS -->
+      <canvas id="focus-canvas" style="position:absolute;inset:0;width:100%;height:100%;"></canvas>
+
+      <!-- Timer overlay -->
+      <div class="focus-ui">
+        <div class="focus-mode-label" id="focus-mode-label">專注中</div>
+        <div class="focus-timer" id="focus-timer">25:00</div>
+        <div class="focus-task-name" id="focus-task-name">今天好好讀書</div>
+
+        <div class="focus-controls">
+          <button class="focus-btn" onclick="toggleFocus()">
+            <span id="focus-btn-icon">⏸</span>
+          </button>
+          <button class="focus-btn focus-btn-stop" onclick="stopFocus()">✕</button>
+        </div>
+
+        <div class="focus-tomato-dots" id="focus-tomato-dots"></div>
+      </div>
+    </div>
+
+    <!-- Setup panel (shown before starting) -->
+    <div class="focus-setup" id="focus-setup">
+      <div class="focus-setup-inner">
+        <!-- Mini scene preview -->
+        <div class="focus-preview" id="focus-preview"></div>
+
+        <div style="font-family:'ChenYuluoyan',sans-serif;font-size:22px;color:var(--ink);margin-bottom:4px;">陪讀模式</div>
+        <div style="font-size:12px;color:var(--text3);margin-bottom:24px;font-family:'ChenYuluoyan',sans-serif;">熱氣球在海上等你，準備好了嗎？</div>
+
+        <div style="margin-bottom:16px;">
+          <div style="font-size:12px;color:var(--text2);margin-bottom:6px;font-family:'ChenYuluoyan',sans-serif;">今天要專注做什麼？</div>
+          <input id="focus-task-input" class="add-todo-input" style="width:100%;border-bottom:2px solid var(--border2);padding:8px 4px;" placeholder="例如：總經第三章複習">
+        </div>
+
+        <div style="margin-bottom:16px;">
+          <div style="font-size:12px;color:var(--text2);margin-bottom:6px;font-family:'ChenYuluoyan',sans-serif;">專注時間（分鐘）</div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;">
+            <button class="focus-time-chip on" onclick="setFocusTime(this,25)">25</button>
+            <button class="focus-time-chip" onclick="setFocusTime(this,30)">30</button>
+            <button class="focus-time-chip" onclick="setFocusTime(this,45)">45</button>
+            <button class="focus-time-chip" onclick="setFocusTime(this,50)">50</button>
+            <button class="focus-time-chip" onclick="setFocusTime(this,60)">60</button>
+          </div>
+          <div style="display:flex;align-items:center;gap:8px;margin-top:8px;">
+            <input type="number" id="focus-custom-min" min="1" max="180"
+              style="width:70px;background:transparent;border:none;border-bottom:1.5px solid var(--border2);padding:6px 4px;font-family:'ChenYuluoyan',sans-serif;font-size:14px;color:var(--ink);outline:none;"
+              placeholder="自訂" onchange="setFocusCustom(this)">
+            <span style="font-size:12px;color:var(--text3);">分鐘</span>
+          </div>
+        </div>
+
+        <div style="margin-bottom:24px;">
+          <div style="font-size:12px;color:var(--text2);margin-bottom:6px;font-family:'ChenYuluoyan',sans-serif;">休息時間（分鐘）</div>
+          <div style="display:flex;gap:8px;">
+            <button class="focus-time-chip on" id="break-chip-5" onclick="setBreakTime(this,5)">5</button>
+            <button class="focus-time-chip" id="break-chip-10" onclick="setBreakTime(this,10)">10</button>
+            <button class="focus-time-chip" id="break-chip-15" onclick="setBreakTime(this,15)">15</button>
+          </div>
+        </div>
+
+        <button class="ob-next" onclick="startFocus()"><span class="ob-next-inner">起飛！🎈</span></button>
+      </div>
+    </div>
+
+    <!-- Finish panel -->
+    <div class="focus-finish" id="focus-finish" style="display:none;">
+      <canvas id="finish-canvas" style="position:absolute;inset:0;width:100%;height:100%;"></canvas>
+      <div style="position:relative;z-index:10;text-align:center;padding:32px 24px;">
+        <div style="font-size:64px;margin-bottom:12px;animation:starSpin 1s ease;">🎈</div>
+        <div style="font-family:'ChenYuluoyan',sans-serif;font-size:26px;color:var(--coral);margin-bottom:8px;" id="finish-title">降落成功！</div>
+        <div style="font-family:'ChenYuluoyan',sans-serif;font-size:14px;color:var(--text2);line-height:1.8;margin-bottom:24px;" id="finish-stats"></div>
+        <button class="ob-next" onclick="resetFocus()"><span class="ob-next-inner">再來一次 ✦</span></button>
+        <br>
+        <button onclick="go('screen-home')" style="margin-top:12px;background:none;border:none;font-family:'ChenYuluoyan',sans-serif;font-size:14px;color:var(--text3);cursor:pointer;">回首頁</button>
+      </div>
+    </div>
+  </div>
+
   <!-- ══════════════ REWARD OVERLAY ══════════════ -->
   <div class="reward-overlay" id="reward-overlay">
     <div class="reward-confetti" id="reward-confetti"></div>
@@ -1266,19 +2746,57 @@ body.daytime {
   <!-- ══════════════ BOTTOM NAV ══════════════ -->
   <div class="bottom-nav" id="bottom-nav" style="display:none;">
     <div class="nav-btn on" id="nav-home" onclick="go('screen-home')">
-      <span class="icon">🏠</span><span class="lbl">首頁</span>
+      <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M3 9.5L12 3l9 6.5V20a1 1 0 01-1 1H4a1 1 0 01-1-1V9.5z"/>
+        <path d="M9 21V12h6v9"/>
+      </svg>
+      <span class="lbl">首頁</span>
     </div>
     <div class="nav-btn" id="nav-record" onclick="go('screen-record')">
-      <span class="icon">✏️</span><span class="lbl">記錄</span>
+      <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 20h9"/>
+        <path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/>
+      </svg>
+      <span class="lbl">記錄</span>
     </div>
-    <div class="nav-btn" id="nav-radar" onclick="go('screen-radar')">
-      <span class="icon">📡</span><span class="lbl">弱點</span>
-    </div>
+
     <div class="nav-btn" id="nav-schedule" onclick="go('screen-schedule')">
-      <span class="icon">📅</span><span class="lbl">行程</span>
+      <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="3" y="4" width="18" height="18" rx="2"/>
+        <line x1="16" y1="2" x2="16" y2="6"/>
+        <line x1="8" y1="2" x2="8" y2="6"/>
+        <line x1="3" y1="10" x2="21" y2="10"/>
+        <line x1="8" y1="14" x2="8" y2="14" stroke-width="2.5"/>
+        <line x1="12" y1="14" x2="12" y2="14" stroke-width="2.5"/>
+        <line x1="16" y1="14" x2="16" y2="14" stroke-width="2.5"/>
+        <line x1="8" y1="18" x2="8" y2="18" stroke-width="2.5"/>
+        <line x1="12" y1="18" x2="12" y2="18" stroke-width="2.5"/>
+      </svg>
+      <span class="lbl">行程</span>
+    </div>
+    <div class="nav-btn" id="nav-bingo" onclick="go('screen-bingo')">
+      <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="3" y="3" width="7" height="7" rx="1"/>
+        <rect x="14" y="3" width="7" height="7" rx="1"/>
+        <rect x="3" y="14" width="7" height="7" rx="1"/>
+        <rect x="14" y="14" width="7" height="7" rx="1"/>
+      </svg>
+      <span class="lbl">拖延症</span>
+    </div>
+    <div class="nav-btn" id="nav-focus" onclick="go('screen-focus')">
+      <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 2C8 2 4 6 4 10c0 6 8 12 8 12s8-6 8-12c0-4-4-8-8-8z"/>
+        <circle cx="12" cy="10" r="3"/>
+      </svg>
+      <span class="lbl">陪讀</span>
     </div>
     <div class="nav-btn" id="nav-goals" onclick="go('screen-goals')">
-      <span class="icon">🎯</span><span class="lbl">目標</span>
+      <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="10"/>
+        <circle cx="12" cy="12" r="6"/>
+        <circle cx="12" cy="12" r="2"/>
+      </svg>
+      <span class="lbl">目標</span>
     </div>
   </div>
 
@@ -1300,10 +2818,22 @@ body.daytime {
   <!-- Add Slot Modal -->
   <div class="modal-overlay" id="slot-modal">
     <div class="modal">
-      <h3>新增讀書計劃</h3>
-      <input class="modal-input" id="m-slot-time" placeholder="時間（例如：14:00）" maxlength="10">
-      <input class="modal-input" id="m-slot-title" placeholder="任務（例如：總經複習）" maxlength="30">
+      <h3>新增行程</h3>
+      <input class="modal-input" id="m-slot-date" type="date" style="color-scheme:light;">
+      <input class="modal-input" id="m-slot-time" type="time" style="color-scheme:light;">
+      <input class="modal-input" id="m-slot-title" placeholder="任務名稱（例如：總經複習）" maxlength="30">
       <input class="modal-input" id="m-slot-detail" placeholder="細節（選填）" maxlength="50">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;padding:0 4px;">
+        <span style="font-family:'ChenYuluoyan',sans-serif;font-size:14px;color:var(--ink);">提醒我</span>
+        <select id="m-slot-reminder" style="flex:1;background:var(--bg);border:none;border-bottom:1.5px solid var(--border2);padding:6px 4px;font-family:'ChenYuluoyan',sans-serif;font-size:13px;color:var(--ink);outline:none;">
+          <option value="0">不提醒</option>
+          <option value="5">5 分鐘前</option>
+          <option value="15" selected>15 分鐘前</option>
+          <option value="30">30 分鐘前</option>
+          <option value="60">1 小時前</option>
+          <option value="1440">1 天前</option>
+        </select>
+      </div>
       <div class="modal-row">
         <button class="modal-cancel" onclick="closeModal('slot-modal')">取消</button>
         <button class="modal-ok" onclick="saveSlot()">儲存</button>
@@ -1322,8 +2852,10 @@ let state = {
   subjects: {},         // { 科目: { topics:{name:pct}, score } }
   weaknesses: [],       // [string]
   goals: [],            // [{ name, date, target, progress }]
-  slots: [],            // [{ time, title, detail, type }]
+  slots: [],            // [{ date, time, title, detail, type, reminder }]
   timetable: [],         // [{ day, time, subject }]
+  chatHistory: [],       // [{ role, content }]
+  uploadedNotes: [],     // [{ name, summary }]
   streak: 0,
   lastStudyDate: null,
 };
@@ -1388,6 +2920,7 @@ function finishOnboarding() {
   document.getElementById('bottom-nav').style.display = 'flex';
   go('screen-home');
   renderAll();
+  rescheduleAllReminders();
 }
 
 // ─── NAVIGATION ──────────────────────────────────────────
@@ -1395,6 +2928,8 @@ const screenNav = {
   'screen-home': 'nav-home', 'screen-record': 'nav-record',
   'screen-radar': 'nav-radar', 'screen-schedule': 'nav-schedule',
   'screen-goals': 'nav-goals',
+  'screen-bingo': 'nav-bingo',
+  'screen-focus': 'nav-focus',
 };
 function go(id) {
   document.querySelectorAll('.screen').forEach(s => { if(s.id !== 'ob') s.classList.remove('active'); });
@@ -1404,6 +2939,8 @@ function go(id) {
   const sc = document.getElementById(id).querySelector('.scroll-area');
   if (sc) sc.scrollTop = 0;
   if (id === 'screen-home') renderHome();
+  if (id === 'screen-bingo') renderBingo();
+  if (id === 'screen-focus') { setTimeout(drawFocusScene, 100); }
   if (id === 'screen-radar') renderRadar();
   if (id === 'screen-schedule') renderSchedule();
   if (id === 'screen-goals') renderGoals();
@@ -1448,7 +2985,7 @@ function renderTasks() {
       </div>`;
     } else if (i === state.tasks.length) {
       // Add button cell
-      html += `<div class="todo-card todo-add" onclick="document.getElementById('new-task-input').focus()">
+      html += `<div class="todo-card todo-add" onclick="document.getElementById('bingo-task-input').focus()">
         <div style="font-size:24px;color:var(--text3);margin:auto;">＋</div>
       </div>`;
     } else {
@@ -1487,6 +3024,7 @@ function addTask() {
   input.value = '';
   save();
   renderTasks();
+  renderBingo();
 }
 
 function toggleTask(i) {
@@ -1699,47 +3237,142 @@ function renderSchedule() {
   for (let i = -1; i <= 5; i++) {
     const d = new Date(now); d.setDate(now.getDate() + i);
     const isToday = i === 0;
-    html += `<div class="day-chip ${isToday ? 'today' : ''}">
+    const hasSlot = state.slots.some(s => s.date === d.toISOString().split('T')[0]);
+    html += `<div class="day-chip ${isToday ? 'today' : ''} ${hasSlot && !isToday ? 'has-slot' : ''}">
       <span class="day-name">${days[d.getDay()]}</span>
       <span class="day-num">${d.getDate()}</span>
+      ${hasSlot && !isToday ? '<div class="day-dot"></div>' : ''}
     </div>`;
   }
   strip.innerHTML = html;
 
   const blocks = document.getElementById('time-blocks');
   if (state.slots.length === 0) {
-    blocks.innerHTML = `<div style="padding:0 24px 16px;font-size:13px;color:var(--text3);">還沒有安排，新增你的空檔！</div>`;
+    blocks.innerHTML = `<div style="padding:0 20px 16px;font-size:13px;color:var(--text3);font-family:'ChenYuluoyan',sans-serif;">還沒有行程，點下方新增！</div>`;
     return;
   }
-  const sorted = [...state.slots].sort((a,b) => a.time.localeCompare(b.time));
-  blocks.innerHTML = sorted.map((s,i) => `
-    <div class="time-block">
-      <div class="time-lbl">${s.time}</div>
-      <div class="time-card study" onclick="removeSlot(${i})">
-        <div class="time-title">${s.title}</div>
-        ${s.detail ? `<div class="time-detail">${s.detail}</div>` : ''}
-        <div class="time-dur">長按刪除</div>
+
+  // Sort by date + time (soonest first)
+  const today = now.toISOString().split('T')[0];
+  const sorted = [...state.slots]
+    .map((s, idx) => ({ ...s, _idx: idx }))
+    .sort((a, b) => {
+      const da = (a.date || today) + 'T' + a.time;
+      const db = (b.date || today) + 'T' + b.time;
+      return da.localeCompare(db);
+    });
+
+  // Separate upcoming vs past
+  const upcoming = sorted.filter(s => {
+    const dt = new Date((s.date || today) + 'T' + s.time);
+    return dt >= now;
+  });
+  const past = sorted.filter(s => {
+    const dt = new Date((s.date || today) + 'T' + s.time);
+    return dt < now;
+  });
+
+  function slotCard(s) {
+    const dt = new Date((s.date || today) + 'T' + s.time);
+    const diff = dt - now;
+    const isPast = diff < 0;
+    let countdown = '';
+    if (!isPast) {
+      const totalMin = Math.floor(diff / 60000);
+      if (totalMin < 60) countdown = `${totalMin} 分鐘後`;
+      else if (totalMin < 1440) countdown = `${Math.floor(totalMin/60)} 小時後`;
+      else countdown = `${Math.floor(totalMin/1440)} 天後`;
+    } else {
+      countdown = '已過期';
+    }
+
+    const dateStr = s.date && s.date !== today
+      ? `${s.date.slice(5).replace('-','/')} `
+      : '今天 ';
+
+    return `<div class="time-block">
+      <div class="time-lbl" style="${isPast ? 'color:var(--text3);' : ''}">${s.time}</div>
+      <div class="time-card ${isPast ? 'free' : 'study'}" style="${isPast ? 'opacity:0.55;' : ''}">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:3px;">
+          <div class="time-title">${s.title}</div>
+          <div style="font-size:10px;color:${isPast ? 'var(--text3)' : 'var(--coral)'};font-family:'ChenYuluoyan',sans-serif;white-space:nowrap;margin-left:8px;">${countdown}</div>
+        </div>
+        <div class="time-detail">${dateStr}${s.detail || ''}</div>
+        ${s.reminder > 0 ? `<div class="ai-badge" style="margin-top:5px;">🔔 提前${s.reminder >= 60 ? s.reminder/60+'小時' : s.reminder+'分鐘'}提醒</div>` : ''}
+        <div class="time-dur" onclick="removeSlot(${s._idx})" style="cursor:pointer;color:var(--coral);margin-top:4px;">✕ 刪除</div>
       </div>
-    </div>
-  `).join('');
+    </div>`;
+  }
+
+  let blocksHtml = '';
+  if (upcoming.length > 0) {
+    blocksHtml += `<div style="padding:0 20px 8px;font-size:11px;color:var(--coral);font-family:'ChenYuluoyan',sans-serif;font-weight:700;letter-spacing:1px;">即將到來</div>`;
+    blocksHtml += upcoming.map(slotCard).join('');
+  }
+  if (past.length > 0) {
+    blocksHtml += `<div style="padding:12px 20px 8px;font-size:11px;color:var(--text3);font-family:'ChenYuluoyan',sans-serif;font-weight:700;letter-spacing:1px;">已過期</div>`;
+    blocksHtml += past.map(slotCard).join('');
+  }
+  blocks.innerHTML = blocksHtml;
 }
 
-function openAddSlot() { document.getElementById('slot-modal').classList.add('open'); }
+function openAddSlot() {
+  // Default date to today
+  const today = new Date().toISOString().split('T')[0];
+  document.getElementById('m-slot-date').value = today;
+  document.getElementById('slot-modal').classList.add('open');
+}
+
 function saveSlot() {
-  const time = document.getElementById('m-slot-time').value.trim();
+  const date = document.getElementById('m-slot-date').value;
+  const time = document.getElementById('m-slot-time').value;
   const title = document.getElementById('m-slot-title').value.trim();
   const detail = document.getElementById('m-slot-detail').value.trim();
+  const reminder = parseInt(document.getElementById('m-slot-reminder').value);
   if (!time || !title) return;
-  state.slots.push({ time, title, detail });
+
+  const slot = { date: date || new Date().toISOString().split('T')[0], time, title, detail, reminder };
+  state.slots.push(slot);
+
+  // Schedule reminder notification
+  if (reminder > 0) scheduleReminder(slot);
+
   save();
   closeModal('slot-modal');
   renderSchedule();
+
+  document.getElementById('m-slot-date').value = '';
   document.getElementById('m-slot-time').value = '';
   document.getElementById('m-slot-title').value = '';
   document.getElementById('m-slot-detail').value = '';
+  document.getElementById('m-slot-reminder').value = '15';
 }
+
 function removeSlot(i) {
-  if (confirm('刪除這個安排？')) { state.slots.splice(i,1); save(); renderSchedule(); }
+  state.slots.splice(i, 1);
+  save();
+  renderSchedule();
+}
+
+function scheduleReminder(slot) {
+  if (!('Notification' in window)) return;
+  Notification.requestPermission().then(perm => {
+    if (perm !== 'granted') return;
+    const [h, m] = slot.time.split(':').map(Number);
+    const slotDate = new Date(slot.date);
+    slotDate.setHours(h, m, 0, 0);
+    const remindAt = new Date(slotDate.getTime() - slot.reminder * 60000);
+    const now = new Date();
+    const delay = remindAt.getTime() - now.getTime();
+    if (delay > 0) {
+      setTimeout(() => {
+        new Notification('📚 StudyMate 提醒', {
+          body: `${slot.reminder >= 60 ? slot.reminder/60 + '小時' : slot.reminder + '分鐘'}後：${slot.title}`,
+          icon: '📚'
+        });
+      }, delay);
+    }
+  });
 }
 
 // ─── GOALS ───────────────────────────────────────────────
@@ -1796,6 +3429,7 @@ document.querySelectorAll('.modal-overlay').forEach(o => {
 // ─── INIT ────────────────────────────────────────────────
 function renderAll() {
   renderHome();
+  renderBingo();
   renderRecords();
   renderRadar();
   renderSchedule();
@@ -1879,7 +3513,869 @@ function applyTimeTheme() {
   }
 }
 applyTimeTheme();
+requestNotifPermission();
 
+
+
+
+
+// ── RECORD TAB SWITCHER ─────────────────────────────────
+function switchRecTab(tab) {
+  const panelRecord = document.getElementById('panel-record');
+  const panelRadar = document.getElementById('panel-radar');
+  const tabRecord = document.getElementById('tab-record');
+  const tabRadar = document.getElementById('tab-radar');
+  const inputRow = document.getElementById('chat-input-row');
+
+  if (tab === 'record') {
+    panelRecord.style.display = 'flex';
+    panelRadar.style.display = 'none';
+    tabRecord.style.background = 'var(--coral)';
+    tabRecord.style.color = 'white';
+    tabRadar.style.background = 'var(--surface)';
+    tabRadar.style.color = 'var(--text2)';
+    if(inputRow) inputRow.style.display = 'flex';
+  } else {
+    panelRecord.style.display = 'none';
+    panelRadar.style.display = 'block';
+    tabRadar.style.background = 'var(--coral)';
+    tabRadar.style.color = 'white';
+    tabRecord.style.background = 'var(--surface)';
+    tabRecord.style.color = 'var(--text2)';
+    if(inputRow) inputRow.style.display = 'none';
+    renderRadar2();
+  }
+}
+
+function renderRadar2() {
+  const chips = document.getElementById('weak-chips2');
+  const title = document.getElementById('weak-title2');
+  if (!chips) return;
+  if (state.weaknesses.length === 0) {
+    chips.innerHTML = '<span class="weak-empty">還沒有弱點記錄！</span>';
+    title.textContent = '弱點清單';
+  } else {
+    title.textContent = `弱點清單（${state.weaknesses.length}個）`;
+    chips.innerHTML = state.weaknesses.map(w => `<span class="weak-chip">${w}</span>`).join('');
+  }
+  const cards = document.getElementById('subj-cards2');
+  if (!cards) return;
+  if (Object.keys(state.subjects).length === 0) {
+    cards.innerHTML = '<div style="padding:20px;font-size:13px;color:var(--text3);font-family:ChenYuluoyan,sans-serif;">記錄學習後會顯示各科掌握度</div>';
+    return;
+  }
+  const colors = {'總經':'var(--accent)','TOEIC':'var(--accent2)','民法':'var(--accent3)','其他':'var(--accent4)'};
+  const icons = {'總經':'📊','TOEIC':'🎧','民法':'⚖️','其他':'📖'};
+  cards.innerHTML = Object.entries(state.subjects).map(([name, data]) => {
+    const color = colors[name] || 'var(--accent)';
+    const icon = icons[name] || '📖';
+    return `<div class="subj-card">
+      <div class="subj-hd">
+        <div class="subj-name"><span class="subj-icon">${icon}</span><span class="subj-title">${name}</span></div>
+        <span class="subj-score" style="color:${color};">${data.score}%</span>
+      </div>
+      <div style="font-size:12px;color:var(--text3);">繼續記錄以追蹤細部主題</div>
+    </div>`;
+  }).join('');
+}
+
+// ── CHAT + NOTES ────────────────────────────────────────
+let chatContext = []; // session chat history
+
+function scrollChat() {
+  const el = document.getElementById('chat-scroll');
+  if (el) setTimeout(() => el.scrollTo({ top: el.scrollHeight, behavior: 'smooth' }), 100);
+}
+
+function addMsg(role, text, isTyping=false) {
+  const container = document.getElementById('chat-messages');
+  if (!container) return;
+  const div = document.createElement('div');
+  if (role === 'ai') {
+    div.className = 'msg-ai';
+    div.innerHTML = `<div class="msg-ai-avatar">📚</div>
+      <div class="msg-ai-bubble${isTyping ? ' typing' : ''}" id="${isTyping ? 'typing-bubble' : ''}">${isTyping ? '' : text}</div>`;
+  } else {
+    div.className = 'msg-user';
+    div.innerHTML = `<div class="msg-user-bubble">${text}</div>`;
+  }
+  container.appendChild(div);
+  scrollChat();
+  return div;
+}
+
+function removeTyping() {
+  const el = document.getElementById('typing-bubble');
+  if (el) el.closest('.msg-ai').remove();
+}
+
+async function sendChatMsg() {
+  const input = document.getElementById('chat-input');
+  const btn = document.getElementById('chat-send-btn');
+  const text = input.value.trim();
+  if (!text) return;
+
+  input.value = '';
+  input.style.height = 'auto';
+  btn.classList.add('loading');
+
+  addMsg('user', text);
+  chatContext.push({ role: 'user', content: text });
+
+  addMsg('ai', '', true); // typing indicator
+
+  try {
+    const systemPrompt = `你是一個親切的學習助理，用繁體中文跟使用者用對話方式聊天。
+使用者名字是「${state.user?.name || '同學'}」。
+你的任務：
+1. 聊今天上了什麼課、學了什麼
+2. 主動提到這個單元可能會遇到的重要理論或觀念
+3. 問使用者有沒有不懂的地方
+4. 語氣像朋友，不要太正式
+5. 回覆簡短，一次不超過3句
+${state.uploadedNotes?.length ? `使用者今天上傳的筆記摘要：${state.uploadedNotes.map(n=>n.summary).join('；')}` : ''}`;
+
+    const res = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 1000,
+        system: systemPrompt,
+        messages: chatContext
+      })
+    });
+
+    const data = await res.json();
+    const reply = data.content[0].text;
+    chatContext.push({ role: 'assistant', content: reply });
+
+    removeTyping();
+    addMsg('ai', reply);
+
+    // Save to records
+    if (chatContext.length === 2) {
+      state.records.unshift({
+        date: new Date().toLocaleString('zh-TW', { month:'numeric', day:'numeric', hour:'2-digit', minute:'2-digit' }),
+        subject: '其他', text, tags: [], weakTags: []
+      });
+      save();
+    }
+
+  } catch(e) {
+    removeTyping();
+    addMsg('ai', '網路有點問題，稍後再試試！');
+  }
+
+  btn.classList.remove('loading');
+  scrollChat();
+}
+
+async function handleNotesUpload(input) {
+  const file = input.files[0];
+  if (!file) return;
+
+  // Show uploaded file
+  const list = document.getElementById('uploaded-files-list');
+  const fileDiv = document.createElement('div');
+  fileDiv.className = 'uploaded-file';
+  fileDiv.innerHTML = `<span>📄</span><span>${file.name}</span><span style="color:var(--text3);font-size:11px;">分析中...</span>`;
+  list.appendChild(fileDiv);
+
+  addMsg('ai', `收到「${file.name}」！我來幫你看看今天的筆記內容 ✦`);
+
+  try {
+    const base64 = await new Promise((res, rej) => {
+      const reader = new FileReader();
+      reader.onload = () => res(reader.result.split(',')[1]);
+      reader.onerror = rej;
+      reader.readAsDataURL(file);
+    });
+
+    const isImage = file.type.startsWith('image/');
+    const msgContent = [
+      {
+        type: isImage ? 'image' : 'document',
+        source: { type: 'base64', media_type: file.type, data: base64 }
+      },
+      {
+        type: 'text',
+        text: `請分析這份筆記，用繁體中文回覆：
+1. 這份筆記的主題是什麼科目？
+2. 今天學了哪些重要概念（列出3-5點）？
+3. 這個單元學生通常會遇到哪些重要理論或容易搞混的地方？
+4. 給學生一個友善的鼓勵
+
+回覆風格像朋友對話，不要條列式，自然地聊天。`
+      }
+    ];
+
+    addMsg('ai', '', true);
+
+    const res = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 1000,
+        messages: [{ role: 'user', content: msgContent }]
+      })
+    });
+
+    const data = await res.json();
+    const reply = data.content[0].text;
+
+    // Save note summary
+    if (!state.uploadedNotes) state.uploadedNotes = [];
+    state.uploadedNotes.push({ name: file.name, summary: reply.slice(0, 200) });
+    chatContext.push({ role: 'user', content: `我上傳了筆記：${file.name}` });
+    chatContext.push({ role: 'assistant', content: reply });
+    save();
+
+    removeTyping();
+    addMsg('ai', reply);
+
+    // Update file status
+    const statusSpan = fileDiv.querySelector('span:last-child');
+    if (statusSpan) statusSpan.textContent = '✓ 已分析';
+
+    // Auto record
+    state.records.unshift({
+      date: new Date().toLocaleString('zh-TW', { month:'numeric', day:'numeric', hour:'2-digit', minute:'2-digit' }),
+      subject: '其他', text: `上傳筆記：${file.name}`, tags: ['筆記上傳'], weakTags: []
+    });
+    save();
+
+  } catch(e) {
+    removeTyping();
+    addMsg('ai', '筆記讀取失敗，可以直接跟我說說今天學了什麼！');
+  }
+
+  scrollChat();
+}
+
+// Auto-resize chat input
+document.addEventListener('input', function(e) {
+  if (e.target.id === 'chat-input') {
+    e.target.style.height = 'auto';
+    e.target.style.height = Math.min(e.target.scrollHeight, 80) + 'px';
+  }
+});
+
+
+function addBingoTask() {
+  const input = document.getElementById('bingo-task-input');
+  const title = input.value.trim();
+  if (!title) return;
+  state.tasks.push({ title, done: false });
+  input.value = '';
+  save();
+  renderBingo();
+}
+
+
+
+// ── FOCUS / 陪讀模式 ────────────────────────────────────
+let focusState = {
+  totalMin: 25,
+  breakMin: 5,
+  remaining: 25 * 60,
+  isRunning: false,
+  isBreak: false,
+  timer: null,
+  tomatoCount: 0,
+  taskName: '',
+  startTime: null,
+  totalFocused: 0,
+};
+
+function setFocusTime(btn, min) {
+  document.querySelectorAll('.focus-time-chip').forEach(c => {
+    if (!c.id || !c.id.startsWith('break')) c.classList.remove('on');
+  });
+  btn.classList.add('on');
+  focusState.totalMin = min;
+  focusState.remaining = min * 60;
+  document.getElementById('focus-custom-min').value = '';
+}
+
+function setFocusCustom(input) {
+  const min = parseInt(input.value);
+  if (isNaN(min) || min < 1) return;
+  document.querySelectorAll('.focus-time-chip').forEach(c => {
+    if (!c.id || !c.id.startsWith('break')) c.classList.remove('on');
+  });
+  focusState.totalMin = min;
+  focusState.remaining = min * 60;
+}
+
+function setBreakTime(btn, min) {
+  ['5','10','15'].forEach(n => {
+    const el = document.getElementById(`break-chip-${n}`);
+    if(el) el.classList.remove('on');
+  });
+  btn.classList.add('on');
+  focusState.breakMin = min;
+}
+
+function startFocus() {
+  const taskInput = document.getElementById('focus-task-input');
+  focusState.taskName = taskInput.value.trim() || '專注中';
+  focusState.remaining = focusState.totalMin * 60;
+  focusState.isRunning = true;
+  focusState.isBreak = false;
+  focusState.tomatoCount = 0;
+  focusState.startTime = Date.now();
+  focusState.totalFocused = 0;
+
+  document.getElementById('focus-setup').style.display = 'none';
+  document.getElementById('focus-finish').style.display = 'none';
+  document.getElementById('focus-task-name').textContent = focusState.taskName;
+  document.getElementById('focus-mode-label').textContent = '專注中 ✦';
+  document.getElementById('focus-btn-icon').textContent = '⏸';
+
+  updateFocusTomatoes();
+  drawFocusScene();
+  tickFocus();
+}
+
+function tickFocus() {
+  if (!focusState.isRunning) return;
+  updateFocusDisplay();
+
+  if (focusState.remaining <= 0) {
+    if (!focusState.isBreak) {
+      focusState.tomatoCount++;
+      focusState.totalFocused += focusState.totalMin;
+      updateFocusTomatoes();
+      // Switch to break
+      focusState.isBreak = true;
+      focusState.remaining = focusState.breakMin * 60;
+      document.getElementById('focus-mode-label').textContent = '休息時間 ☕';
+      updateFocusDisplay();
+    } else {
+      // Break done, back to focus
+      focusState.isBreak = false;
+      focusState.remaining = focusState.totalMin * 60;
+      document.getElementById('focus-mode-label').textContent = '專注中 ✦';
+      updateFocusDisplay();
+    }
+  }
+
+  focusState.remaining--;
+  focusState.timer = setTimeout(tickFocus, 1000);
+}
+
+function updateFocusDisplay() {
+  const m = Math.floor(focusState.remaining / 60);
+  const s = focusState.remaining % 60;
+  document.getElementById('focus-timer').textContent =
+    `${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+}
+
+function updateFocusTomatoes() {
+  const el = document.getElementById('focus-tomato-dots');
+  if (!el) return;
+  let html = '';
+  for (let i = 0; i < 4; i++) {
+    if (i < focusState.tomatoCount) html += '<div class="tomato-dot done"></div>';
+    else if (i === focusState.tomatoCount) html += '<div class="tomato-dot current"></div>';
+    else html += '<div class="tomato-dot"></div>';
+  }
+  el.innerHTML = html;
+}
+
+function toggleFocus() {
+  focusState.isRunning = !focusState.isRunning;
+  document.getElementById('focus-btn-icon').textContent = focusState.isRunning ? '⏸' : '▶';
+  if (focusState.isRunning) tickFocus();
+}
+
+function stopFocus() {
+  clearTimeout(focusState.timer);
+  focusState.isRunning = false;
+  const totalMin = focusState.totalFocused + Math.floor((focusState.totalMin * 60 - focusState.remaining) / 60);
+  showFocusFinish(totalMin);
+}
+
+function showFocusFinish(totalMin) {
+  const finish = document.getElementById('focus-finish');
+  finish.style.display = 'flex';
+
+  const hours = Math.floor(totalMin / 60);
+  const mins = totalMin % 60;
+  const timeStr = hours > 0 ? `${hours} 小時 ${mins} 分鐘` : `${mins} 分鐘`;
+
+  const msgs = [
+    '熱氣球已安全降落 🎈',
+    '今天飛得很高！🌤',
+    '海風相伴，專注達成 ✦',
+    '你的熱氣球到達目的地了！',
+  ];
+
+  document.getElementById('finish-title').textContent = msgs[Math.floor(Math.random() * msgs.length)];
+  document.getElementById('finish-stats').innerHTML =
+    `今天專注了 <strong style="color:var(--coral);font-size:20px;">${timeStr}</strong><br>完成了 <strong style="color:var(--coral);">${focusState.tomatoCount}</strong> 個番茄鐘<br>任務：${focusState.taskName}`;
+
+  // Floating confetti
+  const items = ['🎈','⭐','✨','🌊','☁️','🌸'];
+  for (let i = 0; i < 20; i++) {
+    const c = document.createElement('div');
+    c.style.cssText = `position:absolute;font-size:${16+Math.random()*12}px;left:${Math.random()*100}%;top:-30px;animation:confFall ${1.5+Math.random()*2}s linear ${Math.random()*1.5}s forwards;pointer-events:none;`;
+    c.textContent = items[Math.floor(Math.random() * items.length)];
+    finish.appendChild(c);
+    setTimeout(() => c.remove(), 4000);
+  }
+}
+
+function resetFocus() {
+  document.getElementById('focus-finish').style.display = 'none';
+  document.getElementById('focus-setup').style.display = 'flex';
+  focusState.tomatoCount = 0;
+  focusState.totalFocused = 0;
+  updateFocusTomatoes();
+}
+
+// ── DRAW HOT AIR BALLOON SCENE ──────────────────────────
+function drawFocusScene() {
+  const canvas = document.getElementById('focus-canvas');
+  if (!canvas) return;
+  const W = canvas.offsetWidth;
+  const H = canvas.offsetHeight;
+  canvas.width = W;
+  canvas.height = H;
+  const ctx = canvas.getContext('2d');
+
+  const hour = new Date().getHours();
+  const isDay = hour >= 6 && hour < 18;
+
+  let balloonX = W * 0.5;
+  let balloonY = H * 0.38;
+  let time = 0;
+
+  function frame() {
+    if (!document.getElementById('focus-canvas')) return;
+    ctx.clearRect(0, 0, W, H);
+    time += 0.01;
+
+    // Sky
+    if (isDay) {
+      const sky = ctx.createLinearGradient(0, 0, 0, H);
+      sky.addColorStop(0, '#5ba3d9');
+      sky.addColorStop(0.5, '#87ceeb');
+      sky.addColorStop(1, '#b8e0f7');
+      ctx.fillStyle = sky;
+    } else {
+      const sky = ctx.createLinearGradient(0, 0, 0, H);
+      sky.addColorStop(0, '#0a0a2a');
+      sky.addColorStop(1, '#1a2a5a');
+      ctx.fillStyle = sky;
+    }
+    ctx.fillRect(0, 0, W, H);
+
+    if (isDay) {
+      // Sun
+      ctx.beginPath();
+      ctx.arc(W * 0.8, H * 0.15, 36, 0, Math.PI * 2);
+      ctx.fillStyle = '#ffd060';
+      ctx.fill();
+      ctx.beginPath();
+      ctx.arc(W * 0.8, H * 0.15, 28, 0, Math.PI * 2);
+      ctx.fillStyle = '#ffe080';
+      ctx.fill();
+
+      // Clouds
+      drawCloud(ctx, W * 0.15 + Math.sin(time * 0.3) * 8, H * 0.18, 55, 22, 'rgba(255,255,255,0.9)');
+      drawCloud(ctx, W * 0.6 + Math.sin(time * 0.2 + 1) * 6, H * 0.12, 40, 16, 'rgba(255,255,255,0.8)');
+      drawCloud(ctx, W * 0.35 + Math.sin(time * 0.25 + 2) * 10, H * 0.25, 60, 20, 'rgba(255,255,255,0.7)');
+    } else {
+      // Stars
+      for (let i = 0; i < 40; i++) {
+        const sx = (i * 137.5) % W;
+        const sy = (i * 97.3) % (H * 0.5);
+        const r = 0.5 + (i % 3) * 0.5;
+        ctx.beginPath();
+        ctx.arc(sx, sy, r, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(255,255,255,${0.4 + Math.sin(time * 2 + i) * 0.2})`;
+        ctx.fill();
+      }
+      // Moon
+      ctx.beginPath();
+      ctx.arc(W * 0.75, H * 0.18, 22, 0, Math.PI * 2);
+      ctx.fillStyle = '#f9f0c0';
+      ctx.fill();
+      ctx.beginPath();
+      ctx.arc(W * 0.78, H * 0.16, 18, 0, Math.PI * 2);
+      ctx.fillStyle = '#1a2a5a';
+      ctx.fill();
+    }
+
+    // Sea
+    const seaTop = H * 0.58;
+    const sea = ctx.createLinearGradient(0, seaTop, 0, H);
+    if (isDay) {
+      sea.addColorStop(0, '#1a8ab8');
+      sea.addColorStop(1, '#0a4a7a');
+    } else {
+      sea.addColorStop(0, '#0a3a6a');
+      sea.addColorStop(1, '#020a18');
+    }
+    ctx.fillStyle = sea;
+    ctx.fillRect(0, seaTop, W, H - seaTop);
+
+    // Waves
+    for (let w = 0; w < 4; w++) {
+      ctx.beginPath();
+      ctx.moveTo(0, seaTop + w * 14);
+      for (let x = 0; x <= W; x += 4) {
+        ctx.lineTo(x, seaTop + w * 14 + Math.sin(x * 0.04 + time * 1.5 + w) * 5);
+      }
+      ctx.strokeStyle = `rgba(255,255,255,${0.15 - w * 0.03})`;
+      ctx.lineWidth = 1.5;
+      ctx.stroke();
+    }
+
+    // Sun/moon reflection on water
+    const refX = isDay ? W * 0.8 : W * 0.75;
+    const refGrad = ctx.createLinearGradient(refX, seaTop, refX, H);
+    refGrad.addColorStop(0, 'rgba(255,230,100,0.3)');
+    refGrad.addColorStop(1, 'rgba(255,230,100,0)');
+    ctx.fillStyle = refGrad;
+    ctx.fillRect(refX - 15, seaTop, 30, H - seaTop);
+
+    // Islands silhouette
+    ctx.beginPath();
+    ctx.ellipse(W * 0.15, seaTop + 2, 45, 18, 0, 0, Math.PI * 2);
+    ctx.fillStyle = isDay ? '#2a5a2a' : '#0a1a0a';
+    ctx.fill();
+    ctx.beginPath();
+    ctx.ellipse(W * 0.82, seaTop + 4, 35, 14, 0, 0, Math.PI * 2);
+    ctx.fillStyle = isDay ? '#1a4a1a' : '#081208';
+    ctx.fill();
+
+    // Balloon float
+    const bx = balloonX + Math.sin(time * 0.7) * 18;
+    const by = balloonY + Math.sin(time * 0.5) * 12;
+    drawBalloon(ctx, bx, by, isDay);
+
+    requestAnimationFrame(frame);
+  }
+  frame();
+
+  // Draw preview too
+  const prev = document.getElementById('focus-preview');
+  if (prev) {
+    const pc = document.createElement('canvas');
+    pc.style.cssText = 'width:100%;height:100%;display:block;';
+    prev.innerHTML = '';
+    prev.appendChild(pc);
+    pc.width = prev.offsetWidth || 300;
+    pc.height = 160;
+    const pctx = pc.getContext('2d');
+    // Simple static preview
+    const psky = pctx.createLinearGradient(0,0,0,160);
+    if(isDay){psky.addColorStop(0,'#5ba3d9');psky.addColorStop(1,'#b8e0f7');}
+    else{psky.addColorStop(0,'#0a0a2a');psky.addColorStop(1,'#1a2a5a');}
+    pctx.fillStyle=psky; pctx.fillRect(0,0,pc.width,160);
+    pctx.fillStyle=isDay?'#1a8ab8':'#0a3a6a'; pctx.fillRect(0,100,pc.width,60);
+    drawBalloon(pctx, pc.width/2, 60, isDay);
+  }
+}
+
+function drawCloud(ctx, x, y, w, h, color) {
+  ctx.fillStyle = color;
+  ctx.beginPath();
+  ctx.ellipse(x, y, w/2, h/2, 0, 0, Math.PI*2); ctx.fill();
+  ctx.beginPath();
+  ctx.ellipse(x - w*0.25, y + h*0.1, w*0.35, h*0.45, 0, 0, Math.PI*2); ctx.fill();
+  ctx.beginPath();
+  ctx.ellipse(x + w*0.25, y + h*0.15, w*0.3, h*0.4, 0, 0, Math.PI*2); ctx.fill();
+}
+
+function drawBalloon(ctx, x, y, isDay) {
+  // Balloon body
+  const grad = ctx.createRadialGradient(x-8, y-10, 2, x, y, 32);
+  grad.addColorStop(0, '#ff8860');
+  grad.addColorStop(0.5, '#e8603c');
+  grad.addColorStop(1, '#c04020');
+  ctx.beginPath();
+  ctx.ellipse(x, y, 28, 36, 0, 0, Math.PI*2);
+  ctx.fillStyle = grad;
+  ctx.fill();
+  // Stripes
+  ctx.save();
+  ctx.clip();
+  ctx.beginPath(); ctx.ellipse(x, y, 28, 36, 0, 0, Math.PI*2);
+  ctx.clip();
+  for(let i=-3;i<4;i++){
+    ctx.fillStyle='rgba(255,220,100,0.25)';
+    ctx.fillRect(x+i*14-5, y-36, 10, 72);
+  }
+  ctx.restore();
+  // Highlight
+  ctx.beginPath();
+  ctx.ellipse(x-10, y-14, 8, 12, -0.5, 0, Math.PI*2);
+  ctx.fillStyle='rgba(255,255,255,0.3)';
+  ctx.fill();
+  // Ropes
+  ctx.strokeStyle=isDay?'#8a6030':'#6a4020';
+  ctx.lineWidth=1.5;
+  [[x-12,y+34,x-10,y+52],[x,y+36,x,y+52],[x+12,y+34,x+10,y+52]].forEach(([x1,y1,x2,y2])=>{
+    ctx.beginPath(); ctx.moveTo(x1,y1); ctx.lineTo(x2,y2); ctx.stroke();
+  });
+  // Basket
+  ctx.fillStyle='#8a5a20';
+  ctx.beginPath();
+  ctx.roundRect(x-14, y+52, 28, 18, 3);
+  ctx.fill();
+  ctx.strokeStyle='#6a3a10'; ctx.lineWidth=1.5;
+  ctx.strokeRect(x-14, y+52, 28, 18);
+  // Person in basket
+  ctx.beginPath();
+  ctx.arc(x, y+54, 5, 0, Math.PI*2);
+  ctx.fillStyle='#ffd0a0'; ctx.fill();
+  ctx.fillStyle='#3060a0';
+  ctx.fillRect(x-4, y+59, 8, 8);
+}
+
+// Handle go to focus screen
+const _origGo = go;
+
+// ── BINGO LINE CHECK ─────────────────────────────────────
+let completedLines = new Set();
+
+function checkBingoLines() {
+  const done = state.tasks.slice(0, 9).map(t => t && t.done);
+  // Pad to 9
+  while (done.length < 9) done.push(false);
+
+  const lines = [
+    [0,1,2], [3,4,5], [6,7,8], // rows
+    [0,3,6], [1,4,7], [2,5,8], // cols
+    [0,4,8], [2,4,6]            // diags
+  ];
+
+  const lineNames = [
+    '第一行連線！', '第二行連線！', '第三行連線！',
+    '第一列連線！', '第二列連線！', '第三列連線！',
+    '對角線連線！', '反對角連線！'
+  ];
+
+  const msgs = [
+    '三個任務全部搞定，你今天太給力了 🔥',
+    '一條線完成！動力滿滿，繼續！',
+    '連線達成！拖延症正在消退中 ✦',
+    '三連勝！你比你想的更自律 💪',
+  ];
+
+  for (let i = 0; i < lines.length; i++) {
+    const line = lines[i];
+    const key = line.join('-');
+    if (done[line[0]] && done[line[1]] && done[line[2]] && !completedLines.has(key)) {
+      completedLines.add(key);
+
+      // Highlight winning cards
+      line.forEach(idx => {
+        const card = document.getElementById(`bingo-card-${idx}`);
+        if (card) {
+          card.classList.add('winning');
+          setTimeout(() => card.classList.remove('winning'), 1000);
+        }
+      });
+
+      // Show reward after short delay
+      setTimeout(() => showBingoLine(lineNames[i], msgs[Math.floor(Math.random() * msgs.length)], line), 600);
+      break; // Show one at a time
+    }
+  }
+}
+
+function showBingoLine(title, sub, winCards) {
+  const overlay = document.getElementById('bingo-line-overlay');
+  const stars = ['🎯','🏆','⭐','🎊','✨','🌟'];
+  document.getElementById('bingo-line-star').textContent = stars[Math.floor(Math.random() * stars.length)];
+  document.getElementById('bingo-line-title').textContent = title;
+  document.getElementById('bingo-line-sub').textContent = sub;
+  overlay.classList.add('show');
+
+  // Launch confetti
+  const conf = document.getElementById('bingo-line-conf');
+  conf.innerHTML = '';
+  const items = ['⭐','🎉','✨','💫','🎊','💜','💛','🩷'];
+  for (let i = 0; i < 20; i++) {
+    const c = document.createElement('div');
+    c.className = 'line-conf';
+    c.textContent = items[Math.floor(Math.random() * items.length)];
+    c.style.left = Math.random() * 100 + '%';
+    c.style.top = '-20px';
+    c.style.animationDuration = (1.2 + Math.random() * 1.5) + 's';
+    c.style.animationDelay = (Math.random() * 0.8) + 's';
+    conf.appendChild(c);
+    setTimeout(() => c.remove(), 3000);
+  }
+}
+
+function closeBingoLine() {
+  document.getElementById('bingo-line-overlay').classList.remove('show');
+}
+
+// Reset completed lines when tasks change
+function resetBingoLines() {
+  completedLines = new Set();
+  // Re-check which lines are already done (don't re-trigger)
+  const done = state.tasks.slice(0, 9).map(t => t && t.done);
+  while (done.length < 9) done.push(false);
+  const lines = [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];
+  lines.forEach(line => {
+    if (done[line[0]] && done[line[1]] && done[line[2]]) {
+      completedLines.add(line.join('-'));
+    }
+  });
+}
+
+// ── BINGO / 拖延症 ──────────────────────────────────────
+function renderBingo() {
+  const grid = document.getElementById('bingo-grid');
+  if (!grid) return;
+  resetBingoLines();
+  const emojis = ['📖','🧮','📊','✏️','🎧','⚖️','🌟','💡','📝','🔬'];
+  const total = 9;
+  let html = '';
+
+  for (let i = 0; i < total; i++) {
+    const t = state.tasks[i];
+    if (t) {
+      html += `<div class="bingo-card ${t.done ? 'done' : ''}" onclick="toggleBingo(${i})" id="bingo-card-${i}">
+        <div class="crayon-fill"><canvas id="crayon-${i}" width="120" height="100"></canvas></div>
+        <div class="bingo-stamp">✓</div>
+        <div class="bingo-card-emoji">${emojis[i % emojis.length]}</div>
+        <div class="bingo-card-title">${t.title}</div>
+      </div>`;
+    } else if (i === state.tasks.length) {
+      html += `<div class="bingo-card add-card" onclick="document.getElementById('bingo-task-input').focus()">
+        <div style="font-size:28px;color:var(--text3);">＋</div>
+        <div style="font-size:11px;color:var(--text3);margin-top:4px;font-family:'ChenYuluoyan',sans-serif;">新增任務</div>
+      </div>`;
+    } else {
+      html += `<div class="bingo-card empty"></div>`;
+    }
+  }
+
+  grid.innerHTML = html;
+
+  // Redraw crayon fills for done cards
+  state.tasks.forEach((t, i) => {
+    if (t.done) drawCrayon(i);
+  });
+
+  const done = state.tasks.filter(t => t.done).length;
+  const total2 = state.tasks.length;
+  const el = document.getElementById('bingo-count');
+  if (el) el.textContent = `${done} / ${Math.min(total2, 9)} 完成`;
+}
+
+function toggleBingo(i) {
+  const wasDone = state.tasks[i].done;
+  state.tasks[i].done = !wasDone;
+  save();
+
+  if (!wasDone) {
+    // Animate crayon fill
+    animateCrayon(i, () => {
+      renderBingo();
+      updateStreak();
+      checkBingoLines();
+      setTimeout(checkAllDone, 400);
+    });
+  } else {
+    renderBingo();
+  }
+}
+
+function animateCrayon(i, callback) {
+  const card = document.getElementById(`bingo-card-${i}`);
+  if (!card) { if(callback) callback(); return; }
+  card.classList.add('done');
+
+  const canvas = document.getElementById(`crayon-${i}`);
+  if (!canvas) { if(callback) callback(); return; }
+
+  const ctx = canvas.getContext('2d');
+  const W = canvas.offsetWidth || 120;
+  const H = canvas.offsetHeight || 100;
+  canvas.width = W;
+  canvas.height = H;
+
+  const color = '#e8603c';
+  let progress = 0;
+  const duration = 600;
+  const start = performance.now();
+
+  function frame(now) {
+    progress = Math.min((now - start) / duration, 1);
+    ctx.clearRect(0, 0, W, H);
+
+    // Crayon texture - multiple overlapping strokes
+    const stripeW = 6;
+    const stripes = Math.ceil(W / stripeW);
+    const filled = Math.ceil(stripes * progress);
+
+    for (let s = 0; s < filled; s++) {
+      const x = s * stripeW;
+      const wobble = (Math.sin(s * 1.7) * 2);
+      ctx.globalAlpha = 0.72 + Math.sin(s) * 0.1;
+      ctx.fillStyle = color;
+      ctx.beginPath();
+      ctx.rect(x, wobble, stripeW - 0.5, H + Math.abs(wobble));
+      ctx.fill();
+
+      // Crayon grain texture
+      if (s % 2 === 0) {
+        ctx.globalAlpha = 0.08;
+        ctx.fillStyle = '#fff';
+        for (let g = 0; g < 3; g++) {
+          ctx.fillRect(x + Math.random() * stripeW, Math.random() * H, 1, 2);
+        }
+      }
+    }
+    ctx.globalAlpha = 1;
+
+    if (progress < 1) {
+      requestAnimationFrame(frame);
+    } else {
+      if (callback) callback();
+    }
+  }
+  requestAnimationFrame(frame);
+}
+
+function drawCrayon(i) {
+  const canvas = document.getElementById(`crayon-${i}`);
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const W = canvas.offsetWidth || 120;
+  const H = canvas.offsetHeight || 100;
+  canvas.width = W;
+  canvas.height = H;
+
+  const color = '#e8603c';
+  const stripeW = 6;
+  const stripes = Math.ceil(W / stripeW);
+
+  for (let s = 0; s < stripes; s++) {
+    const x = s * stripeW;
+    const wobble = Math.sin(s * 1.7) * 2;
+    ctx.globalAlpha = 0.72 + Math.sin(s) * 0.1;
+    ctx.fillStyle = color;
+    ctx.fillRect(x, wobble, stripeW - 0.5, H + Math.abs(wobble));
+    if (s % 2 === 0) {
+      ctx.globalAlpha = 0.08;
+      ctx.fillStyle = '#fff';
+      ctx.fillRect(x + 2, H * 0.3, 1, 2);
+    }
+  }
+  ctx.globalAlpha = 1;
+}
 
 // ── TIMETABLE UPLOAD ────────────────────────────────────
 async function handleTimetableUpload(input) {
@@ -1949,6 +4445,45 @@ async function handleTimetableUpload(input) {
   }
 }
 
+
+
+// ── SERVICE WORKER (PWA) ─────────────────────────────────
+if ('serviceWorker' in navigator) {
+  const swCode = `
+    self.addEventListener('install', e => self.skipWaiting());
+    self.addEventListener('fetch', e => e.respondWith(fetch(e.request).catch(() => caches.match(e.request))));
+  `;
+  const blob = new Blob([swCode], { type: 'application/javascript' });
+  const swUrl = URL.createObjectURL(blob);
+  navigator.serviceWorker.register(swUrl).catch(() => {});
+}
+
+// ── NOTIFICATIONS ────────────────────────────────────────
+function requestNotifPermission() {
+  if ('Notification' in window && Notification.permission === 'default') {
+    Notification.requestPermission();
+  }
+}
+// Re-schedule all reminders on load
+function rescheduleAllReminders() {
+  if (!('Notification' in window) || Notification.permission !== 'granted') return;
+  const now = new Date();
+  const today = now.toISOString().split('T')[0];
+  state.slots.forEach(s => {
+    if (!s.reminder || s.reminder === 0) return;
+    const dt = new Date((s.date || today) + 'T' + s.time);
+    const remindAt = new Date(dt.getTime() - s.reminder * 60000);
+    const delay = remindAt.getTime() - now.getTime();
+    if (delay > 0) {
+      setTimeout(() => {
+        new Notification('📚 StudyMate 提醒', {
+          body: `${s.reminder >= 60 ? s.reminder/60 + '小時' : s.reminder + '分鐘'}後：${s.title}`,
+        });
+      }, delay);
+    }
+  });
+}
+
 // ── SPLASH ──────────────────────────────────────────────
 function dismissSplash() {
   const splash = document.getElementById('splash');
@@ -1964,6 +4499,7 @@ if (state.user) {
   document.getElementById('bottom-nav').style.display = 'flex';
   go('screen-home');
   renderAll();
+  rescheduleAllReminders();
 }
 </script>
 </body>
