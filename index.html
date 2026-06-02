@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>StudyMate · 學習助理</title>
-<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Zen+Kurenaido&display=swap" rel="stylesheet">
 <style>@font-face { font-family: "ChenYuluoyan"; src: url("https://cdn.jsdelivr.net/gh/max32002/ChenYuluoyan-Thin-Webfont@main/ChenYuluoyan-Thin.woff2") format("woff2"); font-weight: normal; } @font-face { font-family: "ChenYuluoyan"; src: url("https://cdn.jsdelivr.net/gh/max32002/ChenYuluoyan-Thin-Webfont@main/ChenYuluoyan-Thin.woff2") format("woff2"); font-weight: bold; }
 /* ── SPLASH SCREEN ── */
 #splash {
@@ -111,13 +111,20 @@ body.daytime {
 .ob-next-inner {
   font-family: 'ChenYuluoyan', sans-serif;
   font-size: 18px;
-  color: var(--coral);
-  padding: 12px 48px;
-  border: 2.5px solid var(--coral);
-  border-radius: 62% 38% 46% 54% / 60% 44% 56% 40%;
-  transition: border-radius 0.15s ease, transform 0.15s ease;
-  background: none;
+  color: white;
+  padding: 13px 52px;
+  border: none;
+  border-radius: 50px;
+  transition: all 0.2s ease;
+  background: #E28743;
   display: inline-block;
+  box-shadow: 0 4px 16px -2px rgba(226,135,67,0.35);
+  letter-spacing: 0.5px;
+}
+.ob-next:hover .ob-next-inner {
+  background: #d07633;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px -2px rgba(226,135,67,0.4);
 }
 .ob-next:active .ob-next-inner {
   transform: scale(0.93);
@@ -143,14 +150,14 @@ body.daytime {
 
 
 .todo-empty {
-  background: var(--surface);
+  background: rgba(248,246,240,0.8);
   border: 1.5px dashed var(--border);
   border-radius: 2px;
   min-height: 86px;
   box-shadow: none;
 }
 .todo-add {
-  background: var(--surface);
+  background: rgba(248,246,240,0.8);
   border: 1.5px dashed var(--border2);
   border-radius: 2px;
   min-height: 86px;
@@ -167,14 +174,14 @@ body.daytime {
 /* ── BINGO SCREEN ── */
 .bingo-header {
   padding: 50px 20px 14px;
-  background: var(--surface);
+  background: rgba(248,246,240,0.8);
   border-bottom: 2px solid var(--border);
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
 }
 .bingo-header h1 {
-  font-family: 'ChenYuluoyan', sans-serif;
+  font-family: 'ChenYuluoyan', cursive;
   font-size: 22px;
   font-weight: 700;
   color: var(--ink);
@@ -203,7 +210,7 @@ body.daytime {
   justify-content: center;
   cursor: pointer;
   overflow: hidden;
-  background: var(--surface);
+  background: rgba(248,246,240,0.8);
   transition: transform 0.15s;
   box-shadow: 2px 2px 0 var(--border);
 }
@@ -234,7 +241,7 @@ body.daytime {
   cursor: default;
 }
 .bingo-card.add-card {
-  border: 2px dashed var(--border2);
+  border: 2px dotted rgba(140,130,122,0.35);
   background: transparent;
   box-shadow: none;
 }
@@ -287,7 +294,7 @@ body.daytime {
 /* ── CHAT UI ── */
 .rec-header {
   padding: 50px 20px 12px;
-  background: var(--surface);
+  background: rgba(248,246,240,0.8);
   border-bottom: 2px solid var(--border);
 }
 .rec-header h1 {
@@ -318,7 +325,7 @@ body.daytime {
   border: 2px solid var(--border2);
 }
 .msg-ai-bubble {
-  background: var(--surface);
+  background: rgba(248,246,240,0.8);
   border: 1.5px solid var(--border2);
   border-radius: 0 12px 12px 12px;
   padding: 10px 14px;
@@ -358,13 +365,13 @@ body.daytime {
 /* Upload area */
 .upload-area {
   margin: 8px 16px;
-  border: 2px dashed var(--border2);
+  border: 2px dotted rgba(140,130,122,0.35);
   border-radius: 6px;
   padding: 14px;
   text-align: center;
   cursor: pointer;
   transition: all 0.15s;
-  background: var(--surface);
+  background: rgba(248,246,240,0.8);
   display: flex;
   align-items: center;
   gap: 12px;
@@ -391,7 +398,7 @@ body.daytime {
   display: flex;
   gap: 8px;
   padding: 10px 16px 16px;
-  background: var(--surface);
+  background: rgba(248,246,240,0.8);
   border-top: 1px solid var(--border);
   position: sticky;
   bottom: 70px;
@@ -620,17 +627,18 @@ body.daytime {
 .focus-preview {
   width: 100%;
   height: 160px;
-  border-radius: 8px;
+  border-radius: 24px;
   overflow: hidden;
   margin-bottom: 20px;
-  border: 2px solid var(--border2);
-  background: #c8e8f8;
+  border: none;
+  background: linear-gradient(160deg, #f5ede0 0%, #ede8f5 50%, #e8f0f0 100%);
   position: relative;
+  box-shadow: 0 4px 20px -4px rgba(180,165,150,0.15);
 }
 
 .focus-time-chip {
   padding: 7px 16px;
-  background: var(--surface);
+  background: rgba(248,246,240,0.8);
   border: 1.5px solid var(--border2);
   border-radius: 2px;
   font-family: 'ChenYuluoyan', sans-serif;
@@ -649,14 +657,98 @@ body.daytime {
 .focus-finish {
   position: absolute;
   inset: 0;
-  background: var(--bg);
-  background-image: repeating-linear-gradient(transparent, transparent 27px, rgba(160,145,120,0.18) 27px, rgba(160,145,120,0.18) 28px);
   z-index: 20;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   overflow: hidden;
+  background: transparent;
+}
+.finish-content {
+  position: relative;
+  z-index: 10;
+  text-align: center;
+  padding: 32px 28px;
+  width: 100%;
+}
+.finish-card {
+  background: rgba(255,255,255,0.15);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255,255,255,0.25);
+  border-radius: 24px;
+  padding: 32px 24px;
+  margin: 0 auto;
+  max-width: 340px;
+}
+.finish-emoji {
+  font-size: 72px;
+  margin-bottom: 12px;
+  display: block;
+  animation: starSpin 1s ease;
+}
+.finish-title {
+  font-family: 'ChenYuluoyan', sans-serif;
+  font-size: 26px;
+  color: white;
+  margin-bottom: 16px;
+  text-shadow: 0 2px 12px rgba(0,0,0,0.3);
+}
+.finish-stat-row {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+.finish-stat-box {
+  background: rgba(255,255,255,0.15);
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 12px;
+  padding: 14px 20px;
+  text-align: center;
+  min-width: 90px;
+}
+.finish-stat-num {
+  font-family: 'Caveat', cursive;
+  font-size: 32px;
+  font-weight: 700;
+  color: white;
+  line-height: 1;
+}
+.finish-stat-lbl {
+  font-family: 'ChenYuluoyan', sans-serif;
+  font-size: 11px;
+  color: rgba(255,255,255,0.7);
+  margin-top: 4px;
+}
+.finish-task-name {
+  font-family: 'ChenYuluoyan', sans-serif;
+  font-size: 13px;
+  color: rgba(255,255,255,0.65);
+  margin-bottom: 24px;
+}
+.finish-btn {
+  background: rgba(255,255,255,0.22);
+  border: 2px solid rgba(255,255,255,0.5);
+  border-radius: 50px;
+  padding: 14px 36px;
+  font-family: 'ChenYuluoyan', sans-serif;
+  font-size: 16px;
+  color: white;
+  cursor: pointer;
+  transition: all 0.2s;
+  margin-bottom: 12px;
+  display: block;
+  width: 100%;
+}
+.finish-btn:active { transform: scale(0.95); background: rgba(255,255,255,0.3); }
+.finish-home-btn {
+  background: none;
+  border: none;
+  font-family: 'ChenYuluoyan', sans-serif;
+  font-size: 13px;
+  color: rgba(255,255,255,0.5);
+  cursor: pointer;
 }
 
 
@@ -683,11 +775,623 @@ body.daytime {
   color: rgba(255,255,255,0.4);
 }
 
+
+/* ── GLOBAL CARD REFRESH ── */
+.subj-card, .time-card {
+  background: #FFFFFF !important;
+  border: none !important;
+  border-radius: 16px !important;
+  box-shadow: 0 4px 20px -4px rgba(180,165,150,0.18) !important;
+}
+.bingo-card {
+  background: #FFFFFF !important;
+  border: 1.5px solid rgba(180,165,150,0.2) !important;
+  border-radius: 12px !important;
+  box-shadow: 0 4px 16px -4px rgba(180,165,150,0.15) !important;
+}
+.bingo-card.empty {
+  background: #FFFFFF !important;
+  border: none !important;
+  box-shadow: 0 2px 10px -2px rgba(180,165,150,0.1) !important;
+}
+.bingo-card.add-card {
+  background: rgba(226,135,67,0.06) !important;
+  border: 1.5px solid rgba(226,135,67,0.25) !important;
+  box-shadow: none !important;
+}
+.exam-banner {
+  background: #FFFFFF !important;
+  border: none !important;
+  border-radius: 16px !important;
+  box-shadow: 0 4px 20px -4px rgba(180,165,150,0.18) !important;
+}
+
+
+/* ── SOFT UI REFRESH v2 ── */
+
+/* Global bg */
+body { background: #F9F6F0 !important; }
+.phone { background: transparent !important; }
+
+/* All cards soft shadow */
+.exam-banner, .subj-card, .time-card, .weak-box, .ai-bubble {
+  background: #FFFFFF !important;
+  border: 1px solid #EDE9E2 !important;
+  border-radius: 16px !important;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.04) !important;
+}
+
+/* Bingo cards */
+.bingo-card {
+  background: #FFFFFF !important;
+  border: 1px solid #EDE9E2 !important;
+  border-radius: 12px !important;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.04) !important;
+  transition: transform 0.2s, box-shadow 0.2s !important;
+}
+.bingo-card:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.07) !important; }
+.bingo-card.empty {
+  background: #FAFAF8 !important;
+  border: 1px solid #EDE9E2 !important;
+  box-shadow: none !important;
+}
+.bingo-card.add-card {
+  background: rgba(226,135,67,0.05) !important;
+  border: 1.5px dashed rgba(226,135,67,0.3) !important;
+  box-shadow: none !important;
+  transition: all 0.2s;
+}
+.bingo-card.add-card:hover {
+  background: rgba(226,135,67,0.1) !important;
+  transform: translateY(-2px);
+}
+
+/* Time blocks */
+.time-block { margin-bottom: 8px; }
+.time-card.study {
+  background: #FFFFFF !important;
+  border-left: 3px solid #E28743 !important;
+  border-top: 1px solid #EDE9E2 !important;
+  border-right: 1px solid #EDE9E2 !important;
+  border-bottom: 1px solid #EDE9E2 !important;
+  border-radius: 12px !important;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.04) !important;
+}
+.time-card.free {
+  background: #FFFFFF !important;
+  border-left: 3px solid #768A7E !important;
+  border-top: 1px solid #EDE9E2 !important;
+  border-right: 1px solid #EDE9E2 !important;
+  border-bottom: 1px solid #EDE9E2 !important;
+  border-radius: 12px !important;
+}
+
+/* Add buttons hover lift */
+.add-btn {
+  background: #E28743 !important;
+  border-radius: 50% !important;
+  width: 36px !important;
+  height: 36px !important;
+  border: none !important;
+  transition: all 0.2s !important;
+  box-shadow: 0 4px 12px rgba(226,135,67,0.3) !important;
+}
+.add-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 16px rgba(226,135,67,0.4) !important; }
+.add-btn:active { transform: scale(0.95); }
+
+.add-todo-input {
+  border: none !important;
+  border-bottom: 2px solid #EDE9E2 !important;
+  background: transparent !important;
+  border-radius: 0 !important;
+  font-family: 'ChenYuluoyan', sans-serif !important;
+  font-size: 14px !important;
+  color: #3C3530 !important;
+  transition: border-color 0.2s !important;
+}
+.add-todo-input:focus { border-bottom-color: #E28743 !important; outline: none !important; }
+
+/* Modal */
+.modal {
+  background: #FFFFFF !important;
+  border-radius: 20px !important;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.12) !important;
+  border: none !important;
+}
+.modal-ok {
+  background: #E28743 !important;
+  border-radius: 12px !important;
+  border: none !important;
+  box-shadow: 0 4px 14px rgba(226,135,67,0.3) !important;
+  transition: all 0.2s !important;
+}
+.modal-ok:hover { transform: translateY(-1px); box-shadow: 0 6px 18px rgba(226,135,67,0.4) !important; }
+.modal-cancel {
+  background: #F4F1EA !important;
+  border-radius: 12px !important;
+  border: none !important;
+  color: #A0958D !important;
+  transition: all 0.2s !important;
+}
+.modal-cancel:hover { background: #EDE9E2 !important; }
+
+/* Section headers */
+.sec-hd h2 {
+  color: #3C3530 !important;
+  font-size: 15px !important;
+}
+.sec-hd span {
+  color: #A0958D !important;
+  font-size: 12px !important;
+}
+
+/* Chat input capsule */
+.chat-text-input {
+  border-radius: 24px !important;
+  border: 1.5px solid #EDE9E2 !important;
+  background: #FFFFFF !important;
+  transition: border-color 0.2s !important;
+}
+.chat-text-input:focus { border-color: #E28743 !important; }
+
+.chat-send-btn {
+  background: #E28743 !important;
+  box-shadow: 0 4px 14px rgba(226,135,67,0.3) !important;
+  transition: all 0.2s !important;
+  border: none !important;
+}
+.chat-send-btn:hover { transform: scale(1.08); box-shadow: 0 6px 18px rgba(226,135,67,0.4) !important; }
+
+/* Upload area */
+.upload-area {
+  border: 2px dotted rgba(160,149,141,0.3) !important;
+  border-radius: 16px !important;
+  background: #F4F1EA !important;
+  transition: all 0.2s !important;
+}
+.upload-area:hover {
+  background: #FFFFFF !important;
+  border-color: #E28743 !important;
+  box-shadow: 0 4px 16px rgba(226,135,67,0.1) !important;
+  transform: translateY(-1px);
+}
+
+/* AI avatar */
+.msg-ai-avatar {
+  background: linear-gradient(135deg, #f9d56e, #E28743) !important;
+  border: none !important;
+  box-shadow: 0 2px 8px rgba(226,135,67,0.25) !important;
+}
+
+/* Goal cards */
+.goal-card {
+  background: #FFFFFF !important;
+  border: 1px solid #EDE9E2 !important;
+  border-radius: 16px !important;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.04) !important;
+}
+
+/* Focus setup card */
+.focus-setup {
+  background: #F9F6F0 !important;
+}
+
+/* Focus music btn */
+.focus-music-btn {
+  border-radius: 24px !important;
+  transition: all 0.2s !important;
+}
+.focus-music-btn:hover { transform: translateY(-1px); }
+
+/* Finish card */
+.finish-card {
+  background: rgba(255,255,255,0.18) !important;
+  border-radius: 28px !important;
+  backdrop-filter: blur(24px) !important;
+}
+.finish-btn {
+  background: rgba(255,255,255,0.25) !important;
+  border-radius: 50px !important;
+  border: 2px solid rgba(255,255,255,0.6) !important;
+  transition: all 0.2s !important;
+}
+.finish-btn:hover { background: rgba(255,255,255,0.35) !important; transform: translateY(-2px); }
+
+/* Ob card */
+.ob-card {
+  background: rgba(255,255,255,0.97) !important;
+  border-radius: 28px 28px 0 0 !important;
+}
+
+/* Dot for schedule day */
+.day-dot {
+  width: 5px; height: 5px;
+  background: #E28743;
+  border-radius: 50%;
+  margin: 2px auto 0;
+}
+
+/* Week strip */
+.day-chip { border-radius: 12px !important; transition: all 0.15s !important; }
+.day-chip:hover { background: rgba(226,135,67,0.08) !important; }
+
+/* Score/progress bars */
+.prog-fill { background: #768A7E !important; border-radius: 4px !important; }
+.prog-bg { background: #EDE9E2 !important; border-radius: 4px !important; }
+
+/* Weak chips */
+.weak-chip {
+  background: rgba(118,138,126,0.1) !important;
+  color: #768A7E !important;
+  border: 1px solid rgba(118,138,126,0.2) !important;
+  border-radius: 20px !important;
+}
+
+/* Home header */
+.home-header {
+  background: #F9F6F0 !important;
+  border-bottom: 1px solid #EDE9E2 !important;
+}
+
+/* Scroll areas */
+.scroll-area { background: #F9F6F0 !important; }
+.scroll-area.lined {
+  background-color: #F9F6F0 !important;
+  background-image: repeating-linear-gradient(
+    transparent, transparent 27px,
+    rgba(160,145,120,0.15) 27px,
+    rgba(160,145,120,0.15) 28px
+  ) !important;
+}
+
+
+/* ── WAVE BACKGROUND ── */
+@keyframes waveMove1 { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
+@keyframes waveMove2 { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
+@keyframes waveMove3 { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
+
+.wave-bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+.wave-layer {
+  position: absolute;
+  left: 0;
+  width: 200%;
+  height: 100%;
+}
+.wave-layer-1 { animation: waveMove1 7s linear infinite; bottom: 0; }
+.wave-layer-2 { animation: waveMove2 10s linear infinite reverse; bottom: 0; }
+.wave-layer-3 { animation: waveMove3 8s linear infinite; top: 0; }
+
+/* Make all screens sit above wave */
+.screen, .bottom-nav, .modal-overlay, #splash, .focus-scene, .focus-setup, .focus-finish {
+  position: absolute;
+  background: transparent;
+}
+.screen { background: transparent !important; }
+
+
+/* ── TRANSPARENT LAYERS FOR WAVE ── */
+.phone { background: transparent !important; }
+.screen { background: transparent !important; }
+.scroll-area { background: transparent !important; }
+.scroll-area.lined {
+  background-color: transparent !important;
+  background-image: repeating-linear-gradient(
+    transparent, transparent 27px,
+    rgba(160,145,120,0.12) 27px,
+    rgba(160,145,120,0.12) 28px
+  ) !important;
+}
+.home-header { background: rgba(249,246,240,0.85) !important; backdrop-filter: blur(8px); }
+.rec-header { background: rgba(249,246,240,0.85) !important; backdrop-filter: blur(8px); }
+.bingo-header { background: rgba(249,246,240,0.85) !important; backdrop-filter: blur(8px); }
+.bottom-nav { background: transparent !important; backdrop-filter: none; border-top: none !important; box-shadow: none !important; }
+.chat-input-row { background: rgba(249,246,240,0.88) !important; backdrop-filter: blur(8px); }
+.focus-setup { background: rgba(249,246,240,0.92) !important; backdrop-filter: blur(12px); }
+.ob-card { background: rgba(255,255,255,0.94) !important; backdrop-filter: blur(16px); }
+.status-bar { background: rgba(249,246,240,0.85) !important; backdrop-filter: blur(8px); }
+
+/* Cards keep white but with slight transparency */
+.subj-card, .time-card, .goal-card, .weak-box {
+  background: rgba(255,255,255,0.88) !important;
+  backdrop-filter: blur(4px);
+}
+.bingo-card {
+  background: rgba(255,255,255,0.82) !important;
+  backdrop-filter: blur(4px);
+}
+.exam-banner {
+  background: rgba(255,255,255,0.88) !important;
+  backdrop-filter: blur(4px);
+}
+.msg-ai-bubble {
+  background: rgba(118,138,126,0.1) !important;
+  backdrop-filter: blur(4px);
+}
+.msg-user-bubble {
+  background: rgba(226,135,67,0.9) !important;
+}
+.upload-area {
+  background: rgba(244,241,234,0.7) !important;
+  backdrop-filter: blur(4px);
+}
+
+
+/* ── STICKY NOTE BINGO ── */
+.bingo-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  padding: 20px 16px 8px;
+}
+
+.bingo-card {
+  position: relative !important;
+  aspect-ratio: 1 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 5px !important;
+  cursor: pointer !important;
+  border-radius: 3px !important;
+  padding: 10px 8px !important;
+  transition: transform 0.2s, box-shadow 0.2s !important;
+  border: none !important;
+  backdrop-filter: none !important;
+  min-height: unset !important;
+}
+.bingo-card:hover {
+  transform: rotate(1.5deg) translateY(-4px) !important;
+  z-index: 2;
+}
+.bingo-card:nth-child(9n+1)  { background: #FFB3B3 !important; box-shadow: 3px 3px 10px rgba(255,100,100,0.22), 0 1px 0 rgba(255,255,255,0.7) inset !important; }
+.bingo-card:nth-child(9n+2)  { background: #FFCFA0 !important; box-shadow: 3px 3px 10px rgba(255,160,80,0.22), 0 1px 0 rgba(255,255,255,0.7) inset !important; }
+.bingo-card:nth-child(9n+3)  { background: #FFF0A0 !important; box-shadow: 3px 3px 10px rgba(220,200,60,0.22), 0 1px 0 rgba(255,255,255,0.7) inset !important; }
+.bingo-card:nth-child(9n+4)  { background: #B8F0B0 !important; box-shadow: 3px 3px 10px rgba(80,180,80,0.22), 0 1px 0 rgba(255,255,255,0.7) inset !important; }
+.bingo-card:nth-child(9n+5)  { background: #A8D8F8 !important; box-shadow: 3px 3px 10px rgba(60,140,220,0.22), 0 1px 0 rgba(255,255,255,0.7) inset !important; }
+.bingo-card:nth-child(9n+6)  { background: #C0B0F8 !important; box-shadow: 3px 3px 10px rgba(120,80,220,0.22), 0 1px 0 rgba(255,255,255,0.7) inset !important; }
+.bingo-card:nth-child(9n+7)  { background: #E8B0F0 !important; box-shadow: 3px 3px 10px rgba(180,80,200,0.22), 0 1px 0 rgba(255,255,255,0.7) inset !important; }
+.bingo-card:nth-child(9n+8)  { background: #FFB3B3 !important; box-shadow: 3px 3px 10px rgba(255,100,100,0.22) !important; }
+.bingo-card:nth-child(9n+9)  { background: #FFCFA0 !important; box-shadow: 3px 3px 10px rgba(255,160,80,0.22) !important; }
+
+/* No fold */
+.bingo-card::after { display: none !important; }
+
+/* No pin */
+.bingo-card::before { content: '' !important; display: none; }
+
+/* Done - darker */
+.bingo-card.done:nth-child(9n+1) { background: #e06060 !important; }
+.bingo-card.done:nth-child(9n+2) { background: #d4853a !important; }
+.bingo-card.done:nth-child(9n+3) { background: #c8b030 !important; }
+.bingo-card.done:nth-child(9n+4) { background: #4a9a48 !important; }
+.bingo-card.done:nth-child(9n+5) { background: #3880c0 !important; }
+.bingo-card.done:nth-child(9n+6) { background: #6848c8 !important; }
+.bingo-card.done:nth-child(9n+7) { background: #a840c8 !important; }
+.bingo-card.done:nth-child(9n+8) { background: #e06060 !important; }
+.bingo-card.done:nth-child(9n+9) { background: #d4853a !important; }
+.bingo-card.done .bingo-card-title { color: rgba(255,255,255,0.92) !important; }
+.bingo-card.done .bingo-card-emoji { filter: brightness(0) invert(1); opacity: 0.9; }
+
+/* Empty card */
+.bingo-card.empty {
+  background: rgba(255,255,255,0.4) !important;
+  box-shadow: none !important;
+  opacity: 0.4 !important;
+  border: 1.5px dashed rgba(160,149,141,0.25) !important;
+}
+.bingo-card.empty::before { content: '' !important; }
+.bingo-card.empty::after { display: none; }
+
+/* Add card */
+.bingo-card.add-card {
+  background: rgba(255,255,255,0.55) !important;
+  box-shadow: none !important;
+  border: 2px dashed rgba(226,135,67,0.3) !important;
+}
+.bingo-card.add-card::before { content: '' !important; }
+.bingo-card.add-card::after { display: none; }
+
+/* Stamp checkmark */
+.bingo-stamp {
+  position: absolute !important;
+  top: 5px !important; right: 8px !important;
+  width: 20px !important; height: 20px !important;
+  border-radius: 50% !important;
+  background: rgba(255,255,255,0.9) !important;
+  border: 2px solid rgba(255,255,255,0.6) !important;
+  display: flex !important; align-items: center !important; justify-content: center !important;
+  font-size: 10px !important;
+  color: #3C3530 !important;
+  font-weight: 700 !important;
+  z-index: 3 !important;
+  opacity: 0 !important;
+  transform: scale(0) !important;
+  transition: all 0.3s cubic-bezier(0.34,1.56,0.64,1) !important;
+}
+.bingo-card.done .bingo-stamp {
+  opacity: 1 !important;
+  transform: scale(1) !important;
+}
+
+/* Done animation */
+@keyframes stickyDone {
+  0%   { transform: scale(1) rotate(0deg); }
+  30%  { transform: scale(1.18) rotate(-3deg); }
+  60%  { transform: scale(0.95) rotate(2deg); }
+  100% { transform: scale(1) rotate(0deg); }
+}
+.bingo-card.just-done {
+  animation: stickyDone 0.5s cubic-bezier(0.34,1.56,0.64,1) forwards !important;
+}
+
+/* Title + emoji */
+.bingo-card-title {
+  font-family: 'Caveat', 'Zen Kurenaido', cursive !important;
+  font-size: 16px !important;
+  color: rgba(0,0,0,0.75) !important;
+  text-align: center !important;
+  line-height: 1.5 !important;
+  position: relative !important;
+  z-index: 2 !important;
+  letter-spacing: 0.5px !important;
+  padding: 4px 6px !important;
+  word-break: break-word !important;
+  width: 100% !important;
+}
+.bingo-card-emoji { display: none !important; }
+
+/* Crayon fill hidden - use color change instead */
+.crayon-fill { display: none !important; }
+
+
+/* ── GLOBAL FONT: Caveat (EN) + Zen Kurenaido (ZH) ── */
+* {
+  font-family: 'Caveat', 'Zen Kurenaido', 'ChenYuluoyan', sans-serif !important;
+}
+
+
+/* ── DAY / NIGHT THEME RESTORE ── */
+body {
+  background: #F0EBF8 !important;
+  transition: background 1s ease !important;
+}
+.phone {
+  background: #f0e8f8 !important;
+  transition: background 1s ease !important;
+}
+
+/* Daytime override */
+body.daytime {
+  background: #F9F6F0 !important;
+}
+body.daytime .phone {
+  background: #F9F6F0 !important;
+}
+
+/* Night: scroll area tint */
+body:not(.daytime) .scroll-area {
+  background: rgba(240,235,250,0.3) !important;
+}
+body.daytime .scroll-area {
+  background: transparent !important;
+}
+
+/* Night: home header tint */
+body:not(.daytime) .home-header {
+  background: rgba(230,220,248,0.85) !important;
+}
+body.daytime .home-header {
+  background: rgba(249,246,240,0.85) !important;
+}
+
+/* Night: card tint */
+body:not(.daytime) .subj-card,
+body:not(.daytime) .time-card,
+body:not(.daytime) .exam-banner,
+body:not(.daytime) .goal-card {
+  background: rgba(240,235,252,0.9) !important;
+}
+body.daytime .subj-card,
+body.daytime .time-card,
+body.daytime .exam-banner,
+body.daytime .goal-card {
+  background: rgba(255,255,255,0.88) !important;
+}
+
+/* Wave color by time */
+body:not(.daytime) #wave-bg svg path {
+  fill: rgba(160,140,210,0.07) !important;
+}
+
+
+/* ── REMOVE ALL BORDERS/BOXES ── */
+.home-header,
+.rec-header,
+.bingo-header,
+.schedule-header,
+.goals-header,
+.focus-setup-inner,
+.chat-input-row,
+.status-bar {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+}
+
+/* Cards: keep subtle shadow but no border */
+.subj-card, .time-card, .goal-card, .weak-box,
+.exam-banner, .ai-bubble {
+  border: none !important;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.05) !important;
+}
+
+/* Focus preview: no border */
+.focus-preview {
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* Focus setup: fully transparent */
+.focus-setup {
+  background: transparent !important;
+}
+
+/* Upload area */
+.upload-area {
+  border: 1.5px dotted rgba(160,149,141,0.25) !important;
+  background: rgba(255,255,255,0.3) !important;
+}
+
+/* Modal still needs bg */
+.modal-overlay { backdrop-filter: blur(8px); }
+.modal {
+  background: rgba(255,255,255,0.95) !important;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.1) !important;
+}
+
+/* Bingo cards keep light shadow */
+.bingo-card {
+  box-shadow: 2px 4px 12px rgba(0,0,0,0.08) !important;
+}
+
+/* Bottom nav fully transparent */
+.bottom-nav {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* Chat input row */
+.chat-input-row {
+  background: transparent !important;
+  border: none !important;
+}
+
+/* Section headers */
+.sec-hd {
+  background: transparent !important;
+}
+
+
+/* ── UNIFIED BG: phone blends with body ── */
+body { background: #F9F6F0 !important; }
+body.daytime { background: #F9F6F0 !important; }
+body:not(.daytime) { background: #F0EBF8 !important; }
+.phone { background: transparent !important; box-shadow: none !important; border: none !important; }
+
 </style>
 <style>
 :root {
-  --bg: #f5f0e8;
-  --surface: #faf7f2;
+  --bg: #F8F6F0;
+  --surface: #FFFFFF;
   --surface2: #eeeae0;
   --border: #ddd8ce;
   --border2: #c8c0b4;
@@ -698,9 +1402,9 @@ body.daytime {
   --text: #1a1612;
   --text2: #5a5248;
   --text3: #9a9088;
-  --coral: #e8603c;
+  --coral: #E28743;
   --cream: #f5f0e8;
-  --ink: #1a1612;
+  --ink: #3C3530;
   --r: 4px;
   --rs: 3px;
 }
@@ -721,7 +1425,7 @@ body {
   height: 100vh;
   max-width: 680px;
   margin: 0 auto;
-  background: var(--bg);
+  background: transparent;
   border-radius: 0;
   overflow: hidden;
   position: relative;
@@ -733,10 +1437,10 @@ body {
 .statusbar {
   position: absolute; top:0; left:0; right:0; height:44px;
   display:flex; align-items:center; justify-content:space-between;
-  padding: 0 28px;
-  font-family:'ChenYuluoyan', sans-serif; font-size:11px; font-weight:500;
-  color:var(--text3); z-index:500; pointer-events:none;
-  background:var(--surface); border-bottom:1px solid var(--border);
+  padding: 0 20px;
+  font-family:'Caveat', cursive; font-size:18px; font-weight:600;
+  color:#A0958D; z-index:500; pointer-events:none;
+  background: transparent; border-bottom: none;
 }
 .notch { display:none; }
 
@@ -760,7 +1464,7 @@ body {
 /* ── BOTTOM NAV ── */
 .bottom-nav {
   position:absolute; bottom:0; left:0; right:0; height:82px;
-  background: var(--surface);
+  background: rgba(248,246,240,0.8);
   border-top: 2px solid var(--border);
   display:flex; align-items:center; justify-content:space-around;
   padding-bottom:18px; z-index:400;
@@ -774,14 +1478,14 @@ body {
 .nav-icon {
   width: 24px;
   height: 24px;
-  color: var(--text3);
+  color: #8C827A;
   transition: all 0.2s;
   stroke: currentColor;
 }
-.nav-btn .lbl { font-size:9px; color:var(--text3); font-weight:500; letter-spacing:0.3px; font-family:'ChenYuluoyan',sans-serif; }
-.nav-btn.on .lbl { color:var(--coral); font-weight:700; }
-.nav-btn.on .nav-icon { color:var(--coral); transform:scale(1.12); }
-.nav-btn.on::after { content:''; position:absolute; bottom:2px; left:50%; transform:translateX(-50%); width:20px; height:2.5px; background:var(--coral); border-radius:2px; }
+.nav-btn .lbl { font-size:9px; color:#8C827A; font-weight:500; letter-spacing:0.3px; font-family:'ChenYuluoyan',sans-serif; }
+.nav-btn.on .lbl { color:#E28743; font-weight:700; }
+.nav-btn.on .nav-icon { color:#E28743; transform:scale(1.12); }
+.nav-btn.on::after { content:''; position:absolute; bottom:4px; left:50%; transform:translateX(-50%); width:6px; height:6px; background:#E28743; border-radius:50%; }
 
 /* ── ONBOARDING ── */
 #ob {
@@ -925,16 +1629,16 @@ body {
 /* ── HOME ── */
 .home-header {
   padding: 48px 20px 12px;
-  background: var(--surface);
+  background: rgba(248,246,240,0.8);
   border-bottom: 2px solid var(--border);
 }
 .home-greet { font-size:11px; color:var(--text3); margin-bottom:2px; font-family:'ChenYuluoyan', sans-serif; }
 .home-title { font-family:'ChenYuluoyan', sans-serif; font-size:24px; color:var(--ink); }
-.streak { display:inline-flex; align-items:center; gap:4px; background:var(--coral); border:none; padding:4px 10px; border-radius:2px; font-size:11px; font-weight:700; color:white; float:right; font-family:'ChenYuluoyan', sans-serif; letter-spacing:0.5px; }
+.streak { display:inline-flex; align-items:center; gap:4px; background:transparent; border:none; padding:0; font-size:22px; font-weight:700; color:#E28743; float:right; font-family:'Caveat',cursive; letter-spacing:0.5px; }
 
 .exam-banner {
   margin: 0 24px 16px;
-  background: var(--surface);
+  background: rgba(248,246,240,0.8);
   border:2px solid var(--border2);
   border-radius:2px; padding:14px 16px;
   display:flex; align-items:center; gap:14px;
@@ -945,8 +1649,8 @@ body {
 .exam-days { font-family:'ChenYuluoyan', sans-serif; font-size:26px; color:var(--coral); }
 .exam-days span { font-size:13px; font-weight:400; color:var(--text2); }
 .exam-name { font-size:12px; color:var(--text2); margin-bottom:2px; }
-.exam-bar { height:6px; background:var(--border); border-radius:1px; margin-top:8px; overflow:hidden; }
-.exam-fill { height:100%; background:var(--coral); border-radius:1px; }
+.exam-bar { height:8px; background:#EDE9E2; border-radius:8px; margin-top:10px; overflow:hidden; }
+.exam-fill { height:100%; border-radius:8px; transition: width 0.8s ease, background 0.8s ease; }
 
 .sec-hd { padding:0 20px; margin:16px 0 10px; display:flex; justify-content:space-between; align-items:center; }
 .sec-hd h2 { font-family:'ChenYuluoyan', sans-serif; font-size:15px; color:var(--ink); }
@@ -1359,13 +2063,20 @@ body.daytime {
 .ob-next-inner {
   font-family: 'ChenYuluoyan', sans-serif;
   font-size: 18px;
-  color: var(--coral);
-  padding: 12px 48px;
-  border: 2.5px solid var(--coral);
-  border-radius: 62% 38% 46% 54% / 60% 44% 56% 40%;
-  transition: border-radius 0.15s ease, transform 0.15s ease;
-  background: none;
+  color: white;
+  padding: 13px 52px;
+  border: none;
+  border-radius: 50px;
+  transition: all 0.2s ease;
+  background: #E28743;
   display: inline-block;
+  box-shadow: 0 4px 16px -2px rgba(226,135,67,0.35);
+  letter-spacing: 0.5px;
+}
+.ob-next:hover .ob-next-inner {
+  background: #d07633;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px -2px rgba(226,135,67,0.4);
 }
 .ob-next:active .ob-next-inner {
   transform: scale(0.93);
@@ -1391,14 +2102,14 @@ body.daytime {
 
 
 .todo-empty {
-  background: var(--surface);
+  background: rgba(248,246,240,0.8);
   border: 1.5px dashed var(--border);
   border-radius: 2px;
   min-height: 86px;
   box-shadow: none;
 }
 .todo-add {
-  background: var(--surface);
+  background: rgba(248,246,240,0.8);
   border: 1.5px dashed var(--border2);
   border-radius: 2px;
   min-height: 86px;
@@ -1415,14 +2126,14 @@ body.daytime {
 /* ── BINGO SCREEN ── */
 .bingo-header {
   padding: 50px 20px 14px;
-  background: var(--surface);
+  background: rgba(248,246,240,0.8);
   border-bottom: 2px solid var(--border);
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
 }
 .bingo-header h1 {
-  font-family: 'ChenYuluoyan', sans-serif;
+  font-family: 'ChenYuluoyan', cursive;
   font-size: 22px;
   font-weight: 700;
   color: var(--ink);
@@ -1451,7 +2162,7 @@ body.daytime {
   justify-content: center;
   cursor: pointer;
   overflow: hidden;
-  background: var(--surface);
+  background: rgba(248,246,240,0.8);
   transition: transform 0.15s;
   box-shadow: 2px 2px 0 var(--border);
 }
@@ -1482,7 +2193,7 @@ body.daytime {
   cursor: default;
 }
 .bingo-card.add-card {
-  border: 2px dashed var(--border2);
+  border: 2px dotted rgba(140,130,122,0.35);
   background: transparent;
   box-shadow: none;
 }
@@ -1535,7 +2246,7 @@ body.daytime {
 /* ── CHAT UI ── */
 .rec-header {
   padding: 50px 20px 12px;
-  background: var(--surface);
+  background: rgba(248,246,240,0.8);
   border-bottom: 2px solid var(--border);
 }
 .rec-header h1 {
@@ -1566,7 +2277,7 @@ body.daytime {
   border: 2px solid var(--border2);
 }
 .msg-ai-bubble {
-  background: var(--surface);
+  background: rgba(248,246,240,0.8);
   border: 1.5px solid var(--border2);
   border-radius: 0 12px 12px 12px;
   padding: 10px 14px;
@@ -1606,13 +2317,13 @@ body.daytime {
 /* Upload area */
 .upload-area {
   margin: 8px 16px;
-  border: 2px dashed var(--border2);
+  border: 2px dotted rgba(140,130,122,0.35);
   border-radius: 6px;
   padding: 14px;
   text-align: center;
   cursor: pointer;
   transition: all 0.15s;
-  background: var(--surface);
+  background: rgba(248,246,240,0.8);
   display: flex;
   align-items: center;
   gap: 12px;
@@ -1639,7 +2350,7 @@ body.daytime {
   display: flex;
   gap: 8px;
   padding: 10px 16px 16px;
-  background: var(--surface);
+  background: rgba(248,246,240,0.8);
   border-top: 1px solid var(--border);
   position: sticky;
   bottom: 70px;
@@ -1868,17 +2579,18 @@ body.daytime {
 .focus-preview {
   width: 100%;
   height: 160px;
-  border-radius: 8px;
+  border-radius: 24px;
   overflow: hidden;
   margin-bottom: 20px;
-  border: 2px solid var(--border2);
-  background: #c8e8f8;
+  border: none;
+  background: linear-gradient(160deg, #f5ede0 0%, #ede8f5 50%, #e8f0f0 100%);
   position: relative;
+  box-shadow: 0 4px 20px -4px rgba(180,165,150,0.15);
 }
 
 .focus-time-chip {
   padding: 7px 16px;
-  background: var(--surface);
+  background: rgba(248,246,240,0.8);
   border: 1.5px solid var(--border2);
   border-radius: 2px;
   font-family: 'ChenYuluoyan', sans-serif;
@@ -1897,14 +2609,98 @@ body.daytime {
 .focus-finish {
   position: absolute;
   inset: 0;
-  background: var(--bg);
-  background-image: repeating-linear-gradient(transparent, transparent 27px, rgba(160,145,120,0.18) 27px, rgba(160,145,120,0.18) 28px);
   z-index: 20;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   overflow: hidden;
+  background: transparent;
+}
+.finish-content {
+  position: relative;
+  z-index: 10;
+  text-align: center;
+  padding: 32px 28px;
+  width: 100%;
+}
+.finish-card {
+  background: rgba(255,255,255,0.15);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255,255,255,0.25);
+  border-radius: 24px;
+  padding: 32px 24px;
+  margin: 0 auto;
+  max-width: 340px;
+}
+.finish-emoji {
+  font-size: 72px;
+  margin-bottom: 12px;
+  display: block;
+  animation: starSpin 1s ease;
+}
+.finish-title {
+  font-family: 'ChenYuluoyan', sans-serif;
+  font-size: 26px;
+  color: white;
+  margin-bottom: 16px;
+  text-shadow: 0 2px 12px rgba(0,0,0,0.3);
+}
+.finish-stat-row {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+.finish-stat-box {
+  background: rgba(255,255,255,0.15);
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 12px;
+  padding: 14px 20px;
+  text-align: center;
+  min-width: 90px;
+}
+.finish-stat-num {
+  font-family: 'Caveat', cursive;
+  font-size: 32px;
+  font-weight: 700;
+  color: white;
+  line-height: 1;
+}
+.finish-stat-lbl {
+  font-family: 'ChenYuluoyan', sans-serif;
+  font-size: 11px;
+  color: rgba(255,255,255,0.7);
+  margin-top: 4px;
+}
+.finish-task-name {
+  font-family: 'ChenYuluoyan', sans-serif;
+  font-size: 13px;
+  color: rgba(255,255,255,0.65);
+  margin-bottom: 24px;
+}
+.finish-btn {
+  background: rgba(255,255,255,0.22);
+  border: 2px solid rgba(255,255,255,0.5);
+  border-radius: 50px;
+  padding: 14px 36px;
+  font-family: 'ChenYuluoyan', sans-serif;
+  font-size: 16px;
+  color: white;
+  cursor: pointer;
+  transition: all 0.2s;
+  margin-bottom: 12px;
+  display: block;
+  width: 100%;
+}
+.finish-btn:active { transform: scale(0.95); background: rgba(255,255,255,0.3); }
+.finish-home-btn {
+  background: none;
+  border: none;
+  font-family: 'ChenYuluoyan', sans-serif;
+  font-size: 13px;
+  color: rgba(255,255,255,0.5);
+  cursor: pointer;
 }
 
 
@@ -1930,6 +2726,618 @@ body.daytime {
   border-color: rgba(255,255,255,0.12);
   color: rgba(255,255,255,0.4);
 }
+
+
+/* ── GLOBAL CARD REFRESH ── */
+.subj-card, .time-card {
+  background: #FFFFFF !important;
+  border: none !important;
+  border-radius: 16px !important;
+  box-shadow: 0 4px 20px -4px rgba(180,165,150,0.18) !important;
+}
+.bingo-card {
+  background: #FFFFFF !important;
+  border: 1.5px solid rgba(180,165,150,0.2) !important;
+  border-radius: 12px !important;
+  box-shadow: 0 4px 16px -4px rgba(180,165,150,0.15) !important;
+}
+.bingo-card.empty {
+  background: #FFFFFF !important;
+  border: none !important;
+  box-shadow: 0 2px 10px -2px rgba(180,165,150,0.1) !important;
+}
+.bingo-card.add-card {
+  background: rgba(226,135,67,0.06) !important;
+  border: 1.5px solid rgba(226,135,67,0.25) !important;
+  box-shadow: none !important;
+}
+.exam-banner {
+  background: #FFFFFF !important;
+  border: none !important;
+  border-radius: 16px !important;
+  box-shadow: 0 4px 20px -4px rgba(180,165,150,0.18) !important;
+}
+
+
+/* ── SOFT UI REFRESH v2 ── */
+
+/* Global bg */
+body { background: #F9F6F0 !important; }
+.phone { background: transparent !important; }
+
+/* All cards soft shadow */
+.exam-banner, .subj-card, .time-card, .weak-box, .ai-bubble {
+  background: #FFFFFF !important;
+  border: 1px solid #EDE9E2 !important;
+  border-radius: 16px !important;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.04) !important;
+}
+
+/* Bingo cards */
+.bingo-card {
+  background: #FFFFFF !important;
+  border: 1px solid #EDE9E2 !important;
+  border-radius: 12px !important;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.04) !important;
+  transition: transform 0.2s, box-shadow 0.2s !important;
+}
+.bingo-card:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.07) !important; }
+.bingo-card.empty {
+  background: #FAFAF8 !important;
+  border: 1px solid #EDE9E2 !important;
+  box-shadow: none !important;
+}
+.bingo-card.add-card {
+  background: rgba(226,135,67,0.05) !important;
+  border: 1.5px dashed rgba(226,135,67,0.3) !important;
+  box-shadow: none !important;
+  transition: all 0.2s;
+}
+.bingo-card.add-card:hover {
+  background: rgba(226,135,67,0.1) !important;
+  transform: translateY(-2px);
+}
+
+/* Time blocks */
+.time-block { margin-bottom: 8px; }
+.time-card.study {
+  background: #FFFFFF !important;
+  border-left: 3px solid #E28743 !important;
+  border-top: 1px solid #EDE9E2 !important;
+  border-right: 1px solid #EDE9E2 !important;
+  border-bottom: 1px solid #EDE9E2 !important;
+  border-radius: 12px !important;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.04) !important;
+}
+.time-card.free {
+  background: #FFFFFF !important;
+  border-left: 3px solid #768A7E !important;
+  border-top: 1px solid #EDE9E2 !important;
+  border-right: 1px solid #EDE9E2 !important;
+  border-bottom: 1px solid #EDE9E2 !important;
+  border-radius: 12px !important;
+}
+
+/* Add buttons hover lift */
+.add-btn {
+  background: #E28743 !important;
+  border-radius: 50% !important;
+  width: 36px !important;
+  height: 36px !important;
+  border: none !important;
+  transition: all 0.2s !important;
+  box-shadow: 0 4px 12px rgba(226,135,67,0.3) !important;
+}
+.add-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 16px rgba(226,135,67,0.4) !important; }
+.add-btn:active { transform: scale(0.95); }
+
+.add-todo-input {
+  border: none !important;
+  border-bottom: 2px solid #EDE9E2 !important;
+  background: transparent !important;
+  border-radius: 0 !important;
+  font-family: 'ChenYuluoyan', sans-serif !important;
+  font-size: 14px !important;
+  color: #3C3530 !important;
+  transition: border-color 0.2s !important;
+}
+.add-todo-input:focus { border-bottom-color: #E28743 !important; outline: none !important; }
+
+/* Modal */
+.modal {
+  background: #FFFFFF !important;
+  border-radius: 20px !important;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.12) !important;
+  border: none !important;
+}
+.modal-ok {
+  background: #E28743 !important;
+  border-radius: 12px !important;
+  border: none !important;
+  box-shadow: 0 4px 14px rgba(226,135,67,0.3) !important;
+  transition: all 0.2s !important;
+}
+.modal-ok:hover { transform: translateY(-1px); box-shadow: 0 6px 18px rgba(226,135,67,0.4) !important; }
+.modal-cancel {
+  background: #F4F1EA !important;
+  border-radius: 12px !important;
+  border: none !important;
+  color: #A0958D !important;
+  transition: all 0.2s !important;
+}
+.modal-cancel:hover { background: #EDE9E2 !important; }
+
+/* Section headers */
+.sec-hd h2 {
+  color: #3C3530 !important;
+  font-size: 15px !important;
+}
+.sec-hd span {
+  color: #A0958D !important;
+  font-size: 12px !important;
+}
+
+/* Chat input capsule */
+.chat-text-input {
+  border-radius: 24px !important;
+  border: 1.5px solid #EDE9E2 !important;
+  background: #FFFFFF !important;
+  transition: border-color 0.2s !important;
+}
+.chat-text-input:focus { border-color: #E28743 !important; }
+
+.chat-send-btn {
+  background: #E28743 !important;
+  box-shadow: 0 4px 14px rgba(226,135,67,0.3) !important;
+  transition: all 0.2s !important;
+  border: none !important;
+}
+.chat-send-btn:hover { transform: scale(1.08); box-shadow: 0 6px 18px rgba(226,135,67,0.4) !important; }
+
+/* Upload area */
+.upload-area {
+  border: 2px dotted rgba(160,149,141,0.3) !important;
+  border-radius: 16px !important;
+  background: #F4F1EA !important;
+  transition: all 0.2s !important;
+}
+.upload-area:hover {
+  background: #FFFFFF !important;
+  border-color: #E28743 !important;
+  box-shadow: 0 4px 16px rgba(226,135,67,0.1) !important;
+  transform: translateY(-1px);
+}
+
+/* AI avatar */
+.msg-ai-avatar {
+  background: linear-gradient(135deg, #f9d56e, #E28743) !important;
+  border: none !important;
+  box-shadow: 0 2px 8px rgba(226,135,67,0.25) !important;
+}
+
+/* Goal cards */
+.goal-card {
+  background: #FFFFFF !important;
+  border: 1px solid #EDE9E2 !important;
+  border-radius: 16px !important;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.04) !important;
+}
+
+/* Focus setup card */
+.focus-setup {
+  background: #F9F6F0 !important;
+}
+
+/* Focus music btn */
+.focus-music-btn {
+  border-radius: 24px !important;
+  transition: all 0.2s !important;
+}
+.focus-music-btn:hover { transform: translateY(-1px); }
+
+/* Finish card */
+.finish-card {
+  background: rgba(255,255,255,0.18) !important;
+  border-radius: 28px !important;
+  backdrop-filter: blur(24px) !important;
+}
+.finish-btn {
+  background: rgba(255,255,255,0.25) !important;
+  border-radius: 50px !important;
+  border: 2px solid rgba(255,255,255,0.6) !important;
+  transition: all 0.2s !important;
+}
+.finish-btn:hover { background: rgba(255,255,255,0.35) !important; transform: translateY(-2px); }
+
+/* Ob card */
+.ob-card {
+  background: rgba(255,255,255,0.97) !important;
+  border-radius: 28px 28px 0 0 !important;
+}
+
+/* Dot for schedule day */
+.day-dot {
+  width: 5px; height: 5px;
+  background: #E28743;
+  border-radius: 50%;
+  margin: 2px auto 0;
+}
+
+/* Week strip */
+.day-chip { border-radius: 12px !important; transition: all 0.15s !important; }
+.day-chip:hover { background: rgba(226,135,67,0.08) !important; }
+
+/* Score/progress bars */
+.prog-fill { background: #768A7E !important; border-radius: 4px !important; }
+.prog-bg { background: #EDE9E2 !important; border-radius: 4px !important; }
+
+/* Weak chips */
+.weak-chip {
+  background: rgba(118,138,126,0.1) !important;
+  color: #768A7E !important;
+  border: 1px solid rgba(118,138,126,0.2) !important;
+  border-radius: 20px !important;
+}
+
+/* Home header */
+.home-header {
+  background: #F9F6F0 !important;
+  border-bottom: 1px solid #EDE9E2 !important;
+}
+
+/* Scroll areas */
+.scroll-area { background: #F9F6F0 !important; }
+.scroll-area.lined {
+  background-color: #F9F6F0 !important;
+  background-image: repeating-linear-gradient(
+    transparent, transparent 27px,
+    rgba(160,145,120,0.15) 27px,
+    rgba(160,145,120,0.15) 28px
+  ) !important;
+}
+
+
+/* ── WAVE BACKGROUND ── */
+@keyframes waveMove1 { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
+@keyframes waveMove2 { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
+@keyframes waveMove3 { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
+
+.wave-bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+.wave-layer {
+  position: absolute;
+  left: 0;
+  width: 200%;
+  height: 100%;
+}
+.wave-layer-1 { animation: waveMove1 7s linear infinite; bottom: 0; }
+.wave-layer-2 { animation: waveMove2 10s linear infinite reverse; bottom: 0; }
+.wave-layer-3 { animation: waveMove3 8s linear infinite; top: 0; }
+
+/* Make all screens sit above wave */
+.screen, .bottom-nav, .modal-overlay, #splash, .focus-scene, .focus-setup, .focus-finish {
+  position: absolute;
+  background: transparent;
+}
+.screen { background: transparent !important; }
+
+
+/* ── TRANSPARENT LAYERS FOR WAVE ── */
+.phone { background: transparent !important; }
+.screen { background: transparent !important; }
+.scroll-area { background: transparent !important; }
+.scroll-area.lined {
+  background-color: transparent !important;
+  background-image: repeating-linear-gradient(
+    transparent, transparent 27px,
+    rgba(160,145,120,0.12) 27px,
+    rgba(160,145,120,0.12) 28px
+  ) !important;
+}
+.home-header { background: rgba(249,246,240,0.85) !important; backdrop-filter: blur(8px); }
+.rec-header { background: rgba(249,246,240,0.85) !important; backdrop-filter: blur(8px); }
+.bingo-header { background: rgba(249,246,240,0.85) !important; backdrop-filter: blur(8px); }
+.bottom-nav { background: transparent !important; backdrop-filter: none; border-top: none !important; box-shadow: none !important; }
+.chat-input-row { background: rgba(249,246,240,0.88) !important; backdrop-filter: blur(8px); }
+.focus-setup { background: rgba(249,246,240,0.92) !important; backdrop-filter: blur(12px); }
+.ob-card { background: rgba(255,255,255,0.94) !important; backdrop-filter: blur(16px); }
+.status-bar { background: rgba(249,246,240,0.85) !important; backdrop-filter: blur(8px); }
+
+/* Cards keep white but with slight transparency */
+.subj-card, .time-card, .goal-card, .weak-box {
+  background: rgba(255,255,255,0.88) !important;
+  backdrop-filter: blur(4px);
+}
+.bingo-card {
+  background: rgba(255,255,255,0.82) !important;
+  backdrop-filter: blur(4px);
+}
+.exam-banner {
+  background: rgba(255,255,255,0.88) !important;
+  backdrop-filter: blur(4px);
+}
+.msg-ai-bubble {
+  background: rgba(118,138,126,0.1) !important;
+  backdrop-filter: blur(4px);
+}
+.msg-user-bubble {
+  background: rgba(226,135,67,0.9) !important;
+}
+.upload-area {
+  background: rgba(244,241,234,0.7) !important;
+  backdrop-filter: blur(4px);
+}
+
+
+/* ── STICKY NOTE BINGO ── */
+.bingo-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  padding: 20px 16px 8px;
+}
+
+.bingo-card {
+  position: relative !important;
+  aspect-ratio: 1 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 5px !important;
+  cursor: pointer !important;
+  border-radius: 3px !important;
+  padding: 10px 8px !important;
+  transition: transform 0.2s, box-shadow 0.2s !important;
+  border: none !important;
+  backdrop-filter: none !important;
+  min-height: unset !important;
+}
+.bingo-card:hover {
+  transform: rotate(1.5deg) translateY(-4px) !important;
+  z-index: 2;
+}
+.bingo-card:nth-child(9n+1)  { background: #FFB3B3 !important; box-shadow: 3px 3px 10px rgba(255,100,100,0.22), 0 1px 0 rgba(255,255,255,0.7) inset !important; }
+.bingo-card:nth-child(9n+2)  { background: #FFCFA0 !important; box-shadow: 3px 3px 10px rgba(255,160,80,0.22), 0 1px 0 rgba(255,255,255,0.7) inset !important; }
+.bingo-card:nth-child(9n+3)  { background: #FFF0A0 !important; box-shadow: 3px 3px 10px rgba(220,200,60,0.22), 0 1px 0 rgba(255,255,255,0.7) inset !important; }
+.bingo-card:nth-child(9n+4)  { background: #B8F0B0 !important; box-shadow: 3px 3px 10px rgba(80,180,80,0.22), 0 1px 0 rgba(255,255,255,0.7) inset !important; }
+.bingo-card:nth-child(9n+5)  { background: #A8D8F8 !important; box-shadow: 3px 3px 10px rgba(60,140,220,0.22), 0 1px 0 rgba(255,255,255,0.7) inset !important; }
+.bingo-card:nth-child(9n+6)  { background: #C0B0F8 !important; box-shadow: 3px 3px 10px rgba(120,80,220,0.22), 0 1px 0 rgba(255,255,255,0.7) inset !important; }
+.bingo-card:nth-child(9n+7)  { background: #E8B0F0 !important; box-shadow: 3px 3px 10px rgba(180,80,200,0.22), 0 1px 0 rgba(255,255,255,0.7) inset !important; }
+.bingo-card:nth-child(9n+8)  { background: #FFB3B3 !important; box-shadow: 3px 3px 10px rgba(255,100,100,0.22) !important; }
+.bingo-card:nth-child(9n+9)  { background: #FFCFA0 !important; box-shadow: 3px 3px 10px rgba(255,160,80,0.22) !important; }
+
+/* No fold */
+.bingo-card::after { display: none !important; }
+
+/* No pin */
+.bingo-card::before { content: '' !important; display: none; }
+
+/* Done - darker */
+.bingo-card.done:nth-child(9n+1) { background: #e06060 !important; }
+.bingo-card.done:nth-child(9n+2) { background: #d4853a !important; }
+.bingo-card.done:nth-child(9n+3) { background: #c8b030 !important; }
+.bingo-card.done:nth-child(9n+4) { background: #4a9a48 !important; }
+.bingo-card.done:nth-child(9n+5) { background: #3880c0 !important; }
+.bingo-card.done:nth-child(9n+6) { background: #6848c8 !important; }
+.bingo-card.done:nth-child(9n+7) { background: #a840c8 !important; }
+.bingo-card.done:nth-child(9n+8) { background: #e06060 !important; }
+.bingo-card.done:nth-child(9n+9) { background: #d4853a !important; }
+.bingo-card.done .bingo-card-title { color: rgba(255,255,255,0.92) !important; }
+.bingo-card.done .bingo-card-emoji { filter: brightness(0) invert(1); opacity: 0.9; }
+
+/* Empty card */
+.bingo-card.empty {
+  background: rgba(255,255,255,0.4) !important;
+  box-shadow: none !important;
+  opacity: 0.4 !important;
+  border: 1.5px dashed rgba(160,149,141,0.25) !important;
+}
+.bingo-card.empty::before { content: '' !important; }
+.bingo-card.empty::after { display: none; }
+
+/* Add card */
+.bingo-card.add-card {
+  background: rgba(255,255,255,0.55) !important;
+  box-shadow: none !important;
+  border: 2px dashed rgba(226,135,67,0.3) !important;
+}
+.bingo-card.add-card::before { content: '' !important; }
+.bingo-card.add-card::after { display: none; }
+
+/* Stamp checkmark */
+.bingo-stamp {
+  position: absolute !important;
+  top: 5px !important; right: 8px !important;
+  width: 20px !important; height: 20px !important;
+  border-radius: 50% !important;
+  background: rgba(255,255,255,0.9) !important;
+  border: 2px solid rgba(255,255,255,0.6) !important;
+  display: flex !important; align-items: center !important; justify-content: center !important;
+  font-size: 10px !important;
+  color: #3C3530 !important;
+  font-weight: 700 !important;
+  z-index: 3 !important;
+  opacity: 0 !important;
+  transform: scale(0) !important;
+  transition: all 0.3s cubic-bezier(0.34,1.56,0.64,1) !important;
+}
+.bingo-card.done .bingo-stamp {
+  opacity: 1 !important;
+  transform: scale(1) !important;
+}
+
+/* Done animation */
+@keyframes stickyDone {
+  0%   { transform: scale(1) rotate(0deg); }
+  30%  { transform: scale(1.18) rotate(-3deg); }
+  60%  { transform: scale(0.95) rotate(2deg); }
+  100% { transform: scale(1) rotate(0deg); }
+}
+.bingo-card.just-done {
+  animation: stickyDone 0.5s cubic-bezier(0.34,1.56,0.64,1) forwards !important;
+}
+
+/* Title + emoji */
+.bingo-card-title {
+  font-family: 'Caveat', 'Zen Kurenaido', cursive !important;
+  font-size: 16px !important;
+  color: rgba(0,0,0,0.75) !important;
+  text-align: center !important;
+  line-height: 1.5 !important;
+  position: relative !important;
+  z-index: 2 !important;
+  letter-spacing: 0.5px !important;
+  padding: 4px 6px !important;
+  word-break: break-word !important;
+  width: 100% !important;
+}
+.bingo-card-emoji { display: none !important; }
+
+/* Crayon fill hidden - use color change instead */
+.crayon-fill { display: none !important; }
+
+
+/* ── GLOBAL FONT: Caveat (EN) + Zen Kurenaido (ZH) ── */
+* {
+  font-family: 'Caveat', 'Zen Kurenaido', 'ChenYuluoyan', sans-serif !important;
+}
+
+
+/* ── DAY / NIGHT THEME RESTORE ── */
+body {
+  background: #F0EBF8 !important;
+  transition: background 1s ease !important;
+}
+.phone {
+  background: #f0e8f8 !important;
+  transition: background 1s ease !important;
+}
+
+/* Daytime override */
+body.daytime {
+  background: #F9F6F0 !important;
+}
+body.daytime .phone {
+  background: #F9F6F0 !important;
+}
+
+/* Night: scroll area tint */
+body:not(.daytime) .scroll-area {
+  background: rgba(240,235,250,0.3) !important;
+}
+body.daytime .scroll-area {
+  background: transparent !important;
+}
+
+/* Night: home header tint */
+body:not(.daytime) .home-header {
+  background: rgba(230,220,248,0.85) !important;
+}
+body.daytime .home-header {
+  background: rgba(249,246,240,0.85) !important;
+}
+
+/* Night: card tint */
+body:not(.daytime) .subj-card,
+body:not(.daytime) .time-card,
+body:not(.daytime) .exam-banner,
+body:not(.daytime) .goal-card {
+  background: rgba(240,235,252,0.9) !important;
+}
+body.daytime .subj-card,
+body.daytime .time-card,
+body.daytime .exam-banner,
+body.daytime .goal-card {
+  background: rgba(255,255,255,0.88) !important;
+}
+
+/* Wave color by time */
+body:not(.daytime) #wave-bg svg path {
+  fill: rgba(160,140,210,0.07) !important;
+}
+
+
+/* ── REMOVE ALL BORDERS/BOXES ── */
+.home-header,
+.rec-header,
+.bingo-header,
+.schedule-header,
+.goals-header,
+.focus-setup-inner,
+.chat-input-row,
+.status-bar {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+}
+
+/* Cards: keep subtle shadow but no border */
+.subj-card, .time-card, .goal-card, .weak-box,
+.exam-banner, .ai-bubble {
+  border: none !important;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.05) !important;
+}
+
+/* Focus preview: no border */
+.focus-preview {
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* Focus setup: fully transparent */
+.focus-setup {
+  background: transparent !important;
+}
+
+/* Upload area */
+.upload-area {
+  border: 1.5px dotted rgba(160,149,141,0.25) !important;
+  background: rgba(255,255,255,0.3) !important;
+}
+
+/* Modal still needs bg */
+.modal-overlay { backdrop-filter: blur(8px); }
+.modal {
+  background: rgba(255,255,255,0.95) !important;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.1) !important;
+}
+
+/* Bingo cards keep light shadow */
+.bingo-card {
+  box-shadow: 2px 4px 12px rgba(0,0,0,0.08) !important;
+}
+
+/* Bottom nav fully transparent */
+.bottom-nav {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* Chat input row */
+.chat-input-row {
+  background: transparent !important;
+  border: none !important;
+}
+
+/* Section headers */
+.sec-hd {
+  background: transparent !important;
+}
+
+
+/* ── UNIFIED BG: phone blends with body ── */
+body { background: #F9F6F0 !important; }
+body.daytime { background: #F9F6F0 !important; }
+body:not(.daytime) { background: #F0EBF8 !important; }
+.phone { background: transparent !important; box-shadow: none !important; border: none !important; }
 
 </style>
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -1982,409 +3390,16 @@ body.daytime {
       <path class="splash-underline" d="M48 144 Q68 150 88 144 Q108 138 128 144 Q148 150 168 144 Q182 140 190 144" fill="none" stroke="#e8603c" stroke-width="2" stroke-linecap="round"/>
     </svg>
 
-    <!-- StudyMate signature path animation -->
-    <div class="splash-text" style="margin-top:-8px; line-height:1;">
-      <svg width="300" height="90" viewBox="0 0 300 90" xmlns="http://www.w3.org/2000/svg">
-        <style>
-          .sig-stroke { fill:none; stroke-linecap:round; stroke-linejoin:round; }
-          .s1{stroke:#1a1612;stroke-width:3.5;stroke-dasharray:120;stroke-dashoffset:120;animation:draw 0.5s ease forwards 0.8s;}
-          .s2{stroke:#1a1612;stroke-width:3.5;stroke-dasharray:180;stroke-dashoffset:180;animation:draw 0.6s ease forwards 1.2s;}
-          .s3{stroke:#1a1612;stroke-width:3.5;stroke-dasharray:150;stroke-dashoffset:150;animation:draw 0.5s ease forwards 1.7s;}
-          .s4{stroke:#1a1612;stroke-width:3.5;stroke-dasharray:130;stroke-dashoffset:130;animation:draw 0.45s ease forwards 2.1s;}
-          .s5{stroke:#1a1612;stroke-width:3.5;stroke-dasharray:160;stroke-dashoffset:160;animation:draw 0.55s ease forwards 2.5s;}
-          .m1{stroke:#e8603c;stroke-width:3.5;stroke-dasharray:200;stroke-dashoffset:200;animation:draw 0.65s ease forwards 3.0s;}
-          .m2{stroke:#e8603c;stroke-width:3.5;stroke-dasharray:130;stroke-dashoffset:130;animation:draw 0.45s ease forwards 3.6s;}
-          .m3{stroke:#e8603c;stroke-width:3.5;stroke-dasharray:150;stroke-dashoffset:150;animation:draw 0.5s ease forwards 4.0s;}
-          .m4{stroke:#e8603c;stroke-width:3.5;stroke-dasharray:160;stroke-dashoffset:160;animation:draw 0.55s ease forwards 4.4s;}
-          @keyframes draw { to { stroke-dashoffset:0; } }
-        
-.todo-empty {
-  background: var(--surface);
-  border: 1.5px dashed var(--border);
-  border-radius: 2px;
-  min-height: 86px;
-  box-shadow: none;
-}
-.todo-add {
-  background: var(--surface);
-  border: 1.5px dashed var(--border2);
-  border-radius: 2px;
-  min-height: 86px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: all 0.15s;
-  box-shadow: none;
-}
-.todo-add:active { transform: scale(0.93); }
-
-
-/* ── BINGO SCREEN ── */
-.bingo-header {
-  padding: 50px 20px 14px;
-  background: var(--surface);
-  border-bottom: 2px solid var(--border);
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-}
-.bingo-header h1 {
-  font-family: 'ChenYuluoyan', sans-serif;
-  font-size: 22px;
-  font-weight: 700;
-  color: var(--ink);
-}
-#bingo-count {
-  font-size: 11px;
-  color: var(--coral);
-  font-family: 'ChenYuluoyan', sans-serif;
-}
-
-.bingo-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
-  padding: 16px 16px 8px;
-}
-
-.bingo-card {
-  position: relative;
-  border: 2px solid var(--border2);
-  border-radius: 3px;
-  min-height: 100px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  overflow: hidden;
-  background: var(--surface);
-  transition: transform 0.15s;
-  box-shadow: 2px 2px 0 var(--border);
-}
-.bingo-card:active { transform: scale(0.93); }
-
-.bingo-card-title {
-  font-family: 'ChenYuluoyan', sans-serif;
-  font-size: 12px;
-  color: var(--ink);
-  text-align: center;
-  padding: 0 8px;
-  position: relative;
-  z-index: 2;
-  line-height: 1.5;
-}
-.bingo-card-emoji {
-  font-size: 22px;
-  margin-bottom: 6px;
-  position: relative;
-  z-index: 2;
-}
-
-/* Empty card */
-.bingo-card.empty {
-  border: 2px dashed var(--border);
-  background: transparent;
-  box-shadow: none;
-  cursor: default;
-}
-.bingo-card.add-card {
-  border: 2px dashed var(--border2);
-  background: transparent;
-  box-shadow: none;
-}
-.bingo-card.add-card:active { transform: scale(0.93); }
-
-/* Done card - crayon fill animation */
-.bingo-card.done {
-  border-color: var(--coral);
-}
-.bingo-card.done .bingo-card-title { color: white; }
-.bingo-card.done .bingo-card-emoji { filter: grayscale(0.3); }
-
-/* Crayon fill layer */
-.crayon-fill {
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  pointer-events: none;
-}
-.crayon-fill canvas {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-}
-
-/* Checkmark stamp */
-.bingo-stamp {
-  position: absolute;
-  top: 6px; right: 6px;
-  width: 22px; height: 22px;
-  border-radius: 50%;
-  background: white;
-  border: 2px solid var(--coral);
-  display: flex; align-items: center; justify-content: center;
-  font-size: 12px;
-  color: var(--coral);
-  font-weight: 700;
-  z-index: 3;
-  opacity: 0;
-  transform: scale(0);
-  transition: all 0.3s cubic-bezier(0.34,1.56,0.64,1);
-}
-.bingo-card.done .bingo-stamp {
-  opacity: 1;
-  transform: scale(1);
-}
-
-
-/* ── CHAT UI ── */
-.rec-header {
-  padding: 50px 20px 12px;
-  background: var(--surface);
-  border-bottom: 2px solid var(--border);
-}
-.rec-header h1 {
-  font-family: 'ChenYuluoyan', sans-serif;
-  font-size: 22px; font-weight: 700; color: var(--ink);
-  margin-bottom: 2px;
-}
-.rec-header p { font-size: 11px; color: var(--text3); }
-
-.chat-messages {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  padding: 16px 16px 8px;
-}
-
-.msg-ai {
-  display: flex;
-  gap: 10px;
-  align-items: flex-start;
-}
-.msg-ai-avatar {
-  width: 32px; height: 32px;
-  border-radius: 50%;
-  background: var(--coral);
-  display: flex; align-items: center; justify-content: center;
-  font-size: 14px; flex-shrink: 0;
-  border: 2px solid var(--border2);
-}
-.msg-ai-bubble {
-  background: var(--surface);
-  border: 1.5px solid var(--border2);
-  border-radius: 0 12px 12px 12px;
-  padding: 10px 14px;
-  font-family: 'ChenYuluoyan', sans-serif;
-  font-size: 13px;
-  color: var(--ink);
-  line-height: 1.7;
-  max-width: 85%;
-  box-shadow: 2px 2px 0 var(--border);
-}
-.msg-ai-bubble.typing::after {
-  content: '●●●';
-  animation: typing 1s infinite;
-  color: var(--coral);
-  font-size: 10px;
-}
-@keyframes typing {
-  0%,100% { opacity: 0.3; }
-  50% { opacity: 1; }
-}
-
-.msg-user {
-  display: flex;
-  justify-content: flex-end;
-}
-.msg-user-bubble {
-  background: var(--coral);
-  border-radius: 12px 0 12px 12px;
-  padding: 10px 14px;
-  font-family: 'ChenYuluoyan', sans-serif;
-  font-size: 13px;
-  color: white;
-  line-height: 1.7;
-  max-width: 85%;
-}
-
-/* Upload area */
-.upload-area {
-  margin: 8px 16px;
-  border: 2px dashed var(--border2);
-  border-radius: 6px;
-  padding: 14px;
-  text-align: center;
-  cursor: pointer;
-  transition: all 0.15s;
-  background: var(--surface);
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-.upload-area:active { transform: scale(0.97); }
-.upload-area-icon { font-size: 24px; }
-.upload-area-text { text-align: left; }
-.upload-area-main { font-size: 13px; color: var(--ink); font-family: 'ChenYuluoyan', sans-serif; }
-.upload-area-sub { font-size: 11px; color: var(--text3); margin-top: 2px; }
-
-.uploaded-file {
-  margin: 4px 16px;
-  background: var(--washi-green, #e0f5e8);
-  border: 1.5px solid var(--accent3);
-  border-radius: 6px;
-  padding: 10px 14px;
-  display: flex; align-items: center; gap: 10px;
-  font-family: 'ChenYuluoyan', sans-serif;
-  font-size: 12px;
-}
-
-/* Chat input */
-.chat-input-row {
-  display: flex;
-  gap: 8px;
-  padding: 10px 16px 16px;
-  background: var(--surface);
-  border-top: 1px solid var(--border);
-  position: sticky;
-  bottom: 70px;
-}
-.chat-text-input {
-  flex: 1;
-  background: var(--bg);
-  border: 1.5px solid var(--border2);
-  border-radius: 20px;
-  padding: 10px 16px;
-  font-family: 'ChenYuluoyan', sans-serif;
-  font-size: 13px;
-  color: var(--ink);
-  outline: none;
-  resize: none;
-  max-height: 80px;
-  overflow-y: auto;
-}
-.chat-text-input:focus { border-color: var(--coral); }
-.chat-text-input::placeholder { color: var(--text3); }
-.chat-send-btn {
-  width: 40px; height: 40px;
-  border-radius: 50%;
-  background: var(--coral);
-  border: none;
-  cursor: pointer;
-  font-size: 16px;
-  color: white;
-  display: flex; align-items: center; justify-content: center;
-  transition: all 0.15s;
-  flex-shrink: 0;
-  box-shadow: 2px 2px 0 #c04020;
-  align-self: flex-end;
-}
-.chat-send-btn:active { transform: scale(0.9); }
-.chat-send-btn.loading { opacity: 0.5; pointer-events: none; }
-
-
-/* ── BINGO LINE REWARD ── */
-.bingo-line-overlay {
-  position: absolute;
-  inset: 0;
-  z-index: 900;
-  display: none;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  background: rgba(245,240,232,0.92);
-  backdrop-filter: blur(4px);
-  animation: lineRewardIn 0.4s cubic-bezier(0.34,1.56,0.64,1);
-}
-.bingo-line-overlay.show { display: flex; }
-@keyframes lineRewardIn {
-  from { opacity:0; transform:scale(0.85); }
-  to   { opacity:1; transform:scale(1); }
-}
-.bingo-line-star {
-  font-size: 64px;
-  animation: starPop 0.6s cubic-bezier(0.34,1.56,0.64,1);
-}
-@keyframes starPop {
-  0%   { transform: rotate(-15deg) scale(0.3); }
-  60%  { transform: rotate(8deg) scale(1.2); }
-  100% { transform: rotate(-3deg) scale(1); }
-}
-.bingo-line-title {
-  font-family: 'ChenYuluoyan', sans-serif;
-  font-size: 28px;
-  color: var(--coral);
-  margin: 8px 0 4px;
-  text-decoration: underline wavy var(--coral);
-}
-.bingo-line-sub {
-  font-family: 'ChenYuluoyan', sans-serif;
-  font-size: 14px;
-  color: var(--text2);
-  margin-bottom: 24px;
-  text-align: center;
-  padding: 0 32px;
-  line-height: 1.7;
-}
-.bingo-line-btn {
-  background: var(--coral);
-  color: white;
-  border: none;
-  padding: 12px 32px;
-  border-radius: 2px;
-  font-family: 'ChenYuluoyan', sans-serif;
-  font-size: 16px;
-  cursor: pointer;
-  box-shadow: 3px 3px 0 #c04020;
-  transition: all 0.15s;
-}
-.bingo-line-btn:active { transform: translate(2px,2px); box-shadow: 1px 1px 0 #c04020; }
-
-/* Highlight winning cards */
-.bingo-card.winning {
-  border-color: var(--coral) !important;
-  box-shadow: 0 0 0 3px var(--coral), 3px 3px 0 var(--coral) !important;
-  animation: winPulse 0.6s ease;
-}
-@keyframes winPulse {
-  0%,100% { transform: scale(1); }
-  50%      { transform: scale(1.06); }
-}
-
-/* Line confetti */
-.line-conf {
-  position: absolute;
-  font-size: 22px;
-  animation: confFall2 linear forwards;
-  pointer-events: none;
-}
-@keyframes confFall2 {
-  0%   { transform: translateY(-20px) rotate(0deg); opacity: 1; }
-  100% { transform: translateY(700px) rotate(540deg); opacity: 0; }
-}
-
-
-/* ── LINED PAPER BACKGROUND ── */
-.scroll-area.lined {
-  background-image: repeating-linear-gradient(
-    transparent,
-    transparent 27px,
-    rgba(160,145,120,0.22) 27px,
-    rgba(160,145,120,0.22) 28px
-  );
-  background-attachment: local;
-}"/>
-        <!-- u --><path class="sig-stroke s3" d="M54 34 Q52 52 54 60 Q58 70 66 64 Q72 58 72 48 L72 34"/>
-        <!-- d --><path class="sig-stroke s4" d="M88 14 L86 65 M86 42 Q84 34 78 34 Q70 34 68 44 Q66 56 72 62 Q78 68 86 62"/>
-        <!-- y --><path class="sig-stroke s5" d="M96 34 Q100 52 102 60 M116 34 Q110 56 104 68 Q98 80 90 82"/>
-        <!-- M --><path class="sig-stroke m1" d="M138 65 L136 30 Q148 52 154 30 Q160 52 162 30 L160 65"/>
-        <!-- a --><path class="sig-stroke m2" d="M182 44 Q176 36 170 42 Q164 50 168 60 Q172 68 180 66 Q186 64 186 56 L184 40"/>
-        <!-- t --><path class="sig-stroke m3" d="M196 20 Q194 40 193 56 Q192 64 196 68 Q200 72 206 68 M188 42 L208 40"/>
-        <!-- e --><path class="sig-stroke m4" d="M214 50 Q228 48 228 44 Q228 36 220 34 Q212 34 210 44 Q208 56 214 64 Q220 70 230 66"/>
-      </svg>
+    <!-- StudyMate text animation -->
+    <div class="splash-text" style="margin-top:-8px; line-height:1; text-align:center;">
+      <div style="overflow:visible;padding:0 8px;">
+        <span style="font-family:'Caveat',cursive;font-size:54px;font-weight:700;color:#1a1612;
+          display:inline-block;
+          animation:splashWordIn 0.7s cubic-bezier(0.22,1,0.36,1) 0.6s both;">Study</span><span
+          style="font-family:'Caveat',cursive;font-size:54px;font-weight:700;color:#e8603c;
+          display:inline-block;
+          animation:splashWordIn 0.7s cubic-bezier(0.22,1,0.36,1) 1.1s both;">Mate</span>
+      </div>
     </div>
 
     <!-- Tagline -->
@@ -2393,6 +3408,22 @@ body.daytime {
     </div>
   </div>
 
+
+  <!-- ══ WAVE BG ══ -->
+  <div class="wave-bg" id="wave-bg">
+    <svg class="wave-layer wave-layer-1" viewBox="0 0 800 900" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0,700 Q100,660 200,700 Q300,740 400,700 Q500,660 600,700 Q700,740 800,700 L800,900 L0,900 Z" fill="rgba(226,135,67,0.06)"/>
+      <path d="M0,750 Q100,720 200,750 Q300,780 400,750 Q500,720 600,750 Q700,780 800,750 L800,900 L0,900 Z" fill="rgba(226,135,67,0.04)"/>
+    </svg>
+    <svg class="wave-layer wave-layer-2" viewBox="0 0 800 900" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0,720 Q100,680 200,720 Q300,760 400,720 Q500,680 600,720 Q700,760 800,720 L800,900 L0,900 Z" fill="rgba(118,138,126,0.06)"/>
+      <path d="M0,780 Q100,750 200,780 Q300,810 400,780 Q500,750 600,780 Q700,810 800,780 L800,900 L0,900 Z" fill="rgba(118,138,126,0.04)"/>
+    </svg>
+    <svg class="wave-layer wave-layer-3" viewBox="0 0 800 900" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0,80 Q100,50 200,80 Q300,110 400,80 Q500,50 600,80 Q700,110 800,80 L800,0 L0,0 Z" fill="rgba(226,135,67,0.04)"/>
+      <path d="M0,120 Q100,90 200,120 Q300,150 400,120 Q500,90 600,120 Q700,150 800,120 L800,0 L0,0 Z" fill="rgba(118,138,126,0.03)"/>
+    </svg>
+  </div>
 
   <!-- STATUS BAR -->
   <div class="statusbar">
@@ -2570,8 +3601,8 @@ body.daytime {
         <h1 id="rec-tab-title">學習記錄</h1>
       </div>
       <div style="display:flex;gap:0;border:1.5px solid var(--border2);border-radius:4px;overflow:hidden;">
-        <button id="tab-record" onclick="switchRecTab('record')" style="flex:1;padding:8px;background:var(--coral);color:white;border:none;font-family:'ChenYuluoyan',sans-serif;font-size:13px;cursor:pointer;">📝 記錄</button>
-        <button id="tab-radar" onclick="switchRecTab('radar')" style="flex:1;padding:8px;background:var(--surface);color:var(--text2);border:none;font-family:'ChenYuluoyan',sans-serif;font-size:13px;cursor:pointer;">📡 弱點</button>
+        <button id="tab-record" onclick="switchRecTab('record')" id="tab-record-btn" style="flex:1;padding:8px;background:rgba(226,135,67,0.12);color:#E28743;border:none;font-family:'ChenYuluoyan',sans-serif;font-size:13px;cursor:pointer;border-radius:3px 0 0 3px;font-weight:700;">📝 記錄</button>
+        <button id="tab-radar" onclick="switchRecTab('radar')" style="flex:1;padding:8px;background:transparent;color:#8C827A;border:none;font-family:'ChenYuluoyan',sans-serif;font-size:13px;cursor:pointer;border-radius:0 3px 3px 0;">📡 弱點</button>
       </div>
     </div>
     <div id="panel-record" style="display:flex;flex-direction:column;flex:1;overflow:hidden;">
@@ -2762,14 +3793,24 @@ body.daytime {
 
     <!-- Finish panel -->
     <div class="focus-finish" id="focus-finish" style="display:none;">
-      <canvas id="finish-canvas" style="position:absolute;inset:0;width:100%;height:100%;"></canvas>
-      <div style="position:relative;z-index:10;text-align:center;padding:32px 24px;">
-        <div style="font-size:64px;margin-bottom:12px;animation:starSpin 1s ease;">🎈</div>
-        <div style="font-family:'ChenYuluoyan',sans-serif;font-size:26px;color:var(--coral);margin-bottom:8px;" id="finish-title">降落成功！</div>
-        <div style="font-family:'ChenYuluoyan',sans-serif;font-size:14px;color:var(--text2);line-height:1.8;margin-bottom:24px;" id="finish-stats"></div>
-        <button class="ob-next" onclick="resetFocus()"><span class="ob-next-inner">再來一次 ✦</span></button>
-        <br>
-        <button onclick="go('screen-home')" style="margin-top:12px;background:none;border:none;font-family:'ChenYuluoyan',sans-serif;font-size:14px;color:var(--text3);cursor:pointer;">回首頁</button>
+      <!-- Reuse the scene canvas as background -->
+      <div class="finish-content">
+        <div class="finish-card">
+          <div class="finish-title" id="finish-title">降落成功！</div>
+          <div class="finish-stat-row">
+            <div class="finish-stat-box">
+              <div class="finish-stat-num" id="finish-time-num">0</div>
+              <div class="finish-stat-lbl">分鐘專注</div>
+            </div>
+            <div class="finish-stat-box">
+              <div class="finish-stat-num" id="finish-tomato-num">0</div>
+              <div class="finish-stat-lbl">🍅 番茄鐘</div>
+            </div>
+          </div>
+          <div class="finish-task-name" id="finish-task-display"></div>
+          <button class="finish-btn" onclick="resetFocus()">再來一次 ✦</button>
+          <button class="finish-home-btn" onclick="go('screen-home')">回首頁</button>
+        </div>
       </div>
     </div>
   </div>
@@ -3015,8 +4056,23 @@ function renderHome() {
     document.getElementById('exam-banner').style.display = 'flex';
     document.getElementById('banner-name').textContent = g.name;
     document.getElementById('banner-days').textContent = days;
-    const pct = Math.min(100, state.records.length * 5);
-    document.getElementById('banner-fill').style.width = pct + '%';
+    // Time-based progress: how much of the countdown has passed
+    const totalDays = Math.max(1, Math.ceil((new Date(g.date) - new Date(g.createdAt || Date.now() - 30*86400000)) / 86400000));
+    const elapsed = totalDays - days;
+    const pct = Math.min(100, Math.max(2, (elapsed / totalDays) * 100));
+
+    // Color: green (far) → yellow → orange → red (close)
+    let fillColor;
+    if (days > 60)       fillColor = '#768A7E';           // sage green - far away
+    else if (days > 30)  fillColor = '#a8c878';           // light green
+    else if (days > 14)  fillColor = '#f0c040';           // yellow
+    else if (days > 7)   fillColor = '#E28743';           // orange
+    else                 fillColor = '#e05040';           // red - urgent
+
+    const fill = document.getElementById('banner-fill');
+    fill.style.width = pct + '%';
+    fill.style.background = fillColor;
+    fill.style.boxShadow = `0 0 8px ${fillColor}60`;
   }
 
   renderTasks();
@@ -4203,31 +5259,227 @@ function stopFocus() {
 function showFocusFinish(totalMin) {
   const finish = document.getElementById('focus-finish');
   finish.style.display = 'flex';
+  stopAmbientSound();
 
   const hours = Math.floor(totalMin / 60);
   const mins = totalMin % 60;
-  const timeStr = hours > 0 ? `${hours} 小時 ${mins} 分鐘` : `${mins} 分鐘`;
+  const msgs = ['今天飛得很高！','專注達成 ✦','你做到了！','任務完成！','好厲害！'];
+  document.getElementById('finish-title').textContent = msgs[Math.floor(Math.random() * msgs.length)];
+  document.getElementById('finish-time-num').textContent = hours > 0 ? `${hours}h${mins}` : mins;
+  document.getElementById('finish-tomato-num').textContent = focusState.tomatoCount;
+  document.getElementById('finish-task-display').textContent = `「${focusState.taskName}」`;
 
-  const msgs = [
-    '熱氣球已安全降落 🎈',
-    '今天飛得很高！🌤',
-    '海風相伴，專注達成 ✦',
-    '你的熱氣球到達目的地了！',
+  drawFinishScene();
+}
+
+function drawFinishScene() {
+  const finish = document.getElementById('focus-finish');
+  // Remove old canvas
+  const old = document.getElementById('finish-bg-canvas');
+  if (old) old.remove();
+
+  const hour = new Date().getHours();
+  const isDay = hour >= 6 && hour < 18;
+
+  // Background
+  const bgDiv = document.createElement('div');
+  bgDiv.id = 'finish-bg-canvas';
+  bgDiv.style.cssText = 'position:absolute;inset:0;z-index:0;overflow:hidden;';
+
+  // Gradient bg
+  const bgColor = isDay
+    ? 'linear-gradient(160deg,#e8e2da 0%,#d8d0c8 100%)'
+    : 'linear-gradient(160deg,#f0e8f8 0%,#e8f0f8 100%)';
+  bgDiv.style.background = bgColor;
+
+  // Clouds
+  const cloudSvg = document.createElementNS('http://www.w3.org/2000/svg','svg');
+  cloudSvg.setAttribute('style','position:absolute;inset:0;width:100%;height:100%;');
+  cloudSvg.innerHTML = isDay
+    ? `<ellipse cx="15%" cy="15%" rx="12%" ry="5%" fill="rgba(255,255,255,0.5)"/>
+       <ellipse cx="22%" cy="12%" rx="9%" ry="4%" fill="rgba(255,255,255,0.5)"/>
+       <ellipse cx="75%" cy="10%" rx="11%" ry="4.5%" fill="rgba(255,255,255,0.45)"/>
+       <ellipse cx="82%" cy="8%" rx="7%" ry="3.5%" fill="rgba(255,255,255,0.45)"/>`
+    : `<ellipse cx="15%" cy="18%" rx="13%" ry="5.5%" fill="rgba(255,255,255,0.55)"/>
+       <ellipse cx="24%" cy="14%" rx="10%" ry="4.5%" fill="rgba(255,255,255,0.55)"/>
+       <ellipse cx="72%" cy="12%" rx="12%" ry="5%" fill="rgba(255,255,255,0.5)"/>`;
+  bgDiv.appendChild(cloudSvg);
+
+  finish.insertBefore(bgDiv, finish.firstChild);
+
+  // Balloon colors
+  const morandiColors = [
+    ['#c8a8a8','#a08080'],['#a8b8c8','#8090a8'],['#b0c0a8','#88a080'],
+    ['#d4b898','#b09070'],['#b8a8c8','#9080a8'],['#c8b0a0','#a08878'],
+    ['#a8c0b8','#80a098'],['#c8b8a0','#a09078'],['#b0a8c0','#8880a0'],
+    ['#d0b8b0','#b09090'],['#a8c8b0','#80a888'],['#c0b8d0','#9898b0'],
+    ['#b8d0c0','#90b0a0'],['#d8c0a8','#b8a080'],['#c0c8b0','#a0a888'],
+    ['#b8b0c8','#9890a8'],['#c8d0b8','#a0b090'],['#d0c0b8','#b0a098'],
+  ];
+  const pastelColors = [
+    ['#f8b8d0','#e090b0'],['#b8d8f8','#90b8e0'],['#c8f0b8','#a0d890'],
+    ['#f8d8a0','#e0b870'],['#d8b8f8','#b890e0'],['#f8c8a0','#e0a870'],
+    ['#a8e8e0','#80c8c0'],['#f8b8d8','#e090b8'],['#c8e8b0','#a0c888'],
+    ['#e8d8f8','#c8b0e0'],['#f8e8b0','#e0c888'],['#b8f0d8','#90d8b0'],
+    ['#f8d0b8','#e0a890'],['#d0e8f8','#a8c8e0'],['#f8b8e8','#e090c8'],
+    ['#c8f8d0','#a0e0a8'],['#f0d8b0','#d8b888'],['#b8e8f8','#90c8e0'],
   ];
 
-  document.getElementById('finish-title').textContent = msgs[Math.floor(Math.random() * msgs.length)];
-  document.getElementById('finish-stats').innerHTML =
-    `今天專注了 <strong style="color:var(--coral);font-size:20px;">${timeStr}</strong><br>完成了 <strong style="color:var(--coral);">${focusState.tomatoCount}</strong> 個番茄鐘<br>任務：${focusState.taskName}`;
+  const colors = isDay ? morandiColors : pastelColors;
+  const W = finish.offsetWidth || 390;
+  const H = finish.offsetHeight || 844;
 
-  // Floating confetti
-  const items = ['🎈','⭐','✨','🌊','☁️','🌸'];
-  for (let i = 0; i < 20; i++) {
-    const c = document.createElement('div');
-    c.style.cssText = `position:absolute;font-size:${16+Math.random()*12}px;left:${Math.random()*100}%;top:-30px;animation:confFall ${1.5+Math.random()*2}s linear ${Math.random()*1.5}s forwards;pointer-events:none;`;
-    c.textContent = items[Math.floor(Math.random() * items.length)];
-    finish.appendChild(c);
-    setTimeout(() => c.remove(), 4000);
+  // Create balloons
+  colors.forEach((c, i) => {
+    const size = 28 + Math.random() * 28;
+    const x = Math.random() * (W - size);
+    const startY = H * 0.3 + Math.random() * H * 0.7;
+    const duration = 2.4 + Math.random() * 2.2;
+    const delay = Math.random() * 2;
+    const wobble = (Math.random() - 0.5) * 40;
+
+    const svg = document.createElementNS('http://www.w3.org/2000/svg','svg');
+    svg.setAttribute('width', size);
+    svg.setAttribute('height', size * 1.35);
+    svg.setAttribute('viewBox', '0 0 40 54');
+    svg.style.cssText = `position:absolute;left:${x}px;top:${startY}px;z-index:2;`;
+    svg.style.animation = `finishBalloon ${duration}s ease-in ${delay}s infinite`;
+    svg.style.setProperty('--wobble', wobble + 'px');
+
+    const rx = 17, ry = 20;
+    svg.innerHTML = `
+      <ellipse cx="20" cy="${ry}" rx="${rx}" ry="${ry}" fill="${c[0]}"/>
+      <ellipse cx="${20-rx*0.3}" cy="${ry-ry*0.3}" rx="${rx*0.28}" ry="${ry*0.25}" fill="rgba(255,255,255,0.35)" transform="rotate(-20,${20-rx*0.3},${ry-ry*0.3})"/>
+      <circle cx="20" cy="${ry*2-1}" r="2" fill="${c[1]}"/>
+      <line x1="20" y1="${ry*2+1}" x2="20" y2="54" stroke="${c[1]}" stroke-width="1" opacity="0.7"/>
+    `;
+    bgDiv.appendChild(svg);
+  });
+
+  // Add keyframe if not exists
+  if (!document.getElementById('finish-balloon-style')) {
+    const style = document.createElement('style');
+    style.id = 'finish-balloon-style';
+    style.textContent = `
+      @keyframes finishBalloon {
+        0%   { transform: translateY(0) translateX(0) rotate(-3deg); opacity: 0; }
+        10%  { opacity: 1; }
+        85%  { opacity: 0.9; }
+        100% { transform: translateY(-110vh) translateX(var(--wobble)) rotate(4deg); opacity: 0; }
+      }
+    `;
+    document.head.appendChild(style);
   }
+}
+
+function drawFinishCloud(ctx, x, y, w, h) {
+  ctx.fillStyle = 'rgba(255,255,255,0.85)';
+  [[0,0,1,1],[-.3,.15,.7,.85],[.3,.2,.65,.8]].forEach(([ox,oy,rx,ry])=>{
+    ctx.beginPath();
+    ctx.ellipse(x+ox*w, y+oy*h, w*rx/2, h*ry/2, 0, 0, Math.PI*2);
+    ctx.fill();
+  });
+}
+
+function drawFinishBalloons(ctx, x, y, isDay) {
+  // Balloon cluster - colorful bunch
+  const balloons = [
+    [-32,-65,12,15,'#e8303c','#c01020'],
+    [-14,-80,13,17,'#f0a020','#c07810'],
+    [ 5, -85,14,18,'#f0e020','#c0b010'],
+    [ 24,-75,12,15,'#30b840','#108820'],
+    [ 38,-58,11,14,'#2080e8','#1050b0'],
+    [-42,-48,11,14,'#b030c8','#800898'],
+    [-22,-55,12,15,'#e86020','#b03010'],
+    [  2,-62,13,16,'#f03080','#b01050'],
+    [ 20,-52,11,14,'#20c8b0','#108880'],
+    [ 34,-40,10,13,'#e8c020','#b09010'],
+    [-34,-32,10,13,'#4060e8','#1030a0'],
+    [ -8,-40,11,14,'#e04040','#a01010'],
+    [ 14,-34,10,13,'#40c040','#108810'],
+    [ 30,-24,9, 12,'#e880c0','#b04080'],
+    [-18,-22,9, 12,'#60c8e8','#2080a0'],
+    [  6,-26,10,13,'#f08030','#c05010'],
+    [-26,-14,8, 11,'#a040e8','#6010a0'],
+    [ 22,-14,8, 11,'#e8d040','#b0a010'],
+  ];
+
+  const gatherY = y + 8;
+
+  // Strings
+  balloons.forEach(([ox, oy, rx, ry]) => {
+    ctx.beginPath();
+    ctx.moveTo(x + ox, y + oy + ry);
+    ctx.quadraticCurveTo(x + ox * 0.5, gatherY - 15, x, gatherY);
+    ctx.strokeStyle = 'rgba(200,180,150,0.45)';
+    ctx.lineWidth = 0.8;
+    ctx.stroke();
+  });
+
+  // Balloons
+  balloons.forEach(([ox, oy, rx, ry, c1, c2]) => {
+    const bx = x + ox, by = y + oy;
+    const grad = ctx.createRadialGradient(bx-rx*.3, by-ry*.3, rx*.1, bx, by, rx*1.2);
+    grad.addColorStop(0, c1); grad.addColorStop(1, c2);
+    ctx.beginPath();
+    ctx.ellipse(bx, by, rx, ry, 0, 0, Math.PI*2);
+    ctx.fillStyle = grad; ctx.fill();
+    ctx.beginPath();
+    ctx.ellipse(bx-rx*.28, by-ry*.28, rx*.28, ry*.25, -.4, 0, Math.PI*2);
+    ctx.fillStyle = 'rgba(255,255,255,0.35)'; ctx.fill();
+    ctx.beginPath();
+    ctx.arc(bx, by+ry-1, 2, 0, Math.PI*2);
+    ctx.fillStyle = c2; ctx.fill();
+  });
+
+  // Main rope to house
+  ctx.beginPath();
+  ctx.moveTo(x, gatherY);
+  ctx.lineTo(x, gatherY + 36);
+  ctx.strokeStyle = '#8a6a40'; ctx.lineWidth = 2.5; ctx.stroke();
+
+  // House
+  const hw = 44, hh = 32;
+  const hx = x - hw/2, hy = gatherY + 36;
+
+  // Shadow
+  ctx.fillStyle = 'rgba(0,0,0,0.12)';
+  ctx.beginPath(); ctx.roundRect(hx+4, hy+4, hw, hh, 5); ctx.fill();
+
+  // Body
+  ctx.fillStyle = '#f5e8c8';
+  ctx.strokeStyle = '#c8a870'; ctx.lineWidth = 1.5;
+  ctx.beginPath(); ctx.roundRect(hx, hy, hw, hh, 4); ctx.fill(); ctx.stroke();
+
+  // Roof
+  ctx.beginPath();
+  ctx.moveTo(hx-5, hy); ctx.lineTo(x, hy-20); ctx.lineTo(hx+hw+5, hy);
+  ctx.closePath();
+  ctx.fillStyle = '#e8603c'; ctx.fill();
+  ctx.strokeStyle = '#c04020'; ctx.lineWidth = 1.5; ctx.stroke();
+
+  // Chimney
+  ctx.fillStyle = '#c8a870';
+  ctx.fillRect(x + 10, hy - 28, 7, 14);
+
+  // Windows
+  [[hx+5, hy+5], [hx+hw-17, hy+5]].forEach(([wx, wy]) => {
+    ctx.fillStyle = '#a0d8f8';
+    ctx.strokeStyle = '#70a8c8'; ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.roundRect(wx, wy, 12, 12, 2); ctx.fill(); ctx.stroke();
+    // Cross
+    ctx.strokeStyle = '#70a8c8';
+    ctx.beginPath(); ctx.moveTo(wx+6, wy); ctx.lineTo(wx+6, wy+12); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(wx, wy+6); ctx.lineTo(wx+12, wy+6); ctx.stroke();
+  });
+
+  // Door
+  ctx.fillStyle = '#8a5a20';
+  ctx.beginPath(); ctx.roundRect(x-6, hy+hh-16, 12, 16, 3); ctx.fill();
+  ctx.fillStyle = '#f0c060';
+  ctx.beginPath(); ctx.arc(x+3, hy+hh-9, 1.5, 0, Math.PI*2); ctx.fill();
+
+  
 }
 
 function resetFocus() {
@@ -4237,6 +5489,58 @@ function resetFocus() {
   focusState.tomatoCount = 0;
   focusState.totalFocused = 0;
   updateFocusTomatoes();
+}
+
+
+function drawSimpleBalloon(ctx, x, y, isDay) {
+  // Balloon body
+  const grad = ctx.createRadialGradient(x-10, y-12, 3, x, y, 26);
+  grad.addColorStop(0, '#ff9060');
+  grad.addColorStop(0.5, '#e8603c');
+  grad.addColorStop(1, '#c04020');
+  ctx.beginPath();
+  ctx.ellipse(x, y, 22, 28, 0, 0, Math.PI*2);
+  ctx.fillStyle = grad;
+  ctx.fill();
+
+  // Stripe pattern
+  ctx.save();
+  ctx.beginPath();
+  ctx.ellipse(x, y, 22, 28, 0, 0, Math.PI*2);
+  ctx.clip();
+  for(let i=-2;i<3;i++){
+    ctx.fillStyle = 'rgba(255,240,180,0.18)';
+    ctx.fillRect(x+i*14-5, y-28, 10, 56);
+  }
+  ctx.restore();
+
+  // Highlight
+  ctx.beginPath();
+  ctx.ellipse(x-8, y-10, 7, 10, -0.4, 0, Math.PI*2);
+  ctx.fillStyle = 'rgba(255,255,255,0.28)';
+  ctx.fill();
+
+  // Ropes
+  ctx.strokeStyle = isDay ? '#8a6030' : '#6a4020';
+  ctx.lineWidth = 1.2;
+  [[-8,24,-7,38],[0,26,0,38],[8,24,7,38]].forEach(([dx1,dy1,dx2,dy2])=>{
+    ctx.beginPath();
+    ctx.moveTo(x+dx1, y+dy1);
+    ctx.lineTo(x+dx2, y+dy2);
+    ctx.stroke();
+  });
+
+  // Basket
+  ctx.fillStyle='#8a5a20';
+  ctx.beginPath();
+  ctx.roundRect(x-14, y+52, 28, 18, 3);
+  ctx.fill();
+  ctx.strokeStyle='#6a3a10'; ctx.lineWidth=1.5;
+  ctx.strokeRect(x-14, y+52, 28, 18);
+  // Weave lines
+  ctx.strokeStyle='rgba(100,60,20,0.3)'; ctx.lineWidth=1;
+  ctx.beginPath(); ctx.moveTo(x-14,y+61); ctx.lineTo(x+14,y+61); ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(x,y+52); ctx.lineTo(x,y+70); ctx.stroke();
 }
 
 // ── DRAW HOT AIR BALLOON SCENE ──────────────────────────
@@ -4262,16 +5566,17 @@ function drawFocusScene() {
     time += 0.01;
 
     // Sky
-    if (isDay) {
+    {
       const sky = ctx.createLinearGradient(0, 0, 0, H);
-      sky.addColorStop(0, '#5ba3d9');
-      sky.addColorStop(0.5, '#87ceeb');
-      sky.addColorStop(1, '#b8e0f7');
-      ctx.fillStyle = sky;
-    } else {
-      const sky = ctx.createLinearGradient(0, 0, 0, H);
-      sky.addColorStop(0, '#0a0a2a');
-      sky.addColorStop(1, '#1a2a5a');
+      if (isDay) {
+        sky.addColorStop(0, '#F5F0E8');
+        sky.addColorStop(0.5, '#F9F6F0');
+        sky.addColorStop(1, '#F9F6F0');
+      } else {
+        sky.addColorStop(0, '#E8E0F8');
+        sky.addColorStop(0.5, '#F0EBF8');
+        sky.addColorStop(1, '#F0EBF8');
+      }
       ctx.fillStyle = sky;
     }
     ctx.fillRect(0, 0, W, H);
@@ -4313,48 +5618,15 @@ function drawFocusScene() {
       ctx.fill();
     }
 
-    // Sea
-    const seaTop = H * 0.58;
-    const sea = ctx.createLinearGradient(0, seaTop, 0, H);
-    if (isDay) {
-      sea.addColorStop(0, '#1a8ab8');
-      sea.addColorStop(1, '#0a4a7a');
-    } else {
-      sea.addColorStop(0, '#0a3a6a');
-      sea.addColorStop(1, '#020a18');
-    }
-    ctx.fillStyle = sea;
-    ctx.fillRect(0, seaTop, W, H - seaTop);
-
-    // Waves
-    for (let w = 0; w < 4; w++) {
-      ctx.beginPath();
-      ctx.moveTo(0, seaTop + w * 14);
-      for (let x = 0; x <= W; x += 4) {
-        ctx.lineTo(x, seaTop + w * 14 + Math.sin(x * 0.04 + time * 1.5 + w) * 5);
-      }
-      ctx.strokeStyle = `rgba(255,255,255,${0.15 - w * 0.03})`;
-      ctx.lineWidth = 1.5;
-      ctx.stroke();
-    }
-
-    // Sun/moon reflection on water
-    const refX = isDay ? W * 0.8 : W * 0.75;
-    const refGrad = ctx.createLinearGradient(refX, seaTop, refX, H);
-    refGrad.addColorStop(0, 'rgba(255,230,100,0.3)');
-    refGrad.addColorStop(1, 'rgba(255,230,100,0)');
-    ctx.fillStyle = refGrad;
-    ctx.fillRect(refX - 15, seaTop, 30, H - seaTop);
-
-    // Islands silhouette
+    // Subtle ground line only
+    const seaTop = H * 0.75;
     ctx.beginPath();
-    ctx.ellipse(W * 0.15, seaTop + 2, 45, 18, 0, 0, Math.PI * 2);
-    ctx.fillStyle = isDay ? '#2a5a2a' : '#0a1a0a';
-    ctx.fill();
-    ctx.beginPath();
-    ctx.ellipse(W * 0.82, seaTop + 4, 35, 14, 0, 0, Math.PI * 2);
-    ctx.fillStyle = isDay ? '#1a4a1a' : '#081208';
-    ctx.fill();
+    for (let x = 0; x <= W; x += 4) {
+      ctx.lineTo(x, seaTop + Math.sin(x * 0.03 + time * 0.8) * 4);
+    }
+    ctx.strokeStyle = isDay ? 'rgba(226,135,67,0.12)' : 'rgba(160,140,200,0.12)';
+    ctx.lineWidth = 1.5;
+    ctx.stroke();
 
     // Balloon float
     const bx = balloonX + Math.sin(time * 0.7) * 18;
@@ -4365,23 +5637,38 @@ function drawFocusScene() {
   }
   frame();
 
-  // Draw preview too
+  // Draw preview - simple single hot air balloon
   const prev = document.getElementById('focus-preview');
   if (prev) {
     const pc = document.createElement('canvas');
     pc.style.cssText = 'width:100%;height:100%;display:block;';
     prev.innerHTML = '';
     prev.appendChild(pc);
-    pc.width = prev.offsetWidth || 300;
-    pc.height = 160;
+    const pw = prev.offsetWidth || 320;
+    const ph = 160;
+    pc.width = pw;
+    pc.height = ph;
     const pctx = pc.getContext('2d');
-    // Simple static preview
-    const psky = pctx.createLinearGradient(0,0,0,160);
-    if(isDay){psky.addColorStop(0,'#5ba3d9');psky.addColorStop(1,'#b8e0f7');}
-    else{psky.addColorStop(0,'#0a0a2a');psky.addColorStop(1,'#1a2a5a');}
-    pctx.fillStyle=psky; pctx.fillRect(0,0,pc.width,160);
-    pctx.fillStyle=isDay?'#1a8ab8':'#0a3a6a'; pctx.fillRect(0,100,pc.width,60);
-    drawBalloon(pctx, pc.width/2, 60, isDay);
+
+    // Sky - match page bg
+    const psky = pctx.createLinearGradient(0,0,0,ph);
+    if (isDay) {
+      psky.addColorStop(0,'#f5ede0');
+      psky.addColorStop(1,'#F9F6F0');
+    } else {
+      psky.addColorStop(0,'#e8e0f0');
+      psky.addColorStop(1,'#F0EBF8');
+    }
+    pctx.fillStyle = psky;
+    pctx.fillRect(0, 0, pw, ph);
+
+    // No sun/moon - keep clean
+
+    // No sea
+
+    // Single hot air balloon - simple and clean
+    const bx = pw/2, by = ph*0.34;
+    drawSimpleBalloon(pctx, bx, by, isDay);
   }
 }
 
@@ -4396,36 +5683,132 @@ function drawCloud(ctx, x, y, w, h, color) {
 }
 
 function drawBalloon(ctx, x, y, isDay) {
+  ctx.save(); ctx.translate(x, y);
+  const W=70, H=80, n=8;
+
+  const PANELS = [
+    ['#b89080','#8a6058'],
+    ['#9aaa98','#6a7a68'],
+    ['#a8b0c0','#788090'],
+    ['#c0a888','#907858'],
+    ['#b89080','#8a6058'],
+    ['#9aaa98','#6a7a68'],
+    ['#a8b0c0','#788090'],
+    ['#c0a888','#907858'],
+  ];
+
+  function balloonPath() {
+    ctx.beginPath();
+    ctx.moveTo(0, -H*0.5);
+    ctx.bezierCurveTo(W*0.45, -H*0.5, W*0.55, -H*0.15, W*0.5, H*0.1);
+    ctx.bezierCurveTo(W*0.5, H*0.35, W*0.22, H*0.5, 0, H*0.5);
+    ctx.bezierCurveTo(-W*0.22, H*0.5, -W*0.5, H*0.35, -W*0.5, H*0.1);
+    ctx.bezierCurveTo(-W*0.55, -H*0.15, -W*0.45, -H*0.5, 0, -H*0.5);
+    ctx.closePath();
+  }
+
+  for(let i=0;i<n;i++){
+    const a1=(i/n)*Math.PI*2-Math.PI/2;
+    const a2=((i+1)/n)*Math.PI*2-Math.PI/2;
+    const px1=Math.cos(a1)*W/2, px2=Math.cos(a2)*W/2;
+    ctx.save();
+    balloonPath(); ctx.clip();
+    const g=ctx.createLinearGradient(px1,0,px2,0);
+    g.addColorStop(0,PANELS[i][1]); g.addColorStop(0.35,PANELS[i][0]);
+    g.addColorStop(0.65,PANELS[i][0]); g.addColorStop(1,PANELS[i][1]);
+    ctx.fillStyle=g;
+    ctx.beginPath();
+    ctx.moveTo(0,-H*0.5);
+    ctx.bezierCurveTo(px1*0.5,-H*0.48, px1*0.9,-H*0.1, px1*0.85,H*0.1);
+    ctx.bezierCurveTo(px1*0.8,H*0.35, px1*0.4,H*0.48, 0,H*0.5);
+    ctx.bezierCurveTo(px2*0.4,H*0.48, px2*0.8,H*0.35, px2*0.85,H*0.1);
+    ctx.bezierCurveTo(px2*0.9,-H*0.1, px2*0.5,-H*0.48, 0,-H*0.5);
+    ctx.fill();
+    ctx.beginPath();
+    ctx.moveTo(0,-H*0.5);
+    ctx.bezierCurveTo(px1*0.5,-H*0.48, px1*0.9,-H*0.1, px1*0.85,H*0.1);
+    ctx.bezierCurveTo(px1*0.8,H*0.35, px1*0.4,H*0.48, 0,H*0.5);
+    ctx.strokeStyle='rgba(0,0,0,0.1)'; ctx.lineWidth=0.8; ctx.stroke();
+    ctx.restore();
+  }
+
+  balloonPath();
+  ctx.strokeStyle='rgba(0,0,0,0.2)'; ctx.lineWidth=1.5; ctx.stroke();
+
+  ctx.save(); balloonPath(); ctx.clip();
+  ctx.fillStyle='rgba(30,20,10,0.2)'; ctx.fillRect(-W/2,-6,W,12); ctx.restore();
+
+  ctx.save(); balloonPath(); ctx.clip();
+  ctx.fillStyle='rgba(0,0,0,0.12)'; ctx.fillRect(-W/2,-H*0.5,W,12); ctx.restore();
+
+  ctx.save(); balloonPath(); ctx.clip();
+  const hg=ctx.createRadialGradient(-W*0.15,-H*0.28,2,-W*0.05,-H*0.15,W*0.35);
+  hg.addColorStop(0,'rgba(255,255,255,0.4)'); hg.addColorStop(1,'rgba(255,255,255,0)');
+  ctx.fillStyle=hg; ctx.fillRect(-W/2,-H/2,W,H); ctx.restore();
+
+  ctx.beginPath(); ctx.arc(0,H*0.5,3.5,0,Math.PI*2);
+  ctx.fillStyle='#5a4030'; ctx.fill();
+
+  ctx.strokeStyle='#8a7050'; ctx.lineWidth=1.3;
+  [[-14,H*0.5+1],[0,H*0.5+3],[14,H*0.5+1]].forEach(([rx,ry])=>{
+    ctx.beginPath(); ctx.moveTo(rx*0.3,ry); ctx.lineTo(rx,ry+18); ctx.stroke();
+  });
+
+  const by2=H*0.5+18;
+  const bg=ctx.createLinearGradient(0,by2,0,by2+20);
+  bg.addColorStop(0,'#b08060'); bg.addColorStop(1,'#6a4028');
+  ctx.fillStyle=bg; ctx.beginPath(); ctx.roundRect(-17,by2,34,20,3); ctx.fill();
+  const rimG=ctx.createLinearGradient(0,by2-3,0,by2+4);
+  rimG.addColorStop(0,'#c89060'); rimG.addColorStop(1,'#8a5830');
+  ctx.fillStyle=rimG; ctx.beginPath(); ctx.roundRect(-18,by2-3,36,7,2); ctx.fill();
+  ctx.strokeStyle='rgba(50,20,0,0.2)'; ctx.lineWidth=0.8;
+  for(let r=1;r<4;r++){ctx.beginPath();ctx.moveTo(-17,by2+r*5);ctx.lineTo(17,by2+r*5);ctx.stroke();}
+  for(let c=-2;c<=2;c++){ctx.beginPath();ctx.moveTo(c*7,by2);ctx.lineTo(c*7,by2+20);ctx.stroke();}
+  ctx.strokeStyle='#4a2a10'; ctx.lineWidth=1.3;
+  ctx.beginPath(); ctx.roundRect(-17,by2,34,20,3); ctx.stroke();
+
+  ctx.restore();
+}
+
+
+function drawSimpleBalloon(ctx, x, y, isDay) {
   // Balloon body
-  const grad = ctx.createRadialGradient(x-8, y-10, 2, x, y, 32);
-  grad.addColorStop(0, '#ff8860');
+  const grad = ctx.createRadialGradient(x-10, y-12, 3, x, y, 26);
+  grad.addColorStop(0, '#ff9060');
   grad.addColorStop(0.5, '#e8603c');
   grad.addColorStop(1, '#c04020');
   ctx.beginPath();
-  ctx.ellipse(x, y, 28, 36, 0, 0, Math.PI*2);
+  ctx.ellipse(x, y, 22, 28, 0, 0, Math.PI*2);
   ctx.fillStyle = grad;
   ctx.fill();
-  // Stripes
+
+  // Stripe pattern
   ctx.save();
+  ctx.beginPath();
+  ctx.ellipse(x, y, 22, 28, 0, 0, Math.PI*2);
   ctx.clip();
-  ctx.beginPath(); ctx.ellipse(x, y, 28, 36, 0, 0, Math.PI*2);
-  ctx.clip();
-  for(let i=-3;i<4;i++){
-    ctx.fillStyle='rgba(255,220,100,0.25)';
-    ctx.fillRect(x+i*14-5, y-36, 10, 72);
+  for(let i=-2;i<3;i++){
+    ctx.fillStyle = 'rgba(255,240,180,0.18)';
+    ctx.fillRect(x+i*14-5, y-28, 10, 56);
   }
   ctx.restore();
+
   // Highlight
   ctx.beginPath();
-  ctx.ellipse(x-10, y-14, 8, 12, -0.5, 0, Math.PI*2);
-  ctx.fillStyle='rgba(255,255,255,0.3)';
+  ctx.ellipse(x-8, y-10, 7, 10, -0.4, 0, Math.PI*2);
+  ctx.fillStyle = 'rgba(255,255,255,0.28)';
   ctx.fill();
+
   // Ropes
-  ctx.strokeStyle=isDay?'#8a6030':'#6a4020';
-  ctx.lineWidth=1.5;
-  [[x-12,y+34,x-10,y+52],[x,y+36,x,y+52],[x+12,y+34,x+10,y+52]].forEach(([x1,y1,x2,y2])=>{
-    ctx.beginPath(); ctx.moveTo(x1,y1); ctx.lineTo(x2,y2); ctx.stroke();
+  ctx.strokeStyle = isDay ? '#8a6030' : '#6a4020';
+  ctx.lineWidth = 1.2;
+  [[-8,24,-7,38],[0,26,0,38],[8,24,7,38]].forEach(([dx1,dy1,dx2,dy2])=>{
+    ctx.beginPath();
+    ctx.moveTo(x+dx1, y+dy1);
+    ctx.lineTo(x+dx2, y+dy2);
+    ctx.stroke();
   });
+
   // Basket
   ctx.fillStyle='#8a5a20';
   ctx.beginPath();
@@ -4433,19 +5816,666 @@ function drawBalloon(ctx, x, y, isDay) {
   ctx.fill();
   ctx.strokeStyle='#6a3a10'; ctx.lineWidth=1.5;
   ctx.strokeRect(x-14, y+52, 28, 18);
-  // Person in basket
-  ctx.beginPath();
-  ctx.arc(x, y+54, 5, 0, Math.PI*2);
-  ctx.fillStyle='#ffd0a0'; ctx.fill();
-  ctx.fillStyle='#3060a0';
-  ctx.fillRect(x-4, y+59, 8, 8);
+  // Weave lines
+  ctx.strokeStyle='rgba(100,60,20,0.3)'; ctx.lineWidth=1;
+  ctx.beginPath(); ctx.moveTo(x-14,y+61); ctx.lineTo(x+14,y+61); ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(x,y+52); ctx.lineTo(x,y+70); ctx.stroke();
 }
 
-// Handle go to focus screen
-const _origGo = go;
+// ── DRAW HOT AIR BALLOON SCENE ──────────────────────────
+function drawFocusScene() {
+  const canvas = document.getElementById('focus-canvas');
+  if (!canvas) return;
+  const W = canvas.offsetWidth;
+  const H = canvas.offsetHeight;
+  canvas.width = W;
+  canvas.height = H;
+  const ctx = canvas.getContext('2d');
 
-// ── BINGO LINE CHECK ─────────────────────────────────────
-let completedLines = new Set();
+  const hour = new Date().getHours();
+  const isDay = hour >= 6 && hour < 18;
+
+  let balloonX = W * 0.5;
+  let balloonY = H * 0.38;
+  let time = 0;
+
+  function frame() {
+    if (!document.getElementById('focus-canvas')) return;
+    ctx.clearRect(0, 0, W, H);
+    time += 0.01;
+
+    // Sky
+    {
+      const sky = ctx.createLinearGradient(0, 0, 0, H);
+      if (isDay) {
+        sky.addColorStop(0, '#F5F0E8');
+        sky.addColorStop(0.5, '#F9F6F0');
+        sky.addColorStop(1, '#F9F6F0');
+      } else {
+        sky.addColorStop(0, '#E8E0F8');
+        sky.addColorStop(0.5, '#F0EBF8');
+        sky.addColorStop(1, '#F0EBF8');
+      }
+      ctx.fillStyle = sky;
+    }
+    ctx.fillRect(0, 0, W, H);
+
+    if (isDay) {
+      // Sun
+      ctx.beginPath();
+      ctx.arc(W * 0.8, H * 0.15, 36, 0, Math.PI * 2);
+      ctx.fillStyle = '#ffd060';
+      ctx.fill();
+      ctx.beginPath();
+      ctx.arc(W * 0.8, H * 0.15, 28, 0, Math.PI * 2);
+      ctx.fillStyle = '#ffe080';
+      ctx.fill();
+
+      // Clouds
+      drawCloud(ctx, W * 0.15 + Math.sin(time * 0.3) * 8, H * 0.18, 55, 22, 'rgba(255,255,255,0.9)');
+      drawCloud(ctx, W * 0.6 + Math.sin(time * 0.2 + 1) * 6, H * 0.12, 40, 16, 'rgba(255,255,255,0.8)');
+      drawCloud(ctx, W * 0.35 + Math.sin(time * 0.25 + 2) * 10, H * 0.25, 60, 20, 'rgba(255,255,255,0.7)');
+    } else {
+      // Stars
+      for (let i = 0; i < 40; i++) {
+        const sx = (i * 137.5) % W;
+        const sy = (i * 97.3) % (H * 0.5);
+        const r = 0.5 + (i % 3) * 0.5;
+        ctx.beginPath();
+        ctx.arc(sx, sy, r, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(255,255,255,${0.4 + Math.sin(time * 2 + i) * 0.2})`;
+        ctx.fill();
+      }
+      // Moon
+      ctx.beginPath();
+      ctx.arc(W * 0.75, H * 0.18, 22, 0, Math.PI * 2);
+      ctx.fillStyle = '#f9f0c0';
+      ctx.fill();
+      ctx.beginPath();
+      ctx.arc(W * 0.78, H * 0.16, 18, 0, Math.PI * 2);
+      ctx.fillStyle = '#1a2a5a';
+      ctx.fill();
+    }
+
+    // Subtle ground line only
+    const seaTop = H * 0.75;
+    ctx.beginPath();
+    for (let x = 0; x <= W; x += 4) {
+      ctx.lineTo(x, seaTop + Math.sin(x * 0.03 + time * 0.8) * 4);
+    }
+    ctx.strokeStyle = isDay ? 'rgba(226,135,67,0.12)' : 'rgba(160,140,200,0.12)';
+    ctx.lineWidth = 1.5;
+    ctx.stroke();
+
+    // Balloon float
+    const bx = balloonX + Math.sin(time * 0.7) * 18;
+    const by = balloonY + Math.sin(time * 0.5) * 12;
+    drawBalloon(ctx, bx, by, isDay);
+
+    requestAnimationFrame(frame);
+  }
+  frame();
+
+  // Draw preview - simple single hot air balloon
+  const prev = document.getElementById('focus-preview');
+  if (prev) {
+    const pc = document.createElement('canvas');
+    pc.style.cssText = 'width:100%;height:100%;display:block;';
+    prev.innerHTML = '';
+    prev.appendChild(pc);
+    const pw = prev.offsetWidth || 320;
+    const ph = 160;
+    pc.width = pw;
+    pc.height = ph;
+    const pctx = pc.getContext('2d');
+
+    // Sky - match page bg
+    const psky = pctx.createLinearGradient(0,0,0,ph);
+    if (isDay) {
+      psky.addColorStop(0,'#f5ede0');
+      psky.addColorStop(1,'#F9F6F0');
+    } else {
+      psky.addColorStop(0,'#e8e0f0');
+      psky.addColorStop(1,'#F0EBF8');
+    }
+    pctx.fillStyle = psky;
+    pctx.fillRect(0, 0, pw, ph);
+
+    // No sun/moon - keep clean
+
+    // No sea
+
+    // Single hot air balloon - simple and clean
+    const bx = pw/2, by = ph*0.34;
+    drawSimpleBalloon(pctx, bx, by, isDay);
+  }
+}
+
+function drawCloud(ctx, x, y, w, h, color) {
+  ctx.fillStyle = color;
+  ctx.beginPath();
+  ctx.ellipse(x, y, w/2, h/2, 0, 0, Math.PI*2); ctx.fill();
+  ctx.beginPath();
+  ctx.ellipse(x - w*0.25, y + h*0.1, w*0.35, h*0.45, 0, 0, Math.PI*2); ctx.fill();
+  ctx.beginPath();
+  ctx.ellipse(x + w*0.25, y + h*0.15, w*0.3, h*0.4, 0, 0, Math.PI*2); ctx.fill();
+}
+
+function drawBalloon(ctx, x, y, isDay) {
+  const W = 56, H = 64; // balloon size
+
+  ctx.save();
+  ctx.translate(x, y);
+
+  // ── Balloon body with panels ──
+  const panels = [
+    ['#e8202c','#c01020'], // red
+    ['#f0a000','#c07800'], // orange
+    ['#f8d000','#c0a000'], // yellow
+    ['#f0a000','#c07800'], // orange
+    ['#e8202c','#c01020'], // red
+    ['#f0a000','#c07800'], // orange
+    ['#f8d000','#c0a000'], // yellow
+    ['#f0a000','#c07800'], // orange
+  ];
+
+  // Draw each vertical panel as a curved slice
+  const nPanels = panels.length;
+  for (let i = 0; i < nPanels; i++) {
+    const angle1 = (i / nPanels) * Math.PI * 2 - Math.PI/2;
+    const angle2 = ((i+1) / nPanels) * Math.PI * 2 - Math.PI/2;
+    const mid = (angle1 + angle2) / 2;
+
+    ctx.save();
+    // Clip to balloon ellipse
+    ctx.beginPath();
+    ctx.ellipse(0, 0, W/2, H/2, 0, 0, Math.PI*2);
+    ctx.clip();
+
+    // Panel gradient
+    const px1 = Math.cos(angle1) * W/2;
+    const px2 = Math.cos(angle2) * W/2;
+    const pmx = Math.cos(mid) * W/2;
+    const grad = ctx.createLinearGradient(px1, 0, px2, 0);
+    grad.addColorStop(0, panels[i][1]);
+    grad.addColorStop(0.3, panels[i][0]);
+    grad.addColorStop(0.5, panels[i][0] + 'ee');
+    grad.addColorStop(0.7, panels[i][0]);
+    grad.addColorStop(1, panels[i][1]);
+    ctx.fillStyle = grad;
+
+    // Draw panel slice
+    ctx.beginPath();
+    ctx.moveTo(0, -H/2);
+    ctx.bezierCurveTo(
+      px1 * 0.4, -H/2 * 0.8,
+      px1, -H/2 * 0.2,
+      px1, H/2 * 0.6
+    );
+    ctx.bezierCurveTo(
+      px1, H/2 * 0.9,
+      0, H/2,
+      0, H/2
+    );
+    ctx.bezierCurveTo(
+      0, H/2,
+      px2, H/2 * 0.9,
+      px2, H/2 * 0.6
+    );
+    ctx.bezierCurveTo(
+      px2, -H/2 * 0.2,
+      px2 * 0.4, -H/2 * 0.8,
+      0, -H/2
+    );
+    ctx.fill();
+
+    // Panel divider line
+    ctx.beginPath();
+    ctx.moveTo(0, -H/2);
+    ctx.bezierCurveTo(px1*0.4, -H/2*0.8, px1, -H/2*0.2, px1, H/2*0.6);
+    ctx.lineTo(px1, H/2*0.9);
+    ctx.strokeStyle = 'rgba(0,0,0,0.15)';
+    ctx.lineWidth = 0.8;
+    ctx.stroke();
+
+    ctx.restore();
+  }
+
+  // Balloon outline
+  ctx.beginPath();
+  ctx.ellipse(0, 0, W/2, H/2, 0, 0, Math.PI*2);
+  ctx.strokeStyle = 'rgba(0,0,0,0.2)';
+  ctx.lineWidth = 1.5;
+  ctx.stroke();
+
+  // Horizontal band at equator
+  ctx.save();
+  ctx.beginPath();
+  ctx.ellipse(0, 0, W/2, H/2, 0, 0, Math.PI*2);
+  ctx.clip();
+  ctx.fillStyle = 'rgba(80,20,0,0.25)';
+  ctx.fillRect(-W/2, -4, W, 8);
+  ctx.restore();
+
+  // Top cap
+  ctx.save();
+  ctx.beginPath();
+  ctx.ellipse(0, 0, W/2, H/2, 0, 0, Math.PI*2);
+  ctx.clip();
+  ctx.fillStyle = 'rgba(0,0,0,0.15)';
+  ctx.fillRect(-W/2, -H/2, W, 12);
+  ctx.restore();
+
+  // Highlight (light reflection)
+  ctx.save();
+  ctx.beginPath();
+  ctx.ellipse(0, 0, W/2, H/2, 0, 0, Math.PI*2);
+  ctx.clip();
+  const hgrad = ctx.createRadialGradient(-W*0.18, -H*0.22, 2, -W*0.1, -H*0.15, W*0.35);
+  hgrad.addColorStop(0, 'rgba(255,255,255,0.4)');
+  hgrad.addColorStop(1, 'rgba(255,255,255,0)');
+  ctx.fillStyle = hgrad;
+  ctx.fillRect(-W/2, -H/2, W, H);
+  ctx.restore();
+
+  // Bottom knot
+  ctx.beginPath();
+  ctx.arc(0, H/2, 3, 0, Math.PI*2);
+  ctx.fillStyle = '#6a2000';
+  ctx.fill();
+
+  // Ropes
+  ctx.strokeStyle = isDay ? '#8a6030' : '#7a5028';
+  ctx.lineWidth = 1.2;
+  [[-12, H/2], [0, H/2+2], [12, H/2]].forEach(([rx, ry]) => {
+    ctx.beginPath();
+    ctx.moveTo(rx * 0.7, ry);
+    ctx.lineTo(rx, ry + 16);
+    ctx.stroke();
+  });
+
+  // Basket
+  const by = H/2 + 16;
+  // Basket body
+  const bgrad = ctx.createLinearGradient(-15, by, 15, by + 18);
+  bgrad.addColorStop(0, '#c08040');
+  bgrad.addColorStop(1, '#7a4a18');
+  ctx.fillStyle = bgrad;
+  ctx.beginPath();
+  ctx.roundRect(-15, by, 30, 18, 3);
+  ctx.fill();
+
+  // Basket rim
+  ctx.fillStyle = '#8a5a20';
+  ctx.beginPath();
+  ctx.roundRect(-16, by - 2, 32, 6, 2);
+  ctx.fill();
+
+  // Basket weave
+  ctx.strokeStyle = 'rgba(60,30,0,0.35)';
+  ctx.lineWidth = 1;
+  // Horizontal
+  for (let row = 1; row < 3; row++) {
+    ctx.beginPath();
+    ctx.moveTo(-15, by + row * 5);
+    ctx.lineTo(15, by + row * 5);
+    ctx.stroke();
+  }
+  // Vertical
+  for (let col = -2; col <= 2; col++) {
+    ctx.beginPath();
+    ctx.moveTo(col * 6, by);
+    ctx.lineTo(col * 6, by + 18);
+    ctx.stroke();
+  }
+
+  // Basket outline
+  ctx.strokeStyle = '#5a3010';
+  ctx.lineWidth = 1.2;
+  ctx.beginPath();
+  ctx.roundRect(-15, by, 30, 18, 3);
+  ctx.stroke();
+
+  ctx.restore();
+}
+
+// ── DRAW HOT AIR BALLOON SCENE ──────────────────────────
+function drawFocusScene() {
+  const canvas = document.getElementById('focus-canvas');
+  if (!canvas) return;
+  const W = canvas.offsetWidth;
+  const H = canvas.offsetHeight;
+  canvas.width = W;
+  canvas.height = H;
+  const ctx = canvas.getContext('2d');
+
+  const hour = new Date().getHours();
+  const isDay = hour >= 6 && hour < 18;
+
+  let balloonX = W * 0.5;
+  let balloonY = H * 0.38;
+  let time = 0;
+
+  function frame() {
+    if (!document.getElementById('focus-canvas')) return;
+    ctx.clearRect(0, 0, W, H);
+    time += 0.01;
+
+    // Sky
+    {
+      const sky = ctx.createLinearGradient(0, 0, 0, H);
+      if (isDay) {
+        sky.addColorStop(0, '#F5F0E8');
+        sky.addColorStop(0.5, '#F9F6F0');
+        sky.addColorStop(1, '#F9F6F0');
+      } else {
+        sky.addColorStop(0, '#E8E0F8');
+        sky.addColorStop(0.5, '#F0EBF8');
+        sky.addColorStop(1, '#F0EBF8');
+      }
+      ctx.fillStyle = sky;
+    }
+    ctx.fillRect(0, 0, W, H);
+
+    if (isDay) {
+      // Sun
+      ctx.beginPath();
+      ctx.arc(W * 0.8, H * 0.15, 36, 0, Math.PI * 2);
+      ctx.fillStyle = '#ffd060';
+      ctx.fill();
+      ctx.beginPath();
+      ctx.arc(W * 0.8, H * 0.15, 28, 0, Math.PI * 2);
+      ctx.fillStyle = '#ffe080';
+      ctx.fill();
+
+      // Clouds
+      drawCloud(ctx, W * 0.15 + Math.sin(time * 0.3) * 8, H * 0.18, 55, 22, 'rgba(255,255,255,0.9)');
+      drawCloud(ctx, W * 0.6 + Math.sin(time * 0.2 + 1) * 6, H * 0.12, 40, 16, 'rgba(255,255,255,0.8)');
+      drawCloud(ctx, W * 0.35 + Math.sin(time * 0.25 + 2) * 10, H * 0.25, 60, 20, 'rgba(255,255,255,0.7)');
+    } else {
+      // Stars
+      for (let i = 0; i < 40; i++) {
+        const sx = (i * 137.5) % W;
+        const sy = (i * 97.3) % (H * 0.5);
+        const r = 0.5 + (i % 3) * 0.5;
+        ctx.beginPath();
+        ctx.arc(sx, sy, r, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(255,255,255,${0.4 + Math.sin(time * 2 + i) * 0.2})`;
+        ctx.fill();
+      }
+      // Moon
+      ctx.beginPath();
+      ctx.arc(W * 0.75, H * 0.18, 22, 0, Math.PI * 2);
+      ctx.fillStyle = '#f9f0c0';
+      ctx.fill();
+      ctx.beginPath();
+      ctx.arc(W * 0.78, H * 0.16, 18, 0, Math.PI * 2);
+      ctx.fillStyle = '#1a2a5a';
+      ctx.fill();
+    }
+
+    // Subtle ground line only
+    const seaTop = H * 0.75;
+    ctx.beginPath();
+    for (let x = 0; x <= W; x += 4) {
+      ctx.lineTo(x, seaTop + Math.sin(x * 0.03 + time * 0.8) * 4);
+    }
+    ctx.strokeStyle = isDay ? 'rgba(226,135,67,0.12)' : 'rgba(160,140,200,0.12)';
+    ctx.lineWidth = 1.5;
+    ctx.stroke();
+
+    // Balloon float
+    const bx = balloonX + Math.sin(time * 0.7) * 18;
+    const by = balloonY + Math.sin(time * 0.5) * 12;
+    drawBalloon(ctx, bx, by, isDay);
+
+    requestAnimationFrame(frame);
+  }
+  frame();
+
+  // Draw preview - simple single hot air balloon
+  const prev = document.getElementById('focus-preview');
+  if (prev) {
+    const pc = document.createElement('canvas');
+    pc.style.cssText = 'width:100%;height:100%;display:block;';
+    prev.innerHTML = '';
+    prev.appendChild(pc);
+    const pw = prev.offsetWidth || 320;
+    const ph = 160;
+    pc.width = pw;
+    pc.height = ph;
+    const pctx = pc.getContext('2d');
+
+    // Sky - match page bg
+    const psky = pctx.createLinearGradient(0,0,0,ph);
+    if (isDay) {
+      psky.addColorStop(0,'#f5ede0');
+      psky.addColorStop(1,'#F9F6F0');
+    } else {
+      psky.addColorStop(0,'#e8e0f0');
+      psky.addColorStop(1,'#F0EBF8');
+    }
+    pctx.fillStyle = psky;
+    pctx.fillRect(0, 0, pw, ph);
+
+    // No sun/moon - keep clean
+
+    // No sea
+
+    // Single hot air balloon - simple and clean
+    const bx = pw/2, by = ph*0.34;
+    drawSimpleBalloon(pctx, bx, by, isDay);
+  }
+}
+
+function drawCloud(ctx, x, y, w, h, color) {
+  ctx.fillStyle = color;
+  ctx.beginPath();
+  ctx.ellipse(x, y, w/2, h/2, 0, 0, Math.PI*2); ctx.fill();
+  ctx.beginPath();
+  ctx.ellipse(x - w*0.25, y + h*0.1, w*0.35, h*0.45, 0, 0, Math.PI*2); ctx.fill();
+  ctx.beginPath();
+  ctx.ellipse(x + w*0.25, y + h*0.15, w*0.3, h*0.4, 0, 0, Math.PI*2); ctx.fill();
+}
+
+function drawBalloon(ctx, x, y, isDay) {
+  // Simple clean single hot air balloon
+  // Balloon body gradient
+  const grad = ctx.createRadialGradient(x-12, y-15, 4, x, y, 32);
+  grad.addColorStop(0, '#ff9060');
+  grad.addColorStop(0.5, '#e8603c');
+  grad.addColorStop(1, '#c04020');
+  ctx.beginPath();
+  ctx.ellipse(x, y, 30, 32, 0, 0, Math.PI*2);
+  ctx.fillStyle = grad;
+  ctx.fill();
+
+  // Stripe detail
+  ctx.save();
+  ctx.beginPath();
+  ctx.ellipse(x, y, 30, 32, 0, 0, Math.PI*2);
+  ctx.clip();
+  for(let i=-3;i<4;i++){
+    ctx.fillStyle='rgba(255,240,160,0.15)';
+    ctx.fillRect(x+i*16-6, y-36, 12, 72);
+  }
+  ctx.restore();
+
+  // Highlight
+  ctx.beginPath();
+  ctx.ellipse(x-10, y-12, 9, 13, -0.4, 0, Math.PI*2);
+  ctx.fillStyle='rgba(255,255,255,0.28)';
+  ctx.fill();
+
+  // Bottom knot
+  ctx.beginPath();
+  ctx.arc(x, y+32, 2.5, 0, Math.PI*2);
+  ctx.fillStyle='#c04020'; ctx.fill();
+
+  // Ropes
+  ctx.strokeStyle = isDay ? '#8a6030' : '#7a5028';
+  ctx.lineWidth = 1.5;
+  [[-12,36,-10,52],[0,38,0,52],[12,36,10,52]].forEach(([dx1,dy1,dx2,dy2])=>{
+    ctx.beginPath();
+    ctx.moveTo(x+dx1, y+dy1);
+    ctx.lineTo(x+dx2, y+dy2);
+    ctx.stroke();
+  });
+
+  // Basket
+  ctx.fillStyle='#8a5a20';
+  ctx.beginPath();
+  ctx.roundRect(x-14, y+52, 28, 18, 3);
+  ctx.fill();
+  ctx.strokeStyle='#6a3a10'; ctx.lineWidth=1.5;
+  ctx.strokeRect(x-14, y+52, 28, 18);
+
+  // Basket weave lines
+  ctx.strokeStyle='rgba(100,60,20,0.3)'; ctx.lineWidth=1;
+  ctx.beginPath(); ctx.moveTo(x-14,y+60); ctx.lineTo(x+14,y+60); ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(x,y+52); ctx.lineTo(x,y+70); ctx.stroke();
+
+}
+
+// ── DRAW HOT AIR BALLOON SCENE ──────────────────────────
+function drawFocusScene() {
+  const canvas = document.getElementById('focus-canvas');
+  if (!canvas) return;
+  const W = canvas.offsetWidth;
+  const H = canvas.offsetHeight;
+  canvas.width = W;
+  canvas.height = H;
+  const ctx = canvas.getContext('2d');
+
+  const hour = new Date().getHours();
+  const isDay = hour >= 6 && hour < 18;
+
+  let balloonX = W * 0.5;
+  let balloonY = H * 0.38;
+  let time = 0;
+
+  function frame() {
+    if (!document.getElementById('focus-canvas')) return;
+    ctx.clearRect(0, 0, W, H);
+    time += 0.01;
+
+    // Sky
+    {
+      const sky = ctx.createLinearGradient(0, 0, 0, H);
+      if (isDay) {
+        sky.addColorStop(0, '#F5F0E8');
+        sky.addColorStop(0.5, '#F9F6F0');
+        sky.addColorStop(1, '#F9F6F0');
+      } else {
+        sky.addColorStop(0, '#E8E0F8');
+        sky.addColorStop(0.5, '#F0EBF8');
+        sky.addColorStop(1, '#F0EBF8');
+      }
+      ctx.fillStyle = sky;
+    }
+    ctx.fillRect(0, 0, W, H);
+
+    if (isDay) {
+      // Sun
+      ctx.beginPath();
+      ctx.arc(W * 0.8, H * 0.15, 36, 0, Math.PI * 2);
+      ctx.fillStyle = '#ffd060';
+      ctx.fill();
+      ctx.beginPath();
+      ctx.arc(W * 0.8, H * 0.15, 28, 0, Math.PI * 2);
+      ctx.fillStyle = '#ffe080';
+      ctx.fill();
+
+      // Clouds
+      drawCloud(ctx, W * 0.15 + Math.sin(time * 0.3) * 8, H * 0.18, 55, 22, 'rgba(255,255,255,0.9)');
+      drawCloud(ctx, W * 0.6 + Math.sin(time * 0.2 + 1) * 6, H * 0.12, 40, 16, 'rgba(255,255,255,0.8)');
+      drawCloud(ctx, W * 0.35 + Math.sin(time * 0.25 + 2) * 10, H * 0.25, 60, 20, 'rgba(255,255,255,0.7)');
+    } else {
+      // Stars
+      for (let i = 0; i < 40; i++) {
+        const sx = (i * 137.5) % W;
+        const sy = (i * 97.3) % (H * 0.5);
+        const r = 0.5 + (i % 3) * 0.5;
+        ctx.beginPath();
+        ctx.arc(sx, sy, r, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(255,255,255,${0.4 + Math.sin(time * 2 + i) * 0.2})`;
+        ctx.fill();
+      }
+      // Moon
+      ctx.beginPath();
+      ctx.arc(W * 0.75, H * 0.18, 22, 0, Math.PI * 2);
+      ctx.fillStyle = '#f9f0c0';
+      ctx.fill();
+      ctx.beginPath();
+      ctx.arc(W * 0.78, H * 0.16, 18, 0, Math.PI * 2);
+      ctx.fillStyle = '#1a2a5a';
+      ctx.fill();
+    }
+
+    // Subtle ground line only
+    const seaTop = H * 0.75;
+    ctx.beginPath();
+    for (let x = 0; x <= W; x += 4) {
+      ctx.lineTo(x, seaTop + Math.sin(x * 0.03 + time * 0.8) * 4);
+    }
+    ctx.strokeStyle = isDay ? 'rgba(226,135,67,0.12)' : 'rgba(160,140,200,0.12)';
+    ctx.lineWidth = 1.5;
+    ctx.stroke();
+
+    // Balloon float
+    const bx = balloonX + Math.sin(time * 0.7) * 18;
+    const by = balloonY + Math.sin(time * 0.5) * 12;
+    drawBalloon(ctx, bx, by, isDay);
+
+    requestAnimationFrame(frame);
+  }
+  frame();
+
+  // Draw preview - simple single hot air balloon
+  const prev = document.getElementById('focus-preview');
+  if (prev) {
+    const pc = document.createElement('canvas');
+    pc.style.cssText = 'width:100%;height:100%;display:block;';
+    prev.innerHTML = '';
+    prev.appendChild(pc);
+    const pw = prev.offsetWidth || 320;
+    const ph = 160;
+    pc.width = pw;
+    pc.height = ph;
+    const pctx = pc.getContext('2d');
+
+    // Sky - match page bg
+    const psky = pctx.createLinearGradient(0,0,0,ph);
+    if (isDay) {
+      psky.addColorStop(0,'#f5ede0');
+      psky.addColorStop(1,'#F9F6F0');
+    } else {
+      psky.addColorStop(0,'#e8e0f0');
+      psky.addColorStop(1,'#F0EBF8');
+    }
+    pctx.fillStyle = psky;
+    pctx.fillRect(0, 0, pw, ph);
+
+    // No sun/moon - keep clean
+
+    // No sea
+
+    // Single hot air balloon - simple and clean
+    const bx = pw/2, by = ph*0.34;
+    drawSimpleBalloon(pctx, bx, by, isDay);
+  }
+}
+
+function drawCloud(ctx, x, y, w, h, color) {
+  ctx.fillStyle = color;
+  ctx.beginPath();
+  ctx.ellipse(x, y, w/2, h/2, 0, 0, Math.PI*2); ctx.fill();
+  ctx.beginPath();
+  ctx.ellipse(x - w*0.25, y + h*0.1, w*0.35, h*0.45, 0, 0, Math.PI*2); ctx.fill();
+  ctx.beginPath();
+  ctx.ellipse(x + w*0.25, y + h*0.15, w*0.3, h*0.4, 0, 0, Math.PI*2); ctx.fill();
+}
+
 
 function checkBingoLines() {
   const done = state.tasks.slice(0, 9).map(t => t && t.done);
@@ -4584,12 +6614,16 @@ function toggleBingo(i) {
 
   if (!wasDone) {
     // Animate crayon fill
-    animateCrayon(i, () => {
-      renderBingo();
-      updateStreak();
-      checkBingoLines();
-      setTimeout(checkAllDone, 400);
-    });
+    // Add just-done animation
+    const card = document.getElementById(`bingo-card-${i}`);
+    if (card) {
+      card.classList.add('just-done');
+      setTimeout(() => card.classList.remove('just-done'), 600);
+    }
+    renderBingo();
+    updateStreak();
+    checkBingoLines();
+    setTimeout(checkAllDone, 400);
   } else {
     renderBingo();
   }
