@@ -4193,7 +4193,7 @@ async function submitRecord() {
   bubble.style.display = 'none';
 
   try {
-    const res = await fetch('https://api.anthropic.com/v1/messages', {
+    const res = await fetch('/api/chat', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -4745,7 +4745,7 @@ async function sendChatMsg() {
 5. 回覆簡短，一次不超過3句
 ${state.uploadedNotes?.length ? `使用者今天上傳的筆記摘要：${state.uploadedNotes.map(n=>n.summary).join('；')}` : ''}`;
 
-    const res = await fetch('https://api.anthropic.com/v1/messages', {
+    const res = await fetch('/api/chat', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -4822,7 +4822,7 @@ async function handleNotesUpload(input) {
 
     addMsg('ai', '', true);
 
-    const res = await fetch('https://api.anthropic.com/v1/messages', {
+    const res = await fetch('/api/chat', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -6751,7 +6751,7 @@ async function handleTimetableUpload(input) {
       }
     ];
 
-    const res = await fetch('https://api.anthropic.com/v1/messages', {
+    const res = await fetch('/api/chat', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
